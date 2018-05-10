@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import project_poo_ads20181.erro.ConexaoException;
-
+ 
 public class GerenciadorConexaoMySql implements GerenciadorConexao{
     private final String URL;
     private final String USU;
