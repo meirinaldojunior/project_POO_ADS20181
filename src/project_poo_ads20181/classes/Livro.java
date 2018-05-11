@@ -8,6 +8,8 @@ public class Livro {
   
     private Integer idLivro;
     private String nomeLivro;
+    private Categoria nomeCategoria;
+    private Autor idAutor;
     
   /*  public Livro (Integer idLivro, String nomeLivro){
         this.idLivro = idLivro;
@@ -28,9 +30,15 @@ public class Livro {
     public String getNomeLivro(){
         return this.nomeLivro;
     }
+
+    public void setCategoria(Categoria nomeCategoria){
+        this.nomeCategoria = nomeCategoria;
+    }
+    public Categoria getCategoria(){
+        return this.nomeCategoria;
+    }
     
-    
-    
+  
     
     
 }
