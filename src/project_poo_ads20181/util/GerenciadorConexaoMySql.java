@@ -11,7 +11,13 @@ public class GerenciadorConexaoMySql implements GerenciadorConexao{
     private final String USU;
     private final String SEN;
     private static GerenciadorConexaoMySql instancia;
-        
+    
+     public GerenciadorConexaoMySql(String URL ,String USU,String SEN){
+     this.URL = URL;
+     this.USU = USU;
+     this.SEN = SEN ;
+     
+     }   
     private GerenciadorConexaoMySql(){
         ResourceBundle rb = ResourceBundle.getBundle("projeto.util.banco");
         URL = rb.getString("url");
