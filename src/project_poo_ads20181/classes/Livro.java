@@ -9,7 +9,7 @@ public class Livro {
     private Integer idLivro;
     private String nomeLivro;
     private Categoria nomeCategoria;
-    private Autor autor; // o atributo é na verdade um objeto da classe autor
+    private Autor idAutor,nome;
     
   /*  public Livro (Integer idLivro, String nomeLivro){
         this.idLivro = idLivro;
