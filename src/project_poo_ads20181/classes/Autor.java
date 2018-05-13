@@ -4,8 +4,12 @@ package project_poo_ads20181.classes;
 public class Autor {
     private int id;
     private String nome;
-
-    public Autor(int id, String nome) {
+    
+     public Autor(){
+         
+     }
+    
+     public Autor(int id, String nome) {
         this.id = id;
         this.nome = nome;
         
