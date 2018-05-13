@@ -33,7 +33,7 @@ public class DAOAutorImpl implements DAOAutor {
         }catch(SQLException e){
             throw new DAOException();
         }finally{
-            gc.desconectar(c);
+          GerenciadorConexaoMySql.getInstancia().desconectar(c);  
     }
 
     }
@@ -50,7 +50,7 @@ public class DAOAutorImpl implements DAOAutor {
         }catch(SQLException e){
             throw new DAOException();
         }finally{
-            gc.desconectar(c);
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
     }
     }
 
@@ -61,10 +61,10 @@ public class DAOAutorImpl implements DAOAutor {
      * @throws DAOException
      */
     public ArrayList<Autor>listar()throws ConexaoException, DAOException{
-        GerenciadorConexao gc = null ;
+       
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();  
-        ArrayList<Autor>lista = new ArrayList();
-        Autor a = null;
+        ArrayList<Autor> lista = new ArrayList();
+        
         String sql ="select * from Autor";
         Statement stm;
         try{
@@ -72,7 +72,7 @@ public class DAOAutorImpl implements DAOAutor {
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                a = new Autor();
+              Autor  a = new Autor();
                 a.setId(  rs.getInt("id") );
                 a.setNome( rs.getString("nome") );
                 lista.add(a);
@@ -82,7 +82,7 @@ public class DAOAutorImpl implements DAOAutor {
         }catch(SQLException e){
             throw new DAOException();
         }finally{
-            gc.desconectar(c);
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
     }
 }
 }
