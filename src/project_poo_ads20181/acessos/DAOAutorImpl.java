@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import project_poo_ads20181.classes.Autor;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
-import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
 
 /**
@@ -21,7 +20,6 @@ public class DAOAutorImpl implements DAOAutor {
 
     @Override
     public void inserir(Autor a) throws ConexaoException, DAOException {
-        GerenciadorConexao gc = null ;
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
         String sql = "INSERT INTO Autor (nome,id) VALUES(?,?)";
         PreparedStatement pstm;
@@ -37,8 +35,8 @@ public class DAOAutorImpl implements DAOAutor {
     }
 
     }
+    @Override
     public void alterar (Autor a) throws ConexaoException, DAOException{
-        GerenciadorConexao gc = null ;
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
         String sql = "UPDATE produtos SET nome=? WHERE id=?";
         PreparedStatement pstm;
@@ -60,6 +58,7 @@ public class DAOAutorImpl implements DAOAutor {
      * @throws ConexaoException
      * @throws DAOException
      */
+    @Override
     public ArrayList<Autor>listar()throws ConexaoException, DAOException{
        
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();  
@@ -85,4 +84,20 @@ public class DAOAutorImpl implements DAOAutor {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
     }
 }
+
+    @Override
+    public void excluir(Autor a) throws ConexaoException, DAOException {
+        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "delete from Autor where id = ?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setInt(1, a.getId());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        
+        }  
+    }
 }
