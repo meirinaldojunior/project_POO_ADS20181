@@ -27,7 +27,7 @@ public class Project_POO_ADS20181 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    
+    testaConexao();
     }
     private static void testaConexao(){
         GerenciadorConexao gc;
