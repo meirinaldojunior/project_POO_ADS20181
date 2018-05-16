@@ -84,6 +84,25 @@ public class DAOCategoriaImplementa implements DAOCategoria {
             throw new DAOException();
         }finally{
             gc.desconectar(c);
-        }        
+        }    
     }
+    
+   @Override
+    public void excluir(Categoria ct) throws ConexaoException, DAOException{
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        //
+        String sql = "DELETE FROM Categoria WHERE Nome_categoria=?";
+        
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, ct.getNomeCategoria());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        
+        }  
+    }
+    
 }
