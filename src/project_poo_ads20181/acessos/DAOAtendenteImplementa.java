@@ -58,7 +58,7 @@ public class DAOAtendenteImplementa implements DAOAtendente {
             pstm = c.prepareStatement(sql);
             pstm.setString(1, a.getNome());
             pstm.setString(2, a.getCpf());
-            pstm.setInt(3, a.getId());
+            pstm.setInt(3, a.getIdAtendente());
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null, "Alterado com sucesso...");
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class DAOAtendenteImplementa implements DAOAtendente {
 
             while (rs.next()) {
                 Atendente a = new Atendente();
-                a.setId(rs.getInt("Id_atendente"));
+                a.setIdAtendente(rs.getInt("Id_atendente"));
                 a.setNome(rs.getString("Nome"));
                 a.setCpf(rs.getString("Cpf"));
                 lista.add(a);
@@ -112,7 +112,7 @@ public class DAOAtendenteImplementa implements DAOAtendente {
         String sql = "DELETE FROM Atendente WHERE Id_atendente = ?";
         try {
             PreparedStatement pstm = c.prepareStatement(sql);
-            pstm.setInt(1, a.getId());
+            pstm.setInt(1, a.getIdAtendente());
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null, "Excluído com sucesso...");
         } catch (SQLException e) {

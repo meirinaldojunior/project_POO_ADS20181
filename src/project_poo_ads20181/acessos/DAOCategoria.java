@@ -7,7 +7,7 @@ import project_poo_ads20181.erro.DAOException;
 
 /**
  *
- * @author aluno
+ * @author Hugo Felipe
  */
 public interface DAOCategoria {
     

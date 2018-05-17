@@ -6,12 +6,12 @@ package project_poo_ads20181.classes;
  * @author valter
  */
 public class Atendente {
-    private int id;
+    private int idAtendente;
     private String nome;
     private String cpf;
 
-    public Atendente(int id, String nome, String cpf) {
-        this.id = id;
+    public Atendente(int idAtendente, String nome, String cpf) {
+        this.idAtendente = idAtendente;
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -19,12 +19,12 @@ public class Atendente {
     public Atendente() {
     }
 
-    public int getId() {
-        return id;
+    public int getIdAtendente() {
+        return idAtendente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdAtendente(int idAtendente) {
+        this.idAtendente = idAtendente;
     }
 
     public String getNome() {

@@ -1,5 +1,10 @@
 package project_poo_ads20181.acessos;
 
+/**
+*
+* @author Hugo Felipe
+*/
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
