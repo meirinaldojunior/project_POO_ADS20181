@@ -31,6 +31,7 @@ public class Project_POO_ADS20181 {
         DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
         try {
             dao.inserir(atendente);
+            //System.err.println("inserido com sucesso");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir: "+e.getMessage());
         }
@@ -48,7 +49,7 @@ public class Project_POO_ADS20181 {
             gc.desconectar(c);
             System.out.println("CONECTOU");
         } catch (ConexaoException ex) {
-            System.out.println("PAU NA CONEXAO");
+            System.out.println("PAU NA CONEXAO: "+ex.getMessage());
         }
     }
     
