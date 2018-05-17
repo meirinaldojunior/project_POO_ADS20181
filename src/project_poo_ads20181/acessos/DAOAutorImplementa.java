@@ -16,7 +16,7 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
  *
  * @author valter
  */
-public class DAOAutorImpl implements DAOAutor {
+public class DAOAutorImplementa implements DAOAutor {
 
     @Override
     public void inserir(Autor a) throws ConexaoException, DAOException {

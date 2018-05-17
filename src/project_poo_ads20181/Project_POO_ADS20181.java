@@ -57,7 +57,7 @@ public class Project_POO_ADS20181 {
 
     private static void testaExclusaoAtendente() {
         Atendente atendente = new Atendente();
-        atendente.setId(1);
+        atendente.setIdAtendente(1);
         DAOAtendenteImplementa DAOExcAten = new DAOAtendenteImplementa();
         try {
             DAOExcAten.excluir(atendente);
@@ -70,7 +70,7 @@ public class Project_POO_ADS20181 {
         Atendente atUpt = new Atendente();
         atUpt.setCpf("99999999");
         atUpt.setNome("Novo nome");
-        atUpt.setId(2);
+        atUpt.setIdAtendente(2);
         DAOAtendenteImplementa DAOUpdtAten = new DAOAtendenteImplementa();
         try {
             DAOUpdtAten.alterar(atUpt);
@@ -83,7 +83,7 @@ public class Project_POO_ADS20181 {
         DAOAtendenteImplementa DAOListAten = new DAOAtendenteImplementa();
         try {
             for(Atendente at : DAOListAten.listar()){
-                System.out.println("ID: "+at.getId()+
+                System.out.println("ID: "+at.getIdAtendente()+
                                    " | Nome: "+at.getNome()+
                                    " | CPF: "+at.getCpf());
             }
