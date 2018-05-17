@@ -75,10 +75,8 @@ public class DAOAtendenteImplementa implements DAOAtendente {
      */
     @Override
     public ArrayList<Atendente> listar() throws ConexaoException, DAOException {
-
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Atendente> lista = new ArrayList();
-
         String sql = "select * from Atendente";
         Statement stm;
         try {

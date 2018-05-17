@@ -28,7 +28,7 @@ public class Project_POO_ADS20181 {
         
         /**
          * Testes dos métodos do CRUD DAOAtendente
-         * TODO: PRECISAMOS QUANDO INCLUIR A GUI
+         * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
          */
         
         //testaCadastroAtendente();
@@ -40,9 +40,8 @@ public class Project_POO_ADS20181 {
 
     
     /**
-     * MÉTODOS DE TESTE PROVISÓRIOS OS MÉTODOS A SEGUIR SERÃO SUBSTITUÍDOS
-     * QUANDO FOREM IMPLEMENTADOS OS TESTES UNITÁRIOS.
-     * TODO: PRECISAMOS REMOVER QUANDO IMPLEMENTADO O JUNIT
+     * MÉTODOS DE TESTE PROVISÓRIOS, OS MÉTODOS A SEGUIR SERÃO SUBSTITUÍDOS
+     * QUANDO FOREM IMPLEMENTADOS OS MÉTODOS DE FACHADA E TESTES UNITÁRIOS.
      */
     private static void testaCadastroAtendente() {
         Atendente atendente = new Atendente();
