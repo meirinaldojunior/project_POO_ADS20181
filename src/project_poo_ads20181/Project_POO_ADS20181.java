@@ -27,17 +27,28 @@ public class Project_POO_ADS20181 {
         testaConexao();
         
         //Tenta inserir um atendente
-        Atendente atendente = new Atendente();
-        
-        atendente.setCpf("12345678901");
-        atendente.setNome("Darth Vader");
-        
-        DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
-        try {
-            dao.inserir(atendente);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir: "+e.getMessage());
-        }
+//        Atendente atendente = new Atendente();
+//        atendente.setCpf("12345678901");
+//        atendente.setNome("Darth Vader");
+//        
+//        DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
+//        try {
+//            dao.inserir(atendente);
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Erro ao inserir: "+e.getMessage());
+//        }
+
+
+        //tenta exlcuir um atendente
+            Atendente atendente = new Atendente();
+            atendente.setId(1);
+            DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
+            try {
+                dao.excluir(atendente);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir: "+e);
+            }
+            
         
         
     }

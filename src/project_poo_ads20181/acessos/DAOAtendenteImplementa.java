@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
@@ -42,7 +43,7 @@ public class DAOAtendenteImplementa implements DAOAtendente {
     @Override
     public void alterar (Atendente a) throws ConexaoException, DAOException{
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE produtos SET nome=? WHERE id=?";
+        String sql = "UPDATE Atendente SET nome=? WHERE id=?";
         PreparedStatement pstm;
          try{
             pstm = c.prepareStatement(sql);
@@ -92,11 +93,13 @@ public class DAOAtendenteImplementa implements DAOAtendente {
     @Override
     public void excluir(Atendente a) throws ConexaoException, DAOException {
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "delete from Atendente where id = ?";
+        String sql = "DELETE FROM Atendente WHERE Id_atendente = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setInt(1, a.getId());
             pstm.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso...");
         }catch(SQLException e){
             throw new DAOException();
         }finally{
