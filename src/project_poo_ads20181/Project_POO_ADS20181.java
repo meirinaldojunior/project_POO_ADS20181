@@ -23,27 +23,31 @@ public class Project_POO_ADS20181 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        
         testaConexao();
-
-        //Inicia testes
-//        testaCadastroAtendente();
-//        testaExclusaoAtendente();
-//        testaEdicaoAtendente();
-        testaListagemAtendente();
+        
+        /**
+         * Testes dos métodos do CRUD DAOAtendente
+         * TODO: PRECISAMOS QUANDO INCLUIR A GUI
+         */
+        
+        //testaCadastroAtendente();
+        //testaExclusaoAtendente();
+        //testaEdicaoAtendente();
+        //testaListagemAtendente();
 
     }
 
+    
     /**
-     * METÓDOS DE TESTE PROVISÓRIOS OS METÓDOS A SEGUIR SERÃO SUBSTITUÍDOS
+     * MÉTODOS DE TESTE PROVISÓRIOS OS MÉTODOS A SEGUIR SERÃO SUBSTITUÍDOS
      * QUANDO FOREM IMPLEMENTADOS OS TESTES UNITÁRIOS.
+     * TODO: PRECISAMOS REMOVER QUANDO IMPLEMENTADO O JUNIT
      */
     private static void testaCadastroAtendente() {
-        //Tenta inserir um atendente
         Atendente atendente = new Atendente();
         atendente.setCpf("12345678901");
         atendente.setNome("Darth Vader");
-
         DAOAtendenteImplementa DAOAddAten = new DAOAtendenteImplementa();
         try {
             DAOAddAten.inserir(atendente);
@@ -53,7 +57,6 @@ public class Project_POO_ADS20181 {
     }
 
     private static void testaExclusaoAtendente() {
-        //tenta exlcuir um atendente
         Atendente atendente = new Atendente();
         atendente.setId(1);
         DAOAtendenteImplementa DAOExcAten = new DAOAtendenteImplementa();
@@ -65,12 +68,10 @@ public class Project_POO_ADS20181 {
     }
 
     private static void testaEdicaoAtendente() {
-        //tenta editar atendente
         Atendente atUpt = new Atendente();
         atUpt.setCpf("99999999");
         atUpt.setNome("Novo nome");
         atUpt.setId(2);
-
         DAOAtendenteImplementa DAOUpdtAten = new DAOAtendenteImplementa();
         try {
             DAOUpdtAten.alterar(atUpt);
@@ -81,7 +82,6 @@ public class Project_POO_ADS20181 {
 
     private static void testaListagemAtendente() {
         DAOAtendenteImplementa DAOListAten = new DAOAtendenteImplementa();
-
         try {
             for(Atendente at : DAOListAten.listar()){
                 System.out.println("ID: "+at.getId()+
@@ -91,7 +91,6 @@ public class Project_POO_ADS20181 {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao listar: " + e.getMessage());
         }
-
     }
 
     private static void testaConexao() {
