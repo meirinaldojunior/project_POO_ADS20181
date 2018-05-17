@@ -12,32 +12,32 @@ import project_poo_ads20181.erro.DAOException;
 public interface DAOAtendente {
     
     /**
-     * Grava o atendente no BD
-     * @param p Objeto com os dados validos
-     * @throws ConexaoException 
-     * @throws DAOException 
-     */
-    public void inserir(Atendente at)throws ConexaoException,DAOException;
-    
-    /**
-     * Altera os registros do atendente
-     * @param p Objeto com os dados
+     * Insere o registro do atendente
+     * @param a recebe o objeto do atendente
      * @throws ConexaoException
      * @throws DAOException 
      */
-    public void alterar(Atendente at)throws ConexaoException,DAOException;
+    public void inserir(Atendente a)throws ConexaoException,DAOException;
     
     /**
-     * Lista os atendendentes
-     * @return
+     * Altera o registro do atendente
+     * @param a recebe o objeto do atendente
+     * @throws ConexaoException
+     * @throws DAOException 
+     */
+    public void alterar(Atendente a)throws ConexaoException,DAOException;
+    
+    /**
+     * Listar atendentes
+     * @return uma lista de atendentes
      * @throws ConexaoException
      * @throws DAOException 
      */
     public ArrayList<Atendente> listar() throws ConexaoException,DAOException;
     
     /**
-     * Exlui o atendente
-     * @param a
+     * Exluir o atendente
+     * @param a recebe o objeto do atendente
      * @throws ConexaoException
      * @throws DAOException 
      */

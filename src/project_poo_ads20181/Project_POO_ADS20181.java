@@ -28,10 +28,13 @@ public class Project_POO_ADS20181 {
         
         //Tenta inserir um atendente
         Atendente atendente = new Atendente();
+        
+        atendente.setCpf("12345678901");
+        atendente.setNome("Darth Vader");
+        
         DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
         try {
             dao.inserir(atendente);
-            //System.err.println("inserido com sucesso");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir: "+e.getMessage());
         }

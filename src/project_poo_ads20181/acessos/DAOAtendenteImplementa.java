@@ -18,18 +18,22 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
  */
 public class DAOAtendenteImplementa implements DAOAtendente {
 
+    
     @Override
     public void inserir(Atendente a) throws ConexaoException, DAOException {
-        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "INSERT INTO Atendente (Id_atendente,Nome, Cpf) VALUES(?,?,?)";
-        PreparedStatement pstm;
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "INSERT INTO Atendente (Nome) VALUES(?)";
+        PreparedStatement pstm = null;
          try{
             pstm = c.prepareStatement(sql);
             pstm.setString(1, a.getNome());
-            pstm.setInt(2, a.getId());
+            //pstm.setString(2, a.getCpf());
             pstm.executeUpdate();
+           
+            System.err.println("inserido com sucesso");
+
         }catch(SQLException e){
-            throw new DAOException();
+                throw new DAOException();
         }finally{
           GerenciadorConexaoMySql.getInstancia().desconectar(c);  
     }
