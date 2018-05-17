@@ -6,7 +6,7 @@ package project_poo_ads20181.classes;
  */
 public class Livro {
   
-    private Integer idLivro;
+    private int idLivro;
     private String nomeLivro;
     private Categoria nomeCategoria;
     private Autor idAutor,nome;
