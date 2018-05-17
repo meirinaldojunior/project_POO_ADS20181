@@ -19,7 +19,7 @@ public class GerenciadorConexaoMySql implements GerenciadorConexao{
      
      }   
     private GerenciadorConexaoMySql(){
-        ResourceBundle rb = ResourceBundle.getBundle("projeto.util.banco");
+        ResourceBundle rb = ResourceBundle.getBundle("project_poo_ads20181.util.banco");
         URL = rb.getString("url");
         USU = rb.getString("usuario");
         SEN = rb.getString("senha");
