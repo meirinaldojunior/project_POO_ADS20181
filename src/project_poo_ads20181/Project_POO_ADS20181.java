@@ -23,38 +23,78 @@ public class Project_POO_ADS20181 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    
+
         testaConexao();
-        
-        //Tenta inserir um atendente
-//        Atendente atendente = new Atendente();
-//        atendente.setCpf("12345678901");
-//        atendente.setNome("Darth Vader");
-//        
-//        DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
-//        try {
-//            dao.inserir(atendente);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Erro ao inserir: "+e.getMessage());
-//        }
 
+        //Inicia testes
+//        testaCadastroAtendente();
+//        testaExclusaoAtendente();
+//        testaEdicaoAtendente();
+        testaListagemAtendente();
 
-        //tenta exlcuir um atendente
-            Atendente atendente = new Atendente();
-            atendente.setId(1);
-            DAOAtendenteImplementa dao = new DAOAtendenteImplementa();
-            try {
-                dao.excluir(atendente);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao excluir: "+e);
-            }
-            
-        
-        
     }
-    
-    
-    private static void testaConexao(){
+
+    /**
+     * METÓDOS DE TESTE PROVISÓRIOS OS METÓDOS A SEGUIR SERÃO SUBSTITUÍDOS
+     * QUANDO FOREM IMPLEMENTADOS OS TESTES UNITÁRIOS.
+     */
+    private static void testaCadastroAtendente() {
+        //Tenta inserir um atendente
+        Atendente atendente = new Atendente();
+        atendente.setCpf("12345678901");
+        atendente.setNome("Darth Vader");
+
+        DAOAtendenteImplementa DAOAddAten = new DAOAtendenteImplementa();
+        try {
+            DAOAddAten.inserir(atendente);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir: " + e.getMessage());
+        }
+    }
+
+    private static void testaExclusaoAtendente() {
+        //tenta exlcuir um atendente
+        Atendente atendente = new Atendente();
+        atendente.setId(1);
+        DAOAtendenteImplementa DAOExcAten = new DAOAtendenteImplementa();
+        try {
+            DAOExcAten.excluir(atendente);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e);
+        }
+    }
+
+    private static void testaEdicaoAtendente() {
+        //tenta editar atendente
+        Atendente atUpt = new Atendente();
+        atUpt.setCpf("99999999");
+        atUpt.setNome("Novo nome");
+        atUpt.setId(2);
+
+        DAOAtendenteImplementa DAOUpdtAten = new DAOAtendenteImplementa();
+        try {
+            DAOUpdtAten.alterar(atUpt);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        }
+    }
+
+    private static void testaListagemAtendente() {
+        DAOAtendenteImplementa DAOListAten = new DAOAtendenteImplementa();
+
+        try {
+            for(Atendente at : DAOListAten.listar()){
+                System.out.println("ID: "+at.getId()+
+                                   " | Nome: "+at.getNome()+
+                                   " | CPF: "+at.getCpf());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar: " + e.getMessage());
+        }
+
+    }
+
+    private static void testaConexao() {
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c;
@@ -63,8 +103,8 @@ public class Project_POO_ADS20181 {
             gc.desconectar(c);
             System.out.println("CONECTOU");
         } catch (ConexaoException ex) {
-            System.out.println("PAU NA CONEXAO: "+ex.getMessage());
+            System.out.println("PAU NA CONEXAO: " + ex.getMessage());
         }
     }
-    
-} 
+
+}
