@@ -22,12 +22,12 @@ public class DAOAtendenteImplementa implements DAOAtendente {
     @Override
     public void inserir(Atendente a) throws ConexaoException, DAOException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "INSERT INTO Atendente (Nome) VALUES(?)";
+        String sql = "INSERT INTO Atendente (Nome, Cpf) VALUES(?, ?)";
         PreparedStatement pstm = null;
          try{
             pstm = c.prepareStatement(sql);
             pstm.setString(1, a.getNome());
-            //pstm.setString(2, a.getCpf());
+            pstm.setString(2, a.getCpf());
             pstm.executeUpdate();
            
             System.err.println("inserido com sucesso");
