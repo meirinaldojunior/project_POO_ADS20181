@@ -11,7 +11,10 @@ import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
 import project_poo_ads20181.acessos.DAOAtendenteImplementa;
+import project_poo_ads20181.acessos.DAOAutorImplementa;
 import project_poo_ads20181.classes.Atendente;
+import project_poo_ads20181.classes.Autor;
+import project_poo_ads20181.erro.DAOException;
 
 /**
  *
@@ -22,9 +25,10 @@ public class Project_POO_ADS20181 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ConexaoException, DAOException {
         
         testaConexao();
+        testaAlterarAutor();
         
         /**
          * Testes dos métodos do CRUD DAOAtendente
@@ -103,6 +107,33 @@ public class Project_POO_ADS20181 {
         } catch (ConexaoException ex) {
             System.out.println("PAU NA CONEXAO: " + ex.getMessage());
         }
+        
+        }
+    public static void TestaInserirAutor() throws ConexaoException, DAOException{
+            Autor a = new Autor ("valter");
+            DAOAutorImplementa dai = new DAOAutorImplementa(); 
+            try{
+              dai.inserir(a);
+              System.out.println("objeto gravado com sucesso");
+            }catch(DAOException da){
+                System.out.println("pau");
+            }
+  
+              
     }
-
+    private static void testaAlterarAutor() throws ConexaoException, DAOException{
+        Autor a = new Autor();
+        Autor b = new Autor("bob");
+        b.setId(520);
+        a.setNome("julius");
+        a.setId(b.getId());
+        DAOAutorImplementa dai = new DAOAutorImplementa();
+        try{
+        dai.alterar(b);
+            System.out.println("autor alterado com sucesso");
+    }catch(DAOException dae){
+            System.out.println("pau");
+    }
+    }
 }
+

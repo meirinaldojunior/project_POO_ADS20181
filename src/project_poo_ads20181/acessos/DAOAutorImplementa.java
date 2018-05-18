@@ -21,12 +21,12 @@ public class DAOAutorImplementa implements DAOAutor {
     @Override
     public void inserir(Autor a) throws ConexaoException, DAOException {
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "INSERT INTO Autor (nome,id) VALUES(?,?)";
+        String sql = "INSERT INTO Autor (nome) VALUES(?)";
         PreparedStatement pstm;
          try{
             pstm = c.prepareStatement(sql);
             pstm.setString(1, a.getNome());
-            pstm.setInt(2, a.getId());
+         
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException();
@@ -38,7 +38,7 @@ public class DAOAutorImplementa implements DAOAutor {
     @Override
     public void alterar (Autor a) throws ConexaoException, DAOException{
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE produtos SET nome=? WHERE id=?";
+        String sql = "UPDATE Autor SET nome=? WHERE id=?";
         PreparedStatement pstm;
          try{
             pstm = c.prepareStatement(sql);
@@ -52,12 +52,7 @@ public class DAOAutorImplementa implements DAOAutor {
     }
     }
 
-    /**
-     *
-     * @return
-     * @throws ConexaoException
-     * @throws DAOException
-     */
+
     @Override
     public ArrayList<Autor>listar()throws ConexaoException, DAOException{
        
@@ -100,4 +95,35 @@ public class DAOAutorImplementa implements DAOAutor {
         
         }  
     }
-}
+
+    @Override
+    public Autor buscaPorId(int id) throws ConexaoException, DAOException {
+       Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+        
+        Autor a = null;
+        
+        String sql = "SELECT id,nome,descricao,valor FROM produtos WHERE id=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()){
+                a = new Autor();
+                a.setId(  rs.getInt("id") );
+                a.setNome( rs.getString("nome") );
+                
+            }
+            
+            return a;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+           GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+        
+    }

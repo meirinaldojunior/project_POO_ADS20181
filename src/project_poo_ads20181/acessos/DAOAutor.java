@@ -44,4 +44,13 @@ public interface DAOAutor {
      * @throws DAOException 
      */
     public void excluir(Autor a)throws ConexaoException,DAOException;
+    
+    /**
+     * retorna um objeto com o id informado
+     * @param id
+     * @return um objeto de autor
+     * @throws ConexaoException
+     * @throws DAOException 
+     */
+    public Autor buscaPorId(int id)throws ConexaoException,DAOException;
 }
