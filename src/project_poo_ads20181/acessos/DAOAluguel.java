@@ -19,5 +19,7 @@ public interface DAOAluguel {
 	    public void excluir (Aluguel aluguel) throws ConexaoException, DAOException;
 	    
 	    public ArrayList<Aluguel> lista() throws ConexaoException, DAOException;
+	    
+	    Aluguel consultaAluguel(Integer idAluguel) throws ConexaoException, DAOException;
 	
 }

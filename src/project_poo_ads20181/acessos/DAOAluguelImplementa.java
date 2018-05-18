@@ -68,7 +68,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
             pstm.setString(4,alu.getCpf().getcpf());
             pstm.setDouble(5,alu.getValor());
             pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso...");
+            // JOptionPane.showMessageDialog(null, "Alterado com sucesso...");
         } catch (SQLException e) {
             throw new DAOException();
         } finally {
@@ -91,7 +91,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
             pstm.setString(4,alu.getCpf().getcpf());
             pstm.setDouble(5,alu.getValor());
             pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso...");
+            // JOptionPane.showMessageDialog(null, "Excluido com sucesso...");
         } catch (SQLException e) {
             throw new DAOException();
         } finally {
@@ -126,6 +126,38 @@ public class DAOAluguelImplementa implements DAOAluguel{
             throw new DAOException();
         } finally {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    @Override
+    public Aluguel consultaAluguel (Integer idAluguel) throws ConexaoException, DAOException {
+         GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+        
+        Aluguel alu = null;
+        
+        String sql = "SELECT * FROM Aluguel WHERE id_Aluguel=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, idAluguel);
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()){
+                alu = new Aluguel();
+                alu.setIdAluguel(rs.getInt("Id_Aluguel"));
+                alu.setIdAluguel(rs.getInt("Id_atendente"));
+                alu.setIdAluguel(rs.getInt("Id_exemplar"));
+                alu.setIdAluguel(rs.getInt("Cpf"));
+                alu.setValor(rs.getDouble("Valor"));
+            }
+            return alu;
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            gc.desconectar(c);
         }
     }
 }
