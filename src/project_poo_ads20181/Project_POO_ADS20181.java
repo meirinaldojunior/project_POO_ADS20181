@@ -29,6 +29,7 @@ public class Project_POO_ADS20181 {
         
         testaConexao();
         testaAlterarAutor();
+        //testaExcluirAutor();
         
         /**
          * Testes dos métodos do CRUD DAOAtendente
@@ -123,17 +124,26 @@ public class Project_POO_ADS20181 {
     }
     private static void testaAlterarAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
-        Autor b = new Autor("bob");
-        b.setId(520);
         a.setNome("julius");
-        a.setId(b.getId());
+        a.setId(101);
         DAOAutorImplementa dai = new DAOAutorImplementa();
         try{
-        dai.alterar(b);
+        dai.alterar(a);
             System.out.println("autor alterado com sucesso");
     }catch(DAOException dae){
             System.out.println("pau");
     }
     }
+    private static void testaExcluirAutor() throws ConexaoException, DAOException{
+        Autor a = new Autor();
+        a.setId(102);
+        DAOAutorImplementa dai = new DAOAutorImplementa();
+        try{
+        dai.excluir(a);
+            System.out.println("Autor excluido com sucesso");       
+    }catch(DAOException e){
+            System.out.println("pau!! " +e.getMessage());
+    }
+}
 }
 
