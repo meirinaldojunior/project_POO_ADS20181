@@ -8,13 +8,15 @@ public class Livro {
   
     private int idLivro;
     private String nomeLivro;
-    private Categoria nomeCategoria;
-    private Autor idAutor,nome;
+    private Categoria cat;
+    private Autor a;
     
-  /*  public Livro (Integer idLivro, String nomeLivro){
-        this.idLivro = idLivro;
+        public Livro (String nomeLivro){
         this.nomeLivro = nomeLivro;
-    } */
+    } 
+        public Livro(){
+            
+        }
         
     public void setIdLivro (Integer idlivro){
         this.idLivro = idlivro;
@@ -30,28 +32,5 @@ public class Livro {
     public String getNomeLivro(){
         return this.nomeLivro;
     }
-
-    public void setCategoria(Categoria nomeCategoria){
-        this.nomeCategoria = nomeCategoria;
-    }
-    public Categoria getCategoria(){
-        return this.nomeCategoria;
-    }
-    
-    public void setIdAutor (Autor id){
-        this.idAutor = id;
-    }
-    public Autor getIdAutor(){
-        return this.idAutor;
-    }
-    
-    public void setNomeAutor(Autor Nome){
-        this.nome = Nome;
-    }
-    public Autor getNomeAutor(){
-        return this.nome;
-    }
-  
-    
     
 }
