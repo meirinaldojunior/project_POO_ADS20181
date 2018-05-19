@@ -20,8 +20,8 @@ public interface DAOCategoria {
     public void inserir(Categoria ct)throws ConexaoException,DAOException;
     
     /**
-     * Grava as alterações no BD
-     * @param p Objeto com os dados
+     * Grava as alteraï¿½ï¿½es no BD
+     * @param ct
      * @throws ConexaoException
      * @throws DAOException 
      */

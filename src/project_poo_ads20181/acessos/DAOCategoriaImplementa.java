@@ -42,7 +42,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
     
     @Override
     public void alterar(Categoria ct)throws ConexaoException,DAOException{
-        GerenciadorConexao gc;
+/*        GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
         
@@ -58,7 +58,21 @@ public class DAOCategoriaImplementa implements DAOCategoria {
             throw new DAOException();
         }finally{
             gc.desconectar(c);
-        }        
+        } */
+        
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "UPDATE Categoria SET Nome_categoria=? WHERE Nome_categoria=?";
+        PreparedStatement pstm;
+         try{
+            pstm = c.prepareStatement(sql);
+            pstm.setString(1, ct.getNomeCategoria());
+            pstm.setString(2, ct.getNomeCategoria());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+    }
     }
     
     @Override

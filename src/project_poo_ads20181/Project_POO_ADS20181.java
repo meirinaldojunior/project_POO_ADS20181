@@ -26,19 +26,16 @@ public class Project_POO_ADS20181 {
 
     /**
      * @param args the command line arguments
+     * @throws project_poo_ads20181.erro.ConexaoException
+     * @throws project_poo_ads20181.erro.DAOException
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
-<<<<<<< HEAD
-        testaConexao();
-        testaAlterarAutor();
-        //testaExcluirAutor();
-=======
-        //testaConexao();
+        //testaConexao();        
         //testaAlterarAutor();
-    	testaInserirCategoria();
->>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
-        
+        //testaExcluirAutor();
+    	//testaCadastroCategoria(); 
+        testaAlterarCategoria();
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
@@ -79,6 +76,19 @@ public class Project_POO_ADS20181 {
         }
     }
 
+    
+    private static void testaAlterarCategoria() throws ConexaoException, DAOException{
+        Categoria ct = new Categoria();
+        ct.setNomeCategoria("matematica1");
+        DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
+        try{
+        cat.alterar(ct);
+            System.out.println("categoria alterado com sucesso");
+    }catch(DAOException dae){
+            System.out.println("pau");
+    }
+    }    
+    
     private static void testaEdicaoAtendente() {
         Atendente atUpt = new Atendente();
         atUpt.setCpf("99999999");
@@ -142,7 +152,6 @@ public class Project_POO_ADS20181 {
             System.out.println("pau");
     }
     }
-<<<<<<< HEAD
     private static void testaExcluirAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
         a.setId(102);
@@ -153,35 +162,17 @@ public class Project_POO_ADS20181 {
     }catch(DAOException e){
             System.out.println("pau!! " +e.getMessage());
     }
-=======
-    
-    public static void testaInserirCategoria() throws ConexaoException, DAOException{
-        Categoria ct = new Categoria ("programacao");
-        DAOCategoriaImplementa ctg = new DAOCategoriaImplementa(); 
-        try{
-          ctg.inserir(ct);
-          System.out.println("objeto gravado com sucesso");
-        }catch(DAOException nc){
-            System.out.println("pau");
+}
+
+
+private static void testaCadastroCategoria() {
+        Categoria ct = new Categoria();
+        ct.setNomeCategoria("matematica1");
+        DAOCategoriaImplementa DAOAddCategoria = new DAOCategoriaImplementa();
+        try {
+            DAOAddCategoria.inserir(ct);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir: " + e.getMessage());
         }
-       
-
-          
+    }
 }
-private static void testaAlterarCategoria() throws ConexaoException, DAOException{
-    Autor a = new Autor();
-    Autor b = new Autor("bob");
-    b.setId(520);
-    a.setNome("julius");
-    a.setId(b.getId());
-    DAOAutorImplementa dai = new DAOAutorImplementa();
-    try{
-    dai.alterar(b);
-        System.out.println("autor alterado com sucesso");
-}catch(DAOException dae){
-        System.out.println("pau");
-}
->>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
-}
-}
-
