@@ -6,6 +6,7 @@
 package project_poo_ads20181;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.util.GerenciadorConexao;
@@ -26,18 +27,17 @@ public class Project_POO_ADS20181 {
 
     /**
      * @param args the command line arguments
+     * @throws project_poo_ads20181.erro.ConexaoException
+     * @throws project_poo_ads20181.erro.DAOException
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
-<<<<<<< HEAD
+
         testaConexao();
-        testaAlterarAutor();
-        //testaExcluirAutor();
-=======
-        //testaConexao();
-        //testaAlterarAutor();
-    	testaInserirCategoria();
->>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
+        
+      
+    	
+
         
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
@@ -48,6 +48,11 @@ public class Project_POO_ADS20181 {
         //testaExclusaoAtendente();
         //testaEdicaoAtendente();
         //testaListagemAtendente();
+        // testaInserirAutor();
+        //testaExcluirAutor();
+        //testaAlterarAutor();
+        //testaListarAutor();
+    	
 
     }
 
@@ -142,7 +147,7 @@ public class Project_POO_ADS20181 {
             System.out.println("pau");
     }
     }
-<<<<<<< HEAD
+
     private static void testaExcluirAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
         a.setId(102);
@@ -153,9 +158,9 @@ public class Project_POO_ADS20181 {
     }catch(DAOException e){
             System.out.println("pau!! " +e.getMessage());
     }
-=======
+    }
     
-    public static void testaInserirCategoria() throws ConexaoException, DAOException{
+   public static void testaInserirCategoria() throws ConexaoException, DAOException{
         Categoria ct = new Categoria ("programacao");
         DAOCategoriaImplementa ctg = new DAOCategoriaImplementa(); 
         try{
@@ -164,11 +169,11 @@ public class Project_POO_ADS20181 {
         }catch(DAOException nc){
             System.out.println("pau");
         }
-       
+   }   
 
           
-}
-private static void testaAlterarCategoria() throws ConexaoException, DAOException{
+
+    private static void testaAlterarCategoria() throws ConexaoException, DAOException{
     Autor a = new Autor();
     Autor b = new Autor("bob");
     b.setId(520);
@@ -181,7 +186,21 @@ private static void testaAlterarCategoria() throws ConexaoException, DAOExceptio
 }catch(DAOException dae){
         System.out.println("pau");
 }
->>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
+
 }
+    private static void testaListarAutor() throws ConexaoException, DAOException{
+        DAOAutorImplementa  dai = new DAOAutorImplementa();
+       try{
+        ArrayList<Autor>lista = dai.listar();
+        lista.stream().forEach((a) -> { 
+                System.out.println("Autor: " + a.getNome());
+                });
+                }catch(DAOException e){
+                 System.out.println("pau!! " +e.getMessage());
+                }
+        
+        
+        
+    }
 }
 

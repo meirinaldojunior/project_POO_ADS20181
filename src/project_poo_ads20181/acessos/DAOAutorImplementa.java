@@ -56,7 +56,7 @@ public class DAOAutorImplementa implements DAOAutor {
     @Override
     public ArrayList<Autor>listar()throws ConexaoException, DAOException{
        
-        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();  
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();  
         ArrayList<Autor> lista = new ArrayList();
         
         String sql ="select * from Autor";
@@ -67,8 +67,8 @@ public class DAOAutorImplementa implements DAOAutor {
             
             while(rs.next()){
               Autor  a = new Autor();
-                a.setId(  rs.getInt("id") );
-                a.setNome( rs.getString("nome") );
+                a.setId(  rs.getInt("Id_Autor") );
+                a.setNome( rs.getString("Nome") );
                 lista.add(a);
             }
              return lista;
