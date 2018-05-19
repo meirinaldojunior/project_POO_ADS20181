@@ -12,8 +12,10 @@ import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
 import project_poo_ads20181.acessos.DAOAtendenteImplementa;
 import project_poo_ads20181.acessos.DAOAutorImplementa;
+import project_poo_ads20181.acessos.DAOCategoriaImplementa;
 import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.classes.Autor;
+import project_poo_ads20181.classes.Categoria;
 import project_poo_ads20181.erro.DAOException;
 
 /**
@@ -27,12 +29,18 @@ public class Project_POO_ADS20181 {
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
+<<<<<<< HEAD
         testaConexao();
         testaAlterarAutor();
         //testaExcluirAutor();
+=======
+        //testaConexao();
+        //testaAlterarAutor();
+    	testaInserirCategoria();
+>>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
         
         /**
-         * Testes dos métodos do CRUD DAOAtendente
+         * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
          */
         
@@ -45,8 +53,8 @@ public class Project_POO_ADS20181 {
 
     
     /**
-     * MÉTODOS DE TESTE PROVISÓRIOS, OS MÉTODOS A SEGUIR SERÃO SUBSTITUÍDOS
-     * QUANDO FOREM IMPLEMENTADOS OS MÉTODOS DE FACHADA E TESTES UNITÁRIOS.
+     * MÃ‰TODOS DE TESTE PROVISÃ“RIOS, OS MÃ‰TODOS A SEGUIR SERÃƒO SUBSTITUÃ�DOS
+     * QUANDO FOREM IMPLEMENTADOS OS MÃ‰TODOS DE FACHADA E TESTES UNITÃ�RIOS.
      */
     private static void testaCadastroAtendente() {
         Atendente atendente = new Atendente();
@@ -110,7 +118,7 @@ public class Project_POO_ADS20181 {
         }
         
         }
-    public static void TestaInserirAutor() throws ConexaoException, DAOException{
+    public static void testaInserirAutor() throws ConexaoException, DAOException{
             Autor a = new Autor ("valter");
             DAOAutorImplementa dai = new DAOAutorImplementa(); 
             try{
@@ -122,7 +130,7 @@ public class Project_POO_ADS20181 {
   
               
     }
-    private static void testaAlterarAutor() throws ConexaoException, DAOException{
+    private static void TestaAlterarAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
         a.setNome("julius");
         a.setId(101);
@@ -134,6 +142,7 @@ public class Project_POO_ADS20181 {
             System.out.println("pau");
     }
     }
+<<<<<<< HEAD
     private static void testaExcluirAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
         a.setId(102);
@@ -144,6 +153,35 @@ public class Project_POO_ADS20181 {
     }catch(DAOException e){
             System.out.println("pau!! " +e.getMessage());
     }
+=======
+    
+    public static void testaInserirCategoria() throws ConexaoException, DAOException{
+        Categoria ct = new Categoria ("programacao");
+        DAOCategoriaImplementa ctg = new DAOCategoriaImplementa(); 
+        try{
+          ctg.inserir(ct);
+          System.out.println("objeto gravado com sucesso");
+        }catch(DAOException nc){
+            System.out.println("pau");
+        }
+       
+
+          
+}
+private static void testaAlterarCategoria() throws ConexaoException, DAOException{
+    Autor a = new Autor();
+    Autor b = new Autor("bob");
+    b.setId(520);
+    a.setNome("julius");
+    a.setId(b.getId());
+    DAOAutorImplementa dai = new DAOAutorImplementa();
+    try{
+    dai.alterar(b);
+        System.out.println("autor alterado com sucesso");
+}catch(DAOException dae){
+        System.out.println("pau");
+}
+>>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
 }
 }
 

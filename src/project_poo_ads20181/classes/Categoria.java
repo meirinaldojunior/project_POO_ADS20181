@@ -8,7 +8,15 @@ public class Categoria {
         this.nomeCategoria = nomeCategoria;
     } */
         
-    public void setNomeCategoria (String nomeCategoria){
+    public Categoria(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Categoria() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setNomeCategoria (String nomeCategoria){
         this.nomeCategoria = nomeCategoria;    
         }    
     
