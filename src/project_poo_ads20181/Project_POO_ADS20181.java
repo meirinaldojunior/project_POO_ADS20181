@@ -32,21 +32,12 @@ public class Project_POO_ADS20181 {
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
-<<<<<<< HEAD
         //testaConexao();        
         //testaAlterarAutor();
         //testaExcluirAutor();
-    	//testaCadastroCategoria(); 
+    	testaCadastroCategoria(); 
         testaAlterarCategoria();
-=======
-
         testaConexao();
-        
-      
-    	
-
-        
->>>>>>> 20c04a8d2bd7ac7f06cdd0b2fada4be113a62112
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
@@ -168,10 +159,7 @@ public class Project_POO_ADS20181 {
             System.out.println("pau");
     }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 20c04a8d2bd7ac7f06cdd0b2fada4be113a62112
     private static void testaExcluirAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
         a.setId(102);
@@ -182,38 +170,9 @@ public class Project_POO_ADS20181 {
     }catch(DAOException e){
             System.out.println("pau!! " +e.getMessage());
     }
-<<<<<<< HEAD
-=======
     }
     
-   public static void testaInserirCategoria() throws ConexaoException, DAOException{
-        Categoria ct = new Categoria ("programacao");
-        DAOCategoriaImplementa ctg = new DAOCategoriaImplementa(); 
-        try{
-          ctg.inserir(ct);
-          System.out.println("objeto gravado com sucesso");
-        }catch(DAOException nc){
-            System.out.println("pau");
-        }
-   }   
-
-          
-
-    private static void testaAlterarCategoria() throws ConexaoException, DAOException{
-    Autor a = new Autor();
-    Autor b = new Autor("bob");
-    b.setId(520);
-    a.setNome("julius");
-    a.setId(b.getId());
-    DAOAutorImplementa dai = new DAOAutorImplementa();
-    try{
-    dai.alterar(b);
-        System.out.println("autor alterado com sucesso");
-}catch(DAOException dae){
-        System.out.println("pau");
-}
-
-}
+      
     private static void testaListarAutor() throws ConexaoException, DAOException{
         DAOAutorImplementa  dai = new DAOAutorImplementa();
        try{
@@ -228,11 +187,8 @@ public class Project_POO_ADS20181 {
         
         
     }
->>>>>>> 20c04a8d2bd7ac7f06cdd0b2fada4be113a62112
-}
 
-
-private static void testaCadastroCategoria() {
+    private static void testaCadastroCategoria() {
         Categoria ct = new Categoria();
         ct.setNomeCategoria("matematica1");
         DAOCategoriaImplementa DAOAddCategoria = new DAOCategoriaImplementa();
@@ -243,3 +199,4 @@ private static void testaCadastroCategoria() {
         }
     }
 }
+
