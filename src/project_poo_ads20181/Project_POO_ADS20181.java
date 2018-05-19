@@ -14,9 +14,11 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
 import project_poo_ads20181.acessos.DAOAtendenteImplementa;
 import project_poo_ads20181.acessos.DAOAutorImplementa;
 import project_poo_ads20181.acessos.DAOCategoriaImplementa;
+import project_poo_ads20181.acessos.DAOLivroImplementa;
 import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.classes.Autor;
 import project_poo_ads20181.classes.Categoria;
+import project_poo_ads20181.classes.Livro;
 import project_poo_ads20181.erro.DAOException;
 
 /**
@@ -32,12 +34,13 @@ public class Project_POO_ADS20181 {
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
-        //testaConexao();        
+        testaConexao();
+        inserirLivro();
         //testaAlterarAutor();
         //testaExcluirAutor();
-    	testaCadastroCategoria(); 
-        testaAlterarCategoria();
-        testaConexao();
+    	//testaCadastroCategoria(); 
+        //testaAlterarCategoria();
+        //testaConexao();
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
@@ -198,5 +201,23 @@ public class Project_POO_ADS20181 {
             JOptionPane.showMessageDialog(null, "Erro ao inserir: " + e.getMessage());
         }
     }
+    
+        
+    private static void inserirLivro(){
+        Livro liv = new Livro();
+        Categoria nvCat = new Categoria();
+        
+        liv.setNomeLivro("A rua de baixo");
+        nvCat.setNomeCategoria("Tretas da vida");
+        
+        DAOLivroImplementa DAOLivro = new DAOLivroImplementa();
+                try{
+                    DAOLivro.inserir(liv);
+                        System.out.println("Dados inseridos com sucesso!");
+        }catch(Exception e){
+                    System.out.println("Erro ao inserir registro");
+        }
+    }
+
 }
 
