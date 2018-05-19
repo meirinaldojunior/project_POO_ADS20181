@@ -30,4 +30,6 @@ public interface DAOCategoria {
     public ArrayList<Categoria> listar() throws ConexaoException,DAOException;
     
     public void excluir(Categoria ct)throws ConexaoException,DAOException;
+    
+    Categoria consultaCategoria(String nomeCategoria) throws ConexaoException, DAOException;
 }
