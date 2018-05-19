@@ -29,9 +29,15 @@ public class Project_POO_ADS20181 {
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
+<<<<<<< HEAD
+        testaConexao();
+        testaAlterarAutor();
+        //testaExcluirAutor();
+=======
         //testaConexao();
         //testaAlterarAutor();
     	testaInserirCategoria();
+>>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
         
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
@@ -126,18 +132,28 @@ public class Project_POO_ADS20181 {
     }
     private static void TestaAlterarAutor() throws ConexaoException, DAOException{
         Autor a = new Autor();
-        Autor b = new Autor("bob");
-        b.setId(520);
         a.setNome("julius");
-        a.setId(b.getId());
+        a.setId(101);
         DAOAutorImplementa dai = new DAOAutorImplementa();
         try{
-        dai.alterar(b);
+        dai.alterar(a);
             System.out.println("autor alterado com sucesso");
     }catch(DAOException dae){
             System.out.println("pau");
     }
     }
+<<<<<<< HEAD
+    private static void testaExcluirAutor() throws ConexaoException, DAOException{
+        Autor a = new Autor();
+        a.setId(102);
+        DAOAutorImplementa dai = new DAOAutorImplementa();
+        try{
+        dai.excluir(a);
+            System.out.println("Autor excluido com sucesso");       
+    }catch(DAOException e){
+            System.out.println("pau!! " +e.getMessage());
+    }
+=======
     
     public static void testaInserirCategoria() throws ConexaoException, DAOException{
         Categoria ct = new Categoria ("programacao");
@@ -165,6 +181,7 @@ private static void testaAlterarCategoria() throws ConexaoException, DAOExceptio
 }catch(DAOException dae){
         System.out.println("pau");
 }
+>>>>>>> dfefa05decb8d8e20fa1c8942f02dc506da9daae
 }
 }
 

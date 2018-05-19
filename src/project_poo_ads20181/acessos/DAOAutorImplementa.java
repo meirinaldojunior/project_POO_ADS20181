@@ -38,7 +38,7 @@ public class DAOAutorImplementa implements DAOAutor {
     @Override
     public void alterar (Autor a) throws ConexaoException, DAOException{
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Autor SET nome=? WHERE id=?";
+        String sql = "UPDATE Autor SET nome=? WHERE Id_Autor=?";
         PreparedStatement pstm;
          try{
             pstm = c.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class DAOAutorImplementa implements DAOAutor {
     @Override
     public void excluir(Autor a) throws ConexaoException, DAOException {
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "delete from Autor where id = ?";
+        String sql = "delete from Autor where Id_Autor = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setInt(1, a.getId());
@@ -102,7 +102,7 @@ public class DAOAutorImplementa implements DAOAutor {
         
         Autor a = null;
         
-        String sql = "SELECT id,nome,descricao,valor FROM produtos WHERE id=?";
+        String sql = "SELECT id,nome,descricao,valor FROM produtos WHERE Id_Autor=?";
         
         PreparedStatement pstm;
         try{
