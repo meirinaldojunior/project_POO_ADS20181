@@ -8,8 +8,8 @@ public class Livro {
   
     private int idLivro;
     private String nomeLivro;
-    private Categoria cat;
-    private Autor a;
+    private Categoria cat = new Categoria();
+    private Autor autor = new Autor();
     
         public Livro (String nomeLivro){
         this.nomeLivro = nomeLivro;
@@ -31,6 +31,22 @@ public class Livro {
     }
     public String getNomeLivro(){
         return this.nomeLivro;
+    }
+    
+    public void setCat(Categoria categoria){
+        this.cat = categoria;
+    }
+    
+    public Categoria getCat(){
+        return cat;
+    }
+    
+    public void setAutor(Autor autor){
+        this.autor = autor;
+    }
+    
+    public Autor getAutor(){
+        return autor;
     }
     
 }
