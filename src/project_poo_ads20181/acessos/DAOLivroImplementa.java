@@ -32,22 +32,17 @@ public class DAOLivroImplementa implements DAOLivro{
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
-        Livro liv = new Livro();
-        Categoria nvCat = new Categoria();
-        Autor nvAutor = new Autor();
         
-               
-        String sql = "INSERT INTO Livro (Nome_livro,Nome_categoria,Nome)VALUES(?,?,?)";
-        
+        String sql = "INSERT INTO Livro (Nome_livro,Id_Categoria,Id_Autor) VALUES (?,?,?)";
         PreparedStatement pstm;
+        
         try {
-            pstm = c.prepareStatement(sql);
-             pstm.setString(1,liv.getNomeLivro());
-             pstm.setString(2,nvCat.getNomeCategoria());
-             pstm.setString(3,nvAutor.getNome());
-             
+             pstm = c.prepareStatement(sql);
+             pstm.setString(1, livro.getNomeLivro());
+             pstm.setInt(2,livro.getCat().getIdCategoria());
+             pstm.setInt(3,livro.getAutor().getId());
              pstm.executeUpdate();
-             
+            
         }catch(SQLException e){
             throw new DAOException();
         }finally{
@@ -62,20 +57,16 @@ public class DAOLivroImplementa implements DAOLivro{
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
         
-        Categoria nvCat = new Categoria();
-        Autor nvAutor = new Autor();        
-               
-        String sql = "UPDATE Livro SET Nome_livro=?, Nome_categoria=?, Nome=? WHERE idLivro =?";
+        String sql = "UPDATE Livro SET Nome_livro=?, Id_Categoria=?, Id_Autor=? WHERE Id_livro =?";
         
         PreparedStatement pstm;
         try {
-            pstm = c.prepareStatement(sql);
-            
-            pstm.setString(1,livro.getNomeLivro());
-            pstm.setString(2,nvCat.getNomeCategoria());
-            pstm.setString(3,nvAutor.getNome());
-            pstm.setInt(4,livro.getIdLivro());
-            pstm.executeUpdate();
+             pstm = c.prepareStatement(sql);
+             pstm.setString(1, livro.getNomeLivro());
+             pstm.setInt(2,livro.getCat().getIdCategoria());
+             pstm.setInt(3,livro.getAutor().getId());
+             pstm.setInt(4,livro.getIdLivro());
+             pstm.executeUpdate();
              
         }catch(SQLException e){
             throw new DAOException();
@@ -90,21 +81,14 @@ public class DAOLivroImplementa implements DAOLivro{
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
-        
-        Categoria nvCat = new Categoria();
-        Autor nvAutor = new Autor();
-        
-        String sql = "DELETE Nome_livro, Nome_categoria, Nome FROM Livro WHERE idLivro =?";
+               
+        String sql = "DELETE FROM Livro WHERE Id_livro =?";
         
         PreparedStatement pstm;
         try {
-            pstm = c.prepareStatement(sql);
-            pstm.setString(1,livro.getNomeLivro());
-            pstm.setInt(2,livro.getIdLivro());
-            pstm.setString(3,nvCat.getNomeCategoria());
-            pstm.setString(4,nvAutor.getNome());
-
-            pstm.executeUpdate();
+             pstm = c.prepareStatement(sql);
+             pstm.setInt(1,livro.getIdLivro());
+             pstm.execute();
              
         }catch(SQLException e){
             throw new DAOException();
@@ -128,8 +112,8 @@ public class DAOLivroImplementa implements DAOLivro{
             
             while(rs.next()){
               Livro  a = new Livro();
-                a.setIdLivro(rs.getInt("idLivro"));
-                a.setNomeLivro(rs.getString("nomeLivro"));
+                a.setIdLivro(rs.getInt("Id_livro"));
+                a.setNomeLivro(rs.getString("Nome_livro"));
                 lista.add(a);
             }
              return lista;
