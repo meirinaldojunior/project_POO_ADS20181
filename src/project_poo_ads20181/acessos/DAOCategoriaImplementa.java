@@ -31,7 +31,6 @@ public class DAOCategoriaImplementa implements DAOCategoria {
         try{
             pstm = c.prepareStatement(sql);
             pstm.setString(1, ct.getNomeCategoria());
-
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException();

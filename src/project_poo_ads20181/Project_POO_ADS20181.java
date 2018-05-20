@@ -35,10 +35,10 @@ public class Project_POO_ADS20181 {
     public static void main(String[] args) throws ConexaoException, DAOException {
         
         testaConexao();
-        inserirLivro();
+        //inserirLivro();
         //testaAlterarAutor();
         //testaExcluirAutor();
-    	//testaCadastroCategoria(); 
+    	testaCadastroCategoria();
         //testaAlterarCategoria();
         //testaConexao();
         /**
@@ -84,19 +84,6 @@ public class Project_POO_ADS20181 {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e);
         }
-    }
-
-    
-    private static void testaAlterarCategoria() throws ConexaoException, DAOException{
-        Categoria ct = new Categoria();
-        ct.setNomeCategoria("matematica1");
-        DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
-        try{
-        cat.alterar(ct);
-            System.out.println("categoria alterado com sucesso");
-    }catch(DAOException dae){
-            System.out.println("pau");
-    }
     }    
     
     private static void testaEdicaoAtendente() {
@@ -193,15 +180,28 @@ public class Project_POO_ADS20181 {
 
     private static void testaCadastroCategoria() {
         Categoria ct = new Categoria();
-        ct.setNomeCategoria("matematica1");
+        ct.setNomeCategoria("Suspense");
         DAOCategoriaImplementa DAOAddCategoria = new DAOCategoriaImplementa();
         try {
             DAOAddCategoria.inserir(ct);
+            System.out.println("Categoria cadastrada!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir: " + e.getMessage());
+            System.out.println("PAU");
         }
     }
     
+    private static void testaAlterarCategoria() throws ConexaoException, DAOException{
+        Categoria ct = new Categoria();
+        ct.setNomeCategoria("Suspense");
+        ct.setIdCategoria(1);
+        DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
+        try{
+        cat.alterar(ct);
+            System.out.println("categoria alterada com sucesso");
+    }catch(DAOException dae){
+            System.out.println("pau");
+    }
+    }
         
     private static void inserirLivro(){
         Livro liv = new Livro();
