@@ -60,12 +60,12 @@ public class DAOCategoriaImplementa implements DAOCategoria {
         } */
         
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Categoria SET Nome_categoria=? WHERE Nome_categoria=?";
+        String sql = "UPDATE Categoria SET Nome_categoria=? WHERE Id_categoria=?";
         PreparedStatement pstm;
          try{
             pstm = c.prepareStatement(sql);
             pstm.setString(1, ct.getNomeCategoria());
-            pstm.setString(2, ct.getNomeCategoria());
+            pstm.setInt(2, ct.getIdCategoria());
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException();
@@ -109,11 +109,12 @@ public class DAOCategoriaImplementa implements DAOCategoria {
     public void excluir(Categoria ct) throws ConexaoException, DAOException{
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         //
-        String sql = "DELETE FROM Categoria WHERE Nome_categoria=?";
+        String sql = "DELETE FROM Categoria WHERE Id_categoria=?";
         
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
-            pstm.setString(1, ct.getNomeCategoria());
+            //pstm.setString(1, ct.getNomeCategoria());
+            pstm.setInt(1, ct.getIdCategoria());
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException();

@@ -36,29 +36,47 @@ public class Project_POO_ADS20181 {
         
         testaConexao();
         //inserirLivro();
+ 
         //testaAlterarAutor();
         //testaExcluirAutor();
-    	testaCadastroCategoria();
+    	
+        //testaCadastroCategoria();
         //testaAlterarCategoria();
-        //testaConexao();
-        /**
-         * Testes dos mÃ©todos do CRUD DAOAtendente
-         * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
-         */
+        //testaExcluirCategoria();
+        testaListarCategoria();
+        //testaBuscarIdCategoria();
         
         //testaCadastroAtendente();
         //testaExclusaoAtendente();
         //testaEdicaoAtendente();
         //testaListagemAtendente();
+        
         // testaInserirAutor();
         //testaExcluirAutor();
         //testaAlterarAutor();
         //testaListarAutor();
-    	
-
+        /**
+         * Testes dos mÃ©todos do CRUD DAOAtendente
+         * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
+         */
+        
     }
 
-    
+        private static void inserirLivro(){
+        Livro liv = new Livro();
+        Categoria nvCat = new Categoria();
+        
+        liv.setNomeLivro("A rua de baixo");
+        nvCat.setNomeCategoria("Tretas da vida");
+        
+        DAOLivroImplementa DAOLivro = new DAOLivroImplementa();
+                try{
+                    DAOLivro.inserir(liv);
+                        System.out.println("Dados inseridos com sucesso!");
+        }catch(Exception e){
+                    System.out.println("Erro ao inserir registro");
+        }
+    }
     /**
      * MÃ‰TODOS DE TESTE PROVISÃ“RIOS, OS MÃ‰TODOS A SEGUIR SERÃƒO SUBSTITUÃ�DOS
      * QUANDO FOREM IMPLEMENTADOS OS MÃ‰TODOS DE FACHADA E TESTES UNITÃ�RIOS.
@@ -173,14 +191,11 @@ public class Project_POO_ADS20181 {
                 }catch(DAOException e){
                  System.out.println("pau!! " +e.getMessage());
                 }
-        
-        
-        
     }
 
     private static void testaCadastroCategoria() {
         Categoria ct = new Categoria();
-        ct.setNomeCategoria("Suspense");
+        ct.setNomeCategoria("Geografia");
         DAOCategoriaImplementa DAOAddCategoria = new DAOCategoriaImplementa();
         try {
             DAOAddCategoria.inserir(ct);
@@ -192,7 +207,7 @@ public class Project_POO_ADS20181 {
     
     private static void testaAlterarCategoria() throws ConexaoException, DAOException{
         Categoria ct = new Categoria();
-        ct.setNomeCategoria("Suspense");
+        ct.setNomeCategoria("Romance");
         ct.setIdCategoria(1);
         DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
         try{
@@ -202,22 +217,31 @@ public class Project_POO_ADS20181 {
             System.out.println("pau");
     }
     }
-        
-    private static void inserirLivro(){
-        Livro liv = new Livro();
-        Categoria nvCat = new Categoria();
-        
-        liv.setNomeLivro("A rua de baixo");
-        nvCat.setNomeCategoria("Tretas da vida");
-        
-        DAOLivroImplementa DAOLivro = new DAOLivroImplementa();
-                try{
-                    DAOLivro.inserir(liv);
-                        System.out.println("Dados inseridos com sucesso!");
-        }catch(Exception e){
-                    System.out.println("Erro ao inserir registro");
+    
+        private static void testaExcluirCategoria() {
+        Categoria ct = new Categoria();
+        ct.setIdCategoria(1);
+        DAOCategoriaImplementa Cat = new DAOCategoriaImplementa();
+        try {
+            Cat.excluir(ct);
+			System.out.println("categoria excluida");        
+        } catch (Exception e) {
+            System.out.println("pau");
         }
-    }
+    }    
 
+    private static void testaListarCategoria() throws ConexaoException, DAOException{
+        DAOCategoriaImplementa  ct = new DAOCategoriaImplementa();
+       try{
+        ArrayList<Categoria>lista = ct.listar();
+        System.out.println("Lista dos nomes da categoria:");
+        lista.stream().forEach((cat) -> { 
+                System.out.println(cat.getNomeCategoria());
+                });
+                }catch(DAOException e){
+                 System.out.println("pau!! " +e.getMessage());
+                }
+    }
+        
 }
 
