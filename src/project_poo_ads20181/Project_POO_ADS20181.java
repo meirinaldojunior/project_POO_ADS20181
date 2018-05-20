@@ -35,7 +35,7 @@ public class Project_POO_ADS20181 {
     public static void main(String[] args) throws ConexaoException, DAOException {
         
         testaConexao();
-        inserirLivro();
+        //inserirLivro();
         //testaAlterarAutor();
         //testaExcluirAutor();
     	//testaCadastroCategoria(); 
