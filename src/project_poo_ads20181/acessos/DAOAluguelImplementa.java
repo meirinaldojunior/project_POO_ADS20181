@@ -30,22 +30,25 @@ public class DAOAluguelImplementa implements DAOAluguel{
      */
 @Override
     public void inserir(Aluguel aluguel) throws ConexaoException, DAOException {
-        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "INSERT INTO Aluguel (Id_Aluguel, Id_atendente, Id_exemplar, Cpf, Valor) VALUES(?,?,?,?,?)";
-        PreparedStatement pstm = null;
+        GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+
+        String sql = "INSERT INTO aluguel (Id_atendente, Id_exemplar, Cpf, Valor) VALUES(?,?,?,?)";
+        PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1, aluguel.getIdAluguel());
-            pstm.setInt(2, aluguel.getIdAtendente().getIdAtendente());
-            pstm.setInt(3, aluguel.getIdExemplar().getIdExemplar());
-            pstm.setString(4, aluguel.getCpf().getcpf());
-            pstm.setDouble(5, aluguel.getValor());
+            //pstm.setInt(1, aluguel.getIdAluguel());
+            pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
+            pstm.setInt(2, aluguel.getIdExemplar().getIdExemplar());
+            pstm.setString(3, aluguel.getCpf().getcpf());
+            pstm.setDouble(4, aluguel.getValor());
             pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Inserido com sucesso...");
+            System.out.println("Inserido com sucesso!");
         } catch (SQLException e) {
             throw new DAOException();
         } finally {
-            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+            gc.desconectar(c);
         }
 
     }	

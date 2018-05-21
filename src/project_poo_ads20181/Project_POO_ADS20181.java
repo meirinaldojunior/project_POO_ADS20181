@@ -15,7 +15,9 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
 import project_poo_ads20181.acessos.DAOAtendenteImplementa;
 import project_poo_ads20181.acessos.DAOAutorImplementa;
 import project_poo_ads20181.acessos.DAOCategoriaImplementa;
+import project_poo_ads20181.acessos.DAOExemplarImplementa;
 import project_poo_ads20181.acessos.DAOLivroImplementa;
+import project_poo_ads20181.acessos.DAOUsuarioImplementa;
 import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.classes.Autor;
@@ -72,21 +74,27 @@ public class Project_POO_ADS20181 {
 
     public static void testaCadastroAluguel() throws ConexaoException, DAOException{
             Aluguel alu = new Aluguel();
-            //Atendente ate = new Atendente();
-            //Exemplar exe = new Exemplar();
-            //Usuario usu = new Usuario();
+            Atendente ate = new Atendente();
+            Exemplar exe = new Exemplar();
+            Usuario usu = new Usuario();
             // ainda sem funcionar o testaCadastroAluguel();
-            alu.setIdAluguel(1);
-            alu.getIdAtendente().setIdAtendente(2);
-            alu.getIdExemplar().setIdExemplar(3);
-            alu.getCpf().setCpf("2947.1097");
+            alu.getIdAluguel();
+            ate.setIdAtendente(1);
+            exe.setIdExemplar(1);
+            usu.setCpf("1");
             alu.setValor(10.00);
             
             DAOAluguelImplementa DAOAddAluguel = new DAOAluguelImplementa(); 
+            //DAOAtendenteImplementa DAOAddAtendente = new DAOAtendenteImplementa();
+            //DAOExemplarImplementa DAOAddExemplar = new DAOExemplarImplementa();
+            //DAOUsuarioImplementa DAOAddUsuario = new DAOUsuarioImplementa();
             try{
               DAOAddAluguel.inserir(alu);
+              //DAOAddAtendente.inserir(ate);
+              //DAOAddExemplar.inserir(exe);
+              //DAOAddUsuario.inserir(usu);
               System.out.println("objeto gravado com sucesso");
-            }catch(Exception e){
+            }catch(DAOException e){
                 System.out.println("pau");
             }
   
