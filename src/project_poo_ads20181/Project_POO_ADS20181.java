@@ -75,7 +75,7 @@ public class Project_POO_ADS20181 {
             //Atendente ate = new Atendente();
             //Exemplar exe = new Exemplar();
             //Usuario usu = new Usuario();
-            // ainda sem funcionar
+            // ainda sem funcionar o testaCadastroAluguel();
             alu.setIdAluguel(1);
             alu.getIdAtendente().setIdAtendente(2);
             alu.getIdExemplar().setIdExemplar(3);
