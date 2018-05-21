@@ -40,16 +40,9 @@ public class Project_POO_ADS20181 {
         
         testaConexao();       
         //inserirLivro();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
- 
->>>>>>> ee5940c5f893c40a2e1116fc01fefa375ccae9f0
         //testaAlterarAutor();
         //testaExcluirAutor();
->>>>>>> 11aef8ccd1aba2fdfecdaf9c96320ece839574b1
-    	
+
         //testaCadastroCategoria();
         //testaAlterarCategoria();  
         //testaExcluirCategoria(); 
