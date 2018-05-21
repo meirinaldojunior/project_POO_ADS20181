@@ -12,14 +12,14 @@ import project_poo_ads20181.erro.DAOException;
 
 public interface DAOAluguel {
 
-	  	public void inserir (Aluguel aluguel) throws ConexaoException, DAOException;
+	public void inserir (Aluguel aluguel) throws ConexaoException, DAOException;
 	    
-	    public void alterar (Aluguel aluguel) throws ConexaoException, DAOException;
+	public void alterar (Aluguel aluguel) throws ConexaoException, DAOException;
 	    
-	    public void excluir (Aluguel aluguel) throws ConexaoException, DAOException;
+	public void excluir (Aluguel aluguel) throws ConexaoException, DAOException;
 	    
-	    public ArrayList<Aluguel> lista() throws ConexaoException, DAOException;
+	public ArrayList<Aluguel> lista() throws ConexaoException, DAOException;
 	    
-	    Aluguel consultaAluguel(Integer idAluguel) throws ConexaoException, DAOException;
+	Aluguel consultaAluguel(int idAluguel) throws ConexaoException, DAOException;
 	
 }

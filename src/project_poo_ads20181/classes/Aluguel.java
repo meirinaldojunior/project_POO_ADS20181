@@ -8,16 +8,16 @@ package project_poo_ads20181.classes;
 public class Aluguel {
 
 	private int idAluguel;
-	private Atendente idAtendente;
-	private Exemplar idExemplar;
-	private Usuario cpf;
+	private Atendente idAtendente = new Atendente();
+	private Exemplar idExemplar = new Exemplar();
+	private Usuario cpf = new Usuario();
 	private double valor;
 	
-	public void setIdAluguel (Integer idAluguel){
+	public void setIdAluguel (int idAluguel){
         this.idAluguel = idAluguel;
         
         }
-    public Integer getIdAluguel(){
+    public int getIdAluguel(){
         return this.idAluguel;
     }
     
@@ -31,7 +31,7 @@ public class Aluguel {
     public void setIdExemplar(Exemplar idExemplar){
         this.idExemplar = idExemplar;
     }
-    public Exemplar getExemplar(){
+    public Exemplar getIdExemplar(){
         return this.idExemplar;
     }
     
@@ -48,5 +48,4 @@ public class Aluguel {
     public double getValor(){
         return this.valor;
     }
-
 }

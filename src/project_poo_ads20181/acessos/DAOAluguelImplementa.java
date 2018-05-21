@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import project_poo_ads20181.classes.Aluguel;
+import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.util.GerenciadorConexao;
@@ -23,52 +24,47 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
 public class DAOAluguelImplementa implements DAOAluguel{
 	 /**
      * Implementa DAO Inserir, Excluir, atendente, alterar e listar Aluguel
-     * @param a recebe objeto aluguel
+     * @param aluguel
      * @throws ConexaoException
      * @throws DAOException 
      */
-	@Override
-    public void inserir (Aluguel aluguel) throws ConexaoException, DAOException {
-        GerenciadorConexao gc;
-        gc = GerenciadorConexaoMySql.getInstancia();
-        Connection c = gc.conectar();
-        Aluguel alu = new Aluguel();
-               
-        String sql = "INSERT INTO Aluguel (Id_Aluguel, Id_atendente, Id_exemplar, Cpf, Valor)VALUES(?,?,?,?,?)";
-        
-        PreparedStatement pstm;
+@Override
+    public void inserir(Aluguel aluguel) throws ConexaoException, DAOException {
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "INSERT INTO Aluguel (Id_Aluguel, Id_atendente, Id_exemplar, Cpf, Valor) VALUES(?,?,?,?,?)";
+        PreparedStatement pstm = null;
         try {
-             pstm = c.prepareStatement(sql);
-             pstm.setInt(1,alu.getIdAluguel());
-             pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
-             pstm.setInt(3,alu.getExemplar().getIdExemplar());
-             pstm.setString(4,alu.getCpf().getcpf());
-             pstm.setDouble(5,alu.getValor());
-             pstm.executeUpdate();
-             
-        }catch(SQLException e){
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, aluguel.getIdAluguel());
+            pstm.setInt(2, aluguel.getIdAtendente().getIdAtendente());
+            pstm.setInt(3, aluguel.getIdExemplar().getIdExemplar());
+            pstm.setString(4, aluguel.getCpf().getcpf());
+            pstm.setDouble(5, aluguel.getValor());
+            pstm.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Inserido com sucesso...");
+        } catch (SQLException e) {
             throw new DAOException();
-        }finally{
-            gc.desconectar(c);
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
-	
-	}
-	
+
+    }	
     @Override
     public void alterar(Aluguel aluguel) throws ConexaoException, DAOException {
             Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Aluguel SET Id_Aluguel, Id_exemplar=?, Id_atendente=?, Cpf=?, Valor=? WHERE Id_Aluguel=?";
+        String sql = "UPDATE Aluguel SET Id_Aluguel=?, Id_exemplar=?, Id_atendente=?, Cpf=?, Valor=? WHERE Id_Aluguel=?";
         PreparedStatement pstm;
         Aluguel alu = new Aluguel();
         try {
             pstm = c.prepareStatement(sql);
             pstm.setInt(1,alu.getIdAluguel());
-            pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
-            pstm.setInt(3,alu.getExemplar().getIdExemplar());
+            pstm.setInt(2,alu.getIdExemplar().getIdExemplar());
+            pstm.setInt(3,alu.getIdAtendente().getIdAtendente());
             pstm.setString(4,alu.getCpf().getcpf());
             pstm.setDouble(5,alu.getValor());
+            pstm.setInt(6,alu.getIdAluguel());
             pstm.executeUpdate();
-            // JOptionPane.showMessageDialog(null, "Alterado com sucesso...");
+            
         } catch (SQLException e) {
             throw new DAOException();
         } finally {
@@ -86,10 +82,10 @@ public class DAOAluguelImplementa implements DAOAluguel{
         try {
             pstm = c.prepareStatement(sql);
             pstm.setInt(1,alu.getIdAluguel());
-            pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
-            pstm.setInt(3,alu.getExemplar().getIdExemplar());
-            pstm.setString(4,alu.getCpf().getcpf());
-            pstm.setDouble(5,alu.getValor());
+            //pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
+            //pstm.setInt(3,alu.getExemplar().getIdExemplar());
+            //pstm.setString(4,alu.getCpf().getcpf());
+            //pstm.setDouble(5,alu.getValor());
             pstm.executeUpdate();
             // JOptionPane.showMessageDialog(null, "Excluido com sucesso...");
         } catch (SQLException e) {
@@ -130,7 +126,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
     }
     
     @Override
-    public Aluguel consultaAluguel (Integer idAluguel) throws ConexaoException, DAOException {
+    public Aluguel consultaAluguel (int idAluguel) throws ConexaoException, DAOException {
          GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
@@ -154,6 +150,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
                 alu.setValor(rs.getDouble("Valor"));
             }
             return alu;
+            
         }catch(SQLException e){
             throw new DAOException();
         }finally{

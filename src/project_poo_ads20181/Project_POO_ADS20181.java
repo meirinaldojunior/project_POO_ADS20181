@@ -8,6 +8,7 @@ package project_poo_ads20181;
 import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import project_poo_ads20181.acessos.DAOAluguelImplementa;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
@@ -15,10 +16,13 @@ import project_poo_ads20181.acessos.DAOAtendenteImplementa;
 import project_poo_ads20181.acessos.DAOAutorImplementa;
 import project_poo_ads20181.acessos.DAOCategoriaImplementa;
 import project_poo_ads20181.acessos.DAOLivroImplementa;
+import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.classes.Autor;
 import project_poo_ads20181.classes.Categoria;
+import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.classes.Livro;
+import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.DAOException;
 
 /**
@@ -34,27 +38,29 @@ public class Project_POO_ADS20181 {
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
-        testaConexao();
+        testaConexao();       
         //inserirLivro();
- 
-        //testaAlterarAutor();
-        //testaExcluirAutor();
     	
         //testaCadastroCategoria();
-        //testaAlterarCategoria();
-        //testaExcluirCategoria();
-        testaListarCategoria();
-        //testaBuscarIdCategoria();
+        //testaAlterarCategoria();  
+        //testaExcluirCategoria(); 
+        //testaListarCategoria();   
         
         //testaCadastroAtendente();
         //testaExclusaoAtendente();
         //testaEdicaoAtendente();
         //testaListagemAtendente();
         
-        // testaInserirAutor();
+        //testaInserirAutor();
         //testaExcluirAutor();
         //testaAlterarAutor();
         //testaListarAutor();
+        
+        testaCadastroAluguel();
+        //testaAlterarAluguel();  
+        //testaExcluirAluguel(); 
+        //testaListarAluguel();   
+        
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
@@ -62,6 +68,67 @@ public class Project_POO_ADS20181 {
         
     }
 
+    public static void testaCadastroAluguel() throws ConexaoException, DAOException{
+            Aluguel alu = new Aluguel();
+            //Atendente ate = new Atendente();
+            //Exemplar exe = new Exemplar();
+            //Usuario usu = new Usuario();
+            // ainda sem funcionar
+            alu.setIdAluguel(1);
+            alu.getIdAtendente().setIdAtendente(2);
+            alu.getIdExemplar().setIdExemplar(3);
+            alu.getCpf().setCpf("2947.1097");
+            alu.setValor(10.00);
+            
+            DAOAluguelImplementa DAOAddAluguel = new DAOAluguelImplementa(); 
+            try{
+              DAOAddAluguel.inserir(alu);
+              System.out.println("objeto gravado com sucesso");
+            }catch(Exception e){
+                System.out.println("pau");
+            }
+  
+              
+    }    
+    private static void testaAlterarAluguel() throws ConexaoException, DAOException{
+        Categoria ct = new Categoria();
+        ct.setNomeCategoria("Romance");
+        ct.setIdCategoria(1);
+        DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
+        try{
+        cat.alterar(ct);
+            System.out.println("categoria alterada com sucesso");
+    }catch(DAOException dae){
+            System.out.println("pau");
+    }
+    }
+    
+        private static void testaExcluirAluguel() throws ConexaoException, DAOException {
+        Categoria ct = new Categoria();
+        ct.setIdCategoria(1);
+        DAOCategoriaImplementa Cat = new DAOCategoriaImplementa();
+        try {
+            Cat.excluir(ct);
+			System.out.println("categoria excluida");        
+        } catch (Exception e) {
+            System.out.println("pau");
+        }
+    }    
+
+    private static void testaListarAluguel() throws ConexaoException, DAOException{
+        DAOCategoriaImplementa  ct = new DAOCategoriaImplementa();
+       try{
+        ArrayList<Categoria>lista = ct.listar();
+        System.out.println("Lista dos nomes da categoria:");
+        lista.stream().forEach((cat) -> { 
+                System.out.println(cat.getNomeCategoria());
+                });
+                }catch(DAOException e){
+                 System.out.println("pau!! " +e.getMessage());
+                }
+    }
+    
+    
         private static void inserirLivro(){
         Livro liv = new Livro();
         Categoria nvCat = new Categoria();
@@ -193,7 +260,7 @@ public class Project_POO_ADS20181 {
                 }
     }
 
-    private static void testaCadastroCategoria() {
+    private static void testaCadastroCategoria() throws ConexaoException, DAOException {
         Categoria ct = new Categoria();
         ct.setNomeCategoria("Geografia");
         DAOCategoriaImplementa DAOAddCategoria = new DAOCategoriaImplementa();
@@ -218,7 +285,7 @@ public class Project_POO_ADS20181 {
     }
     }
     
-        private static void testaExcluirCategoria() {
+        private static void testaExcluirCategoria() throws ConexaoException, DAOException {
         Categoria ct = new Categoria();
         ct.setIdCategoria(1);
         DAOCategoriaImplementa Cat = new DAOCategoriaImplementa();
@@ -244,4 +311,3 @@ public class Project_POO_ADS20181 {
     }
         
 }
-
