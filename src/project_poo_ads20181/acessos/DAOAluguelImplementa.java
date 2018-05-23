@@ -34,7 +34,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
 
-        String sql = "INSERT INTO aluguel (Id_atendente, Id_exemplar, Cpf, Valor) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO aluguel ( Id_atendente, Id_exemplar, Cpf, Valor) VALUES(?,?,?,?)";
         PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
@@ -54,25 +54,27 @@ public class DAOAluguelImplementa implements DAOAluguel{
     }	
     @Override
     public void alterar(Aluguel aluguel) throws ConexaoException, DAOException {
-            Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Aluguel SET Id_Aluguel=?, Id_exemplar=?, Id_atendente=?, Cpf=?, Valor=? WHERE Id_Aluguel=?";
+             GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+        
+        String sql = "UPDATE Aluguel SET Id_atendente=?, Id_exemplar=?, Cpf=?, Valor=? WHERE Id_Aluguel =?";
+        
         PreparedStatement pstm;
-        Aluguel alu = new Aluguel();
         try {
-            pstm = c.prepareStatement(sql);
-            pstm.setInt(1,alu.getIdAluguel());
-            pstm.setInt(2,alu.getIdExemplar().getIdExemplar());
-            pstm.setInt(3,alu.getIdAtendente().getIdAtendente());
-            pstm.setString(4,alu.getCpf().getcpf());
-            pstm.setDouble(5,alu.getValor());
-            pstm.setInt(6,alu.getIdAluguel());
-            pstm.executeUpdate();
-            
-        } catch (SQLException e) {
+             pstm = c.prepareStatement(sql);
+             pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
+             pstm.setInt(2,aluguel.getIdExemplar().getIdExemplar());
+             pstm.setString(3,aluguel.getCpf().getcpf());
+             pstm.setDouble(4,aluguel.getValor());
+             pstm.setInt(5, aluguel.getIdAluguel());
+             pstm.executeUpdate();
+             
+        }catch(SQLException e){
             throw new DAOException();
-        } finally {
-            GerenciadorConexaoMySql.getInstancia().desconectar(c);
-        }
+        }finally{
+            gc.desconectar(c);
+        } 
     }
 
     @Override

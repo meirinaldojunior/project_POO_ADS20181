@@ -60,39 +60,35 @@ public class Project_POO_ADS20181 {
         //testaAlterarAutor();
         //testaListarAutor();
         
-        testaCadastroAluguel();
-        //testaAlterarAluguel();  
+        //testaCadastroAluguel();
+        testaAlterarAluguel();  
         //testaExcluirAluguel(); 
         //testaListarAluguel();   
-        
+
+        //testaCadastroExemplar();
+        //testaAlterarExemplar();  
+        //testaExcluirExemplar(); 
+        //testaListarExemplar();   
+
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
          */
         
     }
-
+    
     public static void testaCadastroAluguel() throws ConexaoException, DAOException{
             Aluguel alu = new Aluguel();
-            Atendente ate = new Atendente();
-            Exemplar exe = new Exemplar();
-            Usuario usu = new Usuario();
-            // ainda sem funcionar o testaCadastroAluguel();
+            
             alu.getIdAluguel();
-            ate.setIdAtendente(1);
-            exe.setIdExemplar(1);
-            usu.setCpf("1");
+            alu.getIdAtendente().setIdAtendente(11);
+            alu.getIdExemplar().setIdExemplar(1);
+            alu.getCpf().setCpf("98413");
             alu.setValor(10.00);
             
             DAOAluguelImplementa DAOAddAluguel = new DAOAluguelImplementa(); 
-            //DAOAtendenteImplementa DAOAddAtendente = new DAOAtendenteImplementa();
-            //DAOExemplarImplementa DAOAddExemplar = new DAOExemplarImplementa();
-            //DAOUsuarioImplementa DAOAddUsuario = new DAOUsuarioImplementa();
             try{
               DAOAddAluguel.inserir(alu);
-              //DAOAddAtendente.inserir(ate);
-              //DAOAddExemplar.inserir(exe);
-              //DAOAddUsuario.inserir(usu);
               System.out.println("objeto gravado com sucesso");
             }catch(DAOException e){
                 System.out.println("pau");
@@ -101,14 +97,21 @@ public class Project_POO_ADS20181 {
               
     }    
     private static void testaAlterarAluguel() throws ConexaoException, DAOException{
-        Categoria ct = new Categoria();
-        ct.setNomeCategoria("Romance");
-        ct.setIdCategoria(1);
-        DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
+        Usuario usu = new Usuario();
+        usu.setCpf("98413");
+        
+        Aluguel alu = new Aluguel();
+        alu.getIdAtendente().setIdAtendente(11);
+        alu.getIdExemplar().setIdExemplar(2);
+        alu.getCpf().setCpf("1234");
+        //alu.setValor(100.56);
+        alu.setIdAluguel(98);
+        
+        DAOAluguelImplementa DAOAltAluguel = new DAOAluguelImplementa();
         try{
-        cat.alterar(ct);
-            System.out.println("categoria alterada com sucesso");
-    }catch(DAOException dae){
+        DAOAltAluguel.alterar(alu);
+            System.out.println("aluguel alterado com sucesso");
+    }catch(DAOException e){
             System.out.println("pau");
     }
     }

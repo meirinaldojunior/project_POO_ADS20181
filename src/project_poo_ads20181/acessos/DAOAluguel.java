@@ -7,6 +7,7 @@ package project_poo_ads20181.acessos;
 
 import java.util.ArrayList;
 import project_poo_ads20181.classes.Aluguel;
+import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 
