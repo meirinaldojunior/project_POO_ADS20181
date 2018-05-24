@@ -101,18 +101,21 @@ public class Project_POO_ADS20181 {
         usu.setCpf("98413");
         
         Aluguel alu = new Aluguel();
-        alu.getIdAtendente().setIdAtendente(11);
-        alu.getIdExemplar().setIdExemplar(2);
+        alu.getIdAluguel();
+        //alu.getIdAtendente().setIdAtendente(11);
+        //alu.getIdExemplar().setIdExemplar(2);
         alu.getCpf().setCpf("1234");
-        //alu.setValor(100.56);
-        alu.setIdAluguel(98);
+        alu.setValor(100.56);
         
         DAOAluguelImplementa DAOAltAluguel = new DAOAluguelImplementa();
+        DAOUsuarioImplementa DAOAltusu = new DAOUsuarioImplementa();
+        
         try{
         DAOAltAluguel.alterar(alu);
+        DAOAltusu.alterar(usu);
             System.out.println("aluguel alterado com sucesso");
     }catch(DAOException e){
-            System.out.println("pau");
+            System.out.println("erro");
     }
     }
     
