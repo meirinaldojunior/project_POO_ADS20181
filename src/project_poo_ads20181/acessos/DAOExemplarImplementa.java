@@ -28,17 +28,17 @@ public class DAOExemplarImplementa implements DAOExemplar {
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
+        
         Exemplar exe = new Exemplar();
                
-        String sql = "INSERT INTO Exemplar (Id_exemplar, Id_livro, Id_Categoria, Id_Autor)VALUES(?,?,?,?)";
+        String sql = "INSERT INTO exemplar (Id_livro, Id_Categoria, Id_Autor) VALUES (?,?,?)";
         
         PreparedStatement pstm;
         try {
              pstm = c.prepareStatement(sql);
-             pstm.setInt(1,exe.getIdExemplar());
-             pstm.setInt(2,exe.getIdLivro().getIdLivro());
-             pstm.setInt(3,exe.getIdCategoria().getIdCategoria());
-             pstm.setInt(4,exe.getId().getId());
+             pstm.setInt(1,exe.getIdLivro().getIdLivro());
+             pstm.setInt(2,exe.getIdCategoria().getIdCategoria());
+             pstm.setInt(3,exe.getId().getId());
              pstm.executeUpdate();
              
         }catch(SQLException e){
