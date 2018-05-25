@@ -45,10 +45,10 @@ public class Project_POO_ADS20181 {
         //testaAlterarAutor();
         //testaExcluirAutor();
 
-        //testaCadastroCategoria();
-        //testaAlterarCategoria();  
-        //testaExcluirCategoria(); 
-        //testaListarCategoria();   
+        //testaCadastroCategoria(); //ok
+        //testaAlterarCategoria();  //ok
+        //testaExcluirCategoria();  //ok
+        //testaListarCategoria();   //ok
         
         //testaCadastroAtendente();
         //testaExclusaoAtendente();
@@ -60,15 +60,15 @@ public class Project_POO_ADS20181 {
         //testaAlterarAutor();
         //testaListarAutor();
         
-        //testaCadastroAluguel();
-        testaAlterarAluguel();  
-        //testaExcluirAluguel(); 
-        //testaListarAluguel();   
+        //testaCadastroAluguel(); //ok
+        //testaAlterarAluguel();  //ok
+        //testaExcluirAluguel();  //ok
+        //testaListarAluguel();   //ok
 
-        //testaCadastroExemplar();
-        //testaAlterarExemplar();  
-        //testaExcluirExemplar(); 
-        //testaListarExemplar();   
+        //testaCadastroExemplar(); //pendente
+        //testaAlterarExemplar();  //pendente
+        //testaExcluirExemplar();  //pendente
+        //testaListarExemplar();   //pendente
 
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
@@ -81,10 +81,10 @@ public class Project_POO_ADS20181 {
             Aluguel alu = new Aluguel();
             
             alu.getIdAluguel();
-            alu.getIdAtendente().setIdAtendente(11);
-            alu.getIdExemplar().setIdExemplar(1);
-            alu.getCpf().setCpf("98413");
-            alu.setValor(10.00);
+            alu.getIdAtendente().setIdAtendente(12);
+            alu.getIdExemplar().setIdExemplar(2);
+            alu.getIdUsuario().setIdUsuario(2);
+            alu.setValor(20.00);
             
             DAOAluguelImplementa DAOAddAluguel = new DAOAluguelImplementa(); 
             try{
@@ -97,22 +97,26 @@ public class Project_POO_ADS20181 {
               
     }    
     private static void testaAlterarAluguel() throws ConexaoException, DAOException{
-        Usuario usu = new Usuario();
-        usu.setCpf("98413");
         
         Aluguel alu = new Aluguel();
-        alu.getIdAluguel();
-        //alu.getIdAtendente().setIdAtendente(11);
-        //alu.getIdExemplar().setIdExemplar(2);
-        alu.getCpf().setCpf("1234");
-        alu.setValor(100.56);
+        Atendente ate = new Atendente();
+        Exemplar exe = new Exemplar();
+        Usuario usu = new Usuario();
+        
+        alu.setIdAtendente(ate);
+        alu.setIdExemplar(exe);
+        alu.setIdUsuario(usu);
+        alu.setValor(100.53);
+        alu.setIdAluguel(17);
+        
+        ate.setIdAtendente(11);
+        exe.setIdExemplar(2);
+        usu.setIdUsuario(1);
         
         DAOAluguelImplementa DAOAltAluguel = new DAOAluguelImplementa();
-        DAOUsuarioImplementa DAOAltusu = new DAOUsuarioImplementa();
         
         try{
         DAOAltAluguel.alterar(alu);
-        DAOAltusu.alterar(usu);
             System.out.println("aluguel alterado com sucesso");
     }catch(DAOException e){
             System.out.println("erro");
@@ -120,24 +124,26 @@ public class Project_POO_ADS20181 {
     }
     
         private static void testaExcluirAluguel() throws ConexaoException, DAOException {
-        Categoria ct = new Categoria();
-        ct.setIdCategoria(1);
-        DAOCategoriaImplementa Cat = new DAOCategoriaImplementa();
+        Aluguel alu = new Aluguel();
+        
+        alu.setIdAluguel(17);
+        
+        DAOAluguelImplementa DAOExcAlu = new DAOAluguelImplementa();
         try {
-            Cat.excluir(ct);
-			System.out.println("categoria excluida");        
-        } catch (Exception e) {
-            System.out.println("pau");
+            DAOExcAlu.excluir(alu);
+			System.out.println("Aluguel excluido");        
+        } catch (DAOException e) {
+            System.out.println("Erro");
         }
     }    
 
     private static void testaListarAluguel() throws ConexaoException, DAOException{
-        DAOCategoriaImplementa  ct = new DAOCategoriaImplementa();
+        DAOAluguelImplementa DAOListAlu = new DAOAluguelImplementa();
        try{
-        ArrayList<Categoria>lista = ct.listar();
-        System.out.println("Lista dos nomes da categoria:");
-        lista.stream().forEach((cat) -> { 
-                System.out.println(cat.getNomeCategoria());
+        ArrayList<Aluguel>lista = DAOListAlu.lista();
+        System.out.println("Lista de Alugueis:");
+        lista.stream().forEach((alu) -> { 
+                System.out.println(alu.getIdAluguel());
                 });
                 }catch(DAOException e){
                  System.out.println("pau!! " +e.getMessage());
@@ -291,7 +297,7 @@ public class Project_POO_ADS20181 {
     private static void testaAlterarCategoria() throws ConexaoException, DAOException{
         Categoria ct = new Categoria();
         ct.setNomeCategoria("Romance");
-        ct.setIdCategoria(1);
+        ct.setIdCategoria(6);
         DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
         try{
         cat.alterar(ct);
@@ -303,7 +309,7 @@ public class Project_POO_ADS20181 {
     
         private static void testaExcluirCategoria() throws ConexaoException, DAOException {
         Categoria ct = new Categoria();
-        ct.setIdCategoria(1);
+        ct.setIdCategoria(6);
         DAOCategoriaImplementa Cat = new DAOCategoriaImplementa();
         try {
             Cat.excluir(ct);
@@ -317,9 +323,9 @@ public class Project_POO_ADS20181 {
         DAOCategoriaImplementa  ct = new DAOCategoriaImplementa();
        try{
         ArrayList<Categoria>lista = ct.listar();
-        System.out.println("Lista dos nomes da categoria:");
+        System.out.println("Lista dos ids da categoria:");
         lista.stream().forEach((cat) -> { 
-                System.out.println(cat.getNomeCategoria());
+                System.out.println(cat.getIdCategoria());
                 });
                 }catch(DAOException e){
                  System.out.println("pau!! " +e.getMessage());
