@@ -40,16 +40,25 @@ public class Project_POO_ADS20181 {
      */
     public static void main(String[] args) throws ConexaoException, DAOException {
         
-        testaConexao();       
+        testaConexao();  
+        
         //inserirLivro();
-        //testaAlterarAutor();
-        //testaExcluirAutor();
 
         //testaCadastroCategoria(); //ok
         //testaAlterarCategoria();  //ok
         //testaExcluirCategoria();  //ok
         //testaListarCategoria();   //ok
         
+        //testaCadastroAluguel(); //ok
+        //testaAlterarAluguel();  //ok
+        //testaExcluirAluguel();  //ok
+        //testaListarAluguel();   //ok
+
+        //testaCadastroExemplar(); //ok
+        //testaAlterarExemplar();  //ok
+        //testaExcluirExemplar();  //ok
+        //testaListarExemplar();   //ok
+
         //testaCadastroAtendente();
         //testaExclusaoAtendente();
         //testaEdicaoAtendente();
@@ -60,16 +69,6 @@ public class Project_POO_ADS20181 {
         //testaAlterarAutor();
         //testaListarAutor();
         
-        //testaCadastroAluguel(); //ok
-        //testaAlterarAluguel();  //ok
-        //testaExcluirAluguel();  // ok
-        //testaListarAluguel();   //ok
-
-        //testaCadastroExemplar(); //ok
-        //testaAlterarExemplar();  //ok
-        //testaExcluirExemplar();  //ok
-        //testaListarExemplar();   //ok
-
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
          * TODO: PRECISAMOS REMOVER QUANDO INCLUIR A GUI
