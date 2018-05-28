@@ -62,13 +62,13 @@ public class Project_POO_ADS20181 {
         
         //testaCadastroAluguel(); //ok
         //testaAlterarAluguel();  //ok
-        //testaExcluirAluguel();  
+        //testaExcluirAluguel();  // ok
         //testaListarAluguel();   //ok
 
-        testaCadastroExemplar(); //pendente
-        //testaAlterarExemplar();  //pendente
-        //testaExcluirExemplar();  //pendente
-        //testaListarExemplar();   //pendente
+        //testaCadastroExemplar(); //ok
+        //testaAlterarExemplar();  //ok
+        //testaExcluirExemplar();  //ok
+        //testaListarExemplar();   //ok
 
         /**
          * Testes dos mÃ©todos do CRUD DAOAtendente
@@ -125,7 +125,7 @@ public class Project_POO_ADS20181 {
         private static void testaExcluirAluguel() throws ConexaoException, DAOException {
         Aluguel alu = new Aluguel();
         
-        alu.setIdAluguel(17);
+        alu.setIdAluguel(19);
         
         
         DAOAluguelImplementa DAOExcAlu = new DAOAluguelImplementa();
@@ -154,8 +154,8 @@ public class Project_POO_ADS20181 {
             Exemplar exe = new Exemplar();
             
             exe.getIdExemplar();
-            exe.getIdLivro().setIdLivro(3);
-            exe.getIdCategoria().setIdCategoria(5);
+            exe.getIdLivro().setIdLivro(2);
+            exe.getIdCategoria().setIdCategoria(4);
             exe.getId().setId(104);
             
             DAOExemplarImplementa DAOAddExe = new DAOExemplarImplementa(); 
@@ -170,40 +170,39 @@ public class Project_POO_ADS20181 {
     }    
         private static void testaAlterarExemplar() throws ConexaoException, DAOException{
         
-        Aluguel alu = new Aluguel();
-        Atendente ate = new Atendente();
         Exemplar exe = new Exemplar();
-        Usuario usu = new Usuario();
+        Livro liv = new Livro();
+        Categoria cat = new Categoria();
+        Autor aut = new Autor();
         
-        alu.setIdAtendente(ate);
-        alu.setIdExemplar(exe);
-        alu.setIdUsuario(usu);
-        alu.setValor(100.53);
-        alu.setIdAluguel(17);
+        exe.setIdExemplar(13);
+        exe.setIdLivro(liv);
+        exe.setIdCategoria(cat);
+        exe.setId(aut);
         
-        ate.setIdAtendente(11);
-        exe.setIdExemplar(2);
-        usu.setIdUsuario(1);
+        liv.setIdLivro(3);
+        cat.setIdCategoria(5);
+        aut.setId(105);
         
-        DAOAluguelImplementa DAOAltAluguel = new DAOAluguelImplementa();
+        DAOExemplarImplementa DAOAltExe = new DAOExemplarImplementa();
         
         try{
-        DAOAltAluguel.alterar(alu);
-            System.out.println("aluguel alterado com sucesso");
+        DAOAltExe.alterar(exe);
+            System.out.println("Exemplar alterado com sucesso");
     }catch(DAOException e){
             System.out.println("erro");
     }
     }
     
         private static void testaExcluirExemplar() throws ConexaoException, DAOException {
-        Aluguel alu = new Aluguel();
+        Exemplar exe = new Exemplar();
         
-        alu.setIdAluguel(17);
+        exe.setIdExemplar(1);
         
         
-        DAOAluguelImplementa DAOExcAlu = new DAOAluguelImplementa();
+        DAOExemplarImplementa DAOExcExe = new DAOExemplarImplementa();
         try {
-            DAOExcAlu.excluir(alu);
+            DAOExcExe.excluir(exe);
 			System.out.println("Aluguel excluido");        
         } catch (DAOException e) {
             System.out.println("Erro");
@@ -211,12 +210,12 @@ public class Project_POO_ADS20181 {
     }    
 
         private static void testaListarExemplar() throws ConexaoException, DAOException{
-        DAOAluguelImplementa DAOListAlu = new DAOAluguelImplementa();
+        DAOExemplarImplementa DAOListExe = new DAOExemplarImplementa();
        try{
-        ArrayList<Aluguel>lista = DAOListAlu.lista();
-        System.out.println("Lista de Alugueis:");
-        lista.stream().forEach((alu) -> { 
-                System.out.println(alu.getIdAluguel());
+        ArrayList<Exemplar>lista = DAOListExe.lista();
+        System.out.println("Lista de Exemplares:");
+        lista.stream().forEach((exe) -> { 
+                System.out.println(exe.getIdExemplar());
                 });
                 }catch(DAOException e){
                  System.out.println("pau!! " +e.getMessage());

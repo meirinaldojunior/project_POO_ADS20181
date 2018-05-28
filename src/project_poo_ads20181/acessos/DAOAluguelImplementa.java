@@ -38,7 +38,6 @@ public class DAOAluguelImplementa implements DAOAluguel{
         PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
-            //pstm.setInt(1, aluguel.getIdAluguel());
             pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
             pstm.setInt(2, aluguel.getIdExemplar().getIdExemplar());
             pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
@@ -54,7 +53,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
     }	
     @Override
     public void alterar(Aluguel aluguel) throws ConexaoException, DAOException {
-             GerenciadorConexao gc;
+        GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
         
@@ -82,12 +81,12 @@ public class DAOAluguelImplementa implements DAOAluguel{
                 Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         String sql = "DELETE FROM aluguel WHERE Id_Aluguel =?";
         PreparedStatement pstm;
-        Aluguel alu = new Aluguel();
+       
         
         try {
             pstm = c.prepareStatement(sql);
 
-            pstm.setInt(1 , alu.getIdAluguel());
+            pstm.setInt(1 , aluguel.getIdAluguel());
 
             pstm.executeUpdate();
       
