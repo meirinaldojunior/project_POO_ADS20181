@@ -298,7 +298,7 @@ public class Project_POO_ADS20181 {
             gc.desconectar(c);
             System.out.println("CONECTOU");
         } catch (ConexaoException ex) {
-            System.out.println("PAU NA CONEXAO: " + ex.getMessage());
+            System.out.println("Conexão não pode ser estabelecida: " + ex.getMessage());
         }
         
         }
@@ -309,7 +309,7 @@ public class Project_POO_ADS20181 {
               dai.inserir(a);
               System.out.println("objeto gravado com sucesso");
             }catch(DAOException da){
-                System.out.println("pau");
+                System.out.println("não foi possivel gravar o objeto");
             }
   
               
@@ -323,7 +323,7 @@ public class Project_POO_ADS20181 {
         dai.alterar(a);
             System.out.println("autor alterado com sucesso");
     }catch(DAOException dae){
-            System.out.println("pau");
+            System.out.println("operação não concluida");
     }
     }
 
@@ -335,7 +335,7 @@ public class Project_POO_ADS20181 {
         dai.excluir(a);
             System.out.println("Autor excluido com sucesso");       
     }catch(DAOException e){
-            System.out.println("pau!! " +e.getMessage());
+            System.out.println("exclusão não concluida " +e.getMessage());
     }
     }
     
@@ -348,7 +348,7 @@ public class Project_POO_ADS20181 {
                 System.out.println("Autor: " + a.getNome());
                 });
                 }catch(DAOException e){
-                 System.out.println("pau!! " +e.getMessage());
+                 System.out.println("Autor não pode ser adicionado a lista " +e.getMessage());
                 }
     }
 
