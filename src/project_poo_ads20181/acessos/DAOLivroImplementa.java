@@ -124,7 +124,7 @@ public class DAOLivroImplementa implements DAOLivro{
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         } 
     
-       
+       //método consulta por ID faltando
     }
     
     

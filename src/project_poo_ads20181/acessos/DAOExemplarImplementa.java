@@ -28,17 +28,15 @@ public class DAOExemplarImplementa implements DAOExemplar {
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
-        Exemplar exe = new Exemplar();
-               
-        String sql = "INSERT INTO Exemplar (Id_exemplar, Id_livro, Id_Categoria, Id_Autor)VALUES(?,?,?,?)";
+       
+        String sql = "INSERT INTO exemplar (Id_livro, Id_Categoria, Id_Autor) VALUES (?,?,?)";
         
         PreparedStatement pstm;
         try {
              pstm = c.prepareStatement(sql);
-             pstm.setInt(1,exe.getIdExemplar());
-             pstm.setInt(2,exe.getIdLivro().getIdLivro());
-             pstm.setInt(3,exe.getIdCategoria().getIdCategoria());
-             pstm.setInt(4,exe.getId().getId());
+             pstm.setInt(1,exemplar.getIdLivro().getIdLivro());
+             pstm.setInt(2,exemplar.getIdCategoria().getIdCategoria());
+             pstm.setInt(3,exemplar.getId().getId());
              pstm.executeUpdate();
              
         }catch(SQLException e){
@@ -51,17 +49,19 @@ public class DAOExemplarImplementa implements DAOExemplar {
 	
     @Override
     public void alterar(Exemplar exemplar) throws ConexaoException, DAOException {
-            Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Exemplar SET Id_exemplar=?, Id_Categoria=?, Id_Autor=?, Id_livro=? WHERE Id_Exemplar=?";
+        
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        
+        String sql = "UPDATE exemplar SET Id_livro=? , Id_Categoria=?, Id_Autor=? WHERE Id_exemplar=?";
+        
         PreparedStatement pstm;
-        Exemplar exe = new Exemplar();
+        
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1,exe.getIdExemplar());
-            pstm.setInt(2,exe.getIdCategoria().getIdCategoria());
-            pstm.setInt(3,exe.getId().getId());
-            pstm.setInt(4,exe.getIdLivro().getIdLivro());
-            pstm.setDouble(5,exe.getIdExemplar());
+            pstm.setInt(1,exemplar.getIdLivro().getIdLivro());
+            pstm.setInt(2,exemplar.getIdCategoria().getIdCategoria());
+            pstm.setInt(3,exemplar.getId().getId());
+            pstm.setDouble(4,exemplar.getIdExemplar());
             pstm.executeUpdate();
             
         } catch (SQLException e) {
@@ -73,14 +73,13 @@ public class DAOExemplarImplementa implements DAOExemplar {
 
     @Override
     public void excluir(Exemplar exemplar) throws ConexaoException, DAOException {
-                Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "DELETE FROM Exemplar WHERE Id_Exemplar =?";
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "DELETE FROM exemplar WHERE Id_exemplar =?";
         PreparedStatement pstm;
-        Exemplar exe = new Exemplar();
         
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1,exe.getIdExemplar());
+            pstm.setInt(1,exemplar.getIdExemplar());
             //pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
             //pstm.setInt(3,alu.getExemplar().getIdExemplar());
             //pstm.setString(4,alu.getCpf().getcpf());
@@ -97,7 +96,7 @@ public class DAOExemplarImplementa implements DAOExemplar {
     public ArrayList<Exemplar> lista() throws ConexaoException, DAOException {
     Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Exemplar> lista = new ArrayList();
-        String sql = "SELECT * FROM Exemplar";
+        String sql = "SELECT * FROM exemplar";
         Statement stm;
         
         try {
@@ -106,7 +105,7 @@ public class DAOExemplarImplementa implements DAOExemplar {
 
             while (rs.next()) {
                 Exemplar exe = new Exemplar();
-                exe.setIdExemplar(rs.getInt("Id_Exemplar"));
+                exe.setIdExemplar(rs.getInt("Id_exemplar"));
                 //exe.setIdCategoria(rs.getInt("Id_Categoria"));
                 //exe.setId(rs.getInt("Id_Autor"));
                 //exe.setIdLivro(rs.getInt("Id_livro"));

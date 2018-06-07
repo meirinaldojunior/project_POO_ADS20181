@@ -3,9 +3,9 @@ package project_poo_ads20181.classes;
 public class Exemplar {
 
 	private int idExemplar;
-	private Categoria idCategoria;
-        private Autor id;
-        private Livro idLivro;
+	private Categoria idCategoria = new Categoria();
+        private Autor id = new Autor();
+        private Livro idLivro = new Livro();
         
 	public void setIdExemplar (int idExemplar){
         this.idExemplar = idExemplar;  

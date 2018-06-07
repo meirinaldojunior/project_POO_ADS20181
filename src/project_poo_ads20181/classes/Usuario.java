@@ -7,13 +7,14 @@ package project_poo_ads20181.classes;
 
 public class Usuario {
 
-	private String cpf;
+        private int idUsuario;
+    	private String cpf;
 	private String nome;
 	
 	public Usuario() {
 	}
 	
-	public void setCpf (String cpf){
+    public void setCpf (String cpf){
         this.cpf = cpf;
         
         }
@@ -27,6 +28,12 @@ public class Usuario {
     public String getNome(){
         return this.nome;
     }
-	
+    
+    public void setIdUsuario (int idUsuario){
+        this.idUsuario = idUsuario;
+    }
+    public int getIdUsuario(){
+        return this.idUsuario;
+    }
 	
 }

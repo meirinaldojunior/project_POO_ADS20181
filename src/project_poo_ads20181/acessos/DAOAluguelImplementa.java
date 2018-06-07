@@ -34,14 +34,13 @@ public class DAOAluguelImplementa implements DAOAluguel{
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
 
-        String sql = "INSERT INTO aluguel ( Id_atendente, Id_exemplar, Cpf, Valor) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO aluguel ( Id_atendente, Id_exemplar, Id_Usuario, Valor) VALUES(?,?,?,?)";
         PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
-            //pstm.setInt(1, aluguel.getIdAluguel());
             pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
             pstm.setInt(2, aluguel.getIdExemplar().getIdExemplar());
-            pstm.setString(3, aluguel.getCpf().getcpf());
+            pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
             pstm.setDouble(4, aluguel.getValor());
             pstm.executeUpdate();
             System.out.println("Inserido com sucesso!");
@@ -54,18 +53,18 @@ public class DAOAluguelImplementa implements DAOAluguel{
     }	
     @Override
     public void alterar(Aluguel aluguel) throws ConexaoException, DAOException {
-             GerenciadorConexao gc;
+        GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
         
-        String sql = "UPDATE Aluguel SET Id_atendente=?, Id_exemplar=?, Cpf=?, Valor=? WHERE Id_Aluguel =?";
+        String sql = "UPDATE aluguel SET Id_atendente=?, Id_exemplar=?, Id_Usuario=?, Valor=? WHERE Id_Aluguel =?";
         
         PreparedStatement pstm;
         try {
              pstm = c.prepareStatement(sql);
              pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
              pstm.setInt(2,aluguel.getIdExemplar().getIdExemplar());
-             pstm.setString(3,aluguel.getCpf().getcpf());
+             pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
              pstm.setDouble(4,aluguel.getValor());
              pstm.setInt(5, aluguel.getIdAluguel());
              pstm.executeUpdate();
@@ -80,19 +79,17 @@ public class DAOAluguelImplementa implements DAOAluguel{
     @Override
     public void excluir(Aluguel aluguel) throws ConexaoException, DAOException {
                 Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "DELETE FROM Aluguel WHERE Id_Aluguel =?";
+        String sql = "DELETE FROM aluguel WHERE Id_Aluguel =?";
         PreparedStatement pstm;
-        Aluguel alu = new Aluguel();
+       
         
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1,alu.getIdAluguel());
-            //pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
-            //pstm.setInt(3,alu.getExemplar().getIdExemplar());
-            //pstm.setString(4,alu.getCpf().getcpf());
-            //pstm.setDouble(5,alu.getValor());
+
+            pstm.setInt(1 , aluguel.getIdAluguel());
+
             pstm.executeUpdate();
-            // JOptionPane.showMessageDialog(null, "Excluido com sucesso...");
+      
         } catch (SQLException e) {
             throw new DAOException();
         } finally {
@@ -104,7 +101,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
     public ArrayList<Aluguel> lista() throws ConexaoException, DAOException {
     Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Aluguel> lista = new ArrayList();
-        String sql = "SELECT * FROM Aluguel";
+        String sql = "SELECT * FROM aluguel";
         Statement stm;
         
         try {
@@ -114,9 +111,6 @@ public class DAOAluguelImplementa implements DAOAluguel{
             while (rs.next()) {
                 Aluguel alu = new Aluguel();
                 alu.setIdAluguel(rs.getInt("Id_Aluguel"));
-                alu.setIdAluguel(rs.getInt("Id_atendente"));
-                alu.setIdAluguel(rs.getInt("Id_exemplar"));
-                alu.setIdAluguel(rs.getInt("Cpf"));
                 alu.setValor(rs.getDouble("Valor"));
                 lista.add(alu);
             }

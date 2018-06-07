@@ -10,7 +10,7 @@ public class Aluguel {
 	private int idAluguel;
 	private Atendente idAtendente = new Atendente();
 	private Exemplar idExemplar = new Exemplar();
-	private Usuario cpf = new Usuario();
+	private Usuario idUsuario = new Usuario();
 	private double valor;
 	
 	public void setIdAluguel (int idAluguel){
@@ -35,11 +35,11 @@ public class Aluguel {
         return this.idExemplar;
     }
     
-    public void setCpf (Usuario cpf){
-        this.cpf = cpf;
+    public void setIdUsuario (Usuario idUsuario){
+        this.idUsuario = idUsuario;
     }
-    public Usuario getCpf(){
-        return this.cpf;
+    public Usuario getIdUsuario(){
+        return this.idUsuario;
     }
     
     public void setValor(double valor){
