@@ -3,7 +3,7 @@ package project_poo_ads20181.classes;
 
 /**
  *
- * @author valter
+ * @author Meirinaldo Júnior
  */
 public class Atendente {
     private int idAtendente;
