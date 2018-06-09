@@ -29,7 +29,6 @@ public interface DAOAutor {
     public void alterar(Autor a)throws ConexaoException,DAOException;
     /**
      * cria uma lista de autores cadastrados no BD
-     * @param a Objeto com os dados validos
      * @throws ConexaoException 
      * @throws DAOException 
      * @return lista
@@ -53,4 +52,12 @@ public interface DAOAutor {
      * @throws DAOException 
      */
     public Autor buscaPorId(int id)throws ConexaoException,DAOException;
+     /**
+     * retorna um objeto com o nome informado
+     * @param nome
+     * @return um objeto de autor
+     * @throws ConexaoException
+     * @throws DAOException 
+    */
+    public Autor consultaNome(String nome)throws ConexaoException, DAOException;
 }
