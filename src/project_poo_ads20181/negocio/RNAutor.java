@@ -85,6 +85,7 @@ public class RNAutor {
      
      DAOAutorImplementa dai = new DAOAutorImplementa();
      try{
+         
          dai.excluir(a);
      }catch(ConexaoException e){
             throw new GeralException("Contacte o ADM.");
@@ -115,7 +116,7 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
         }catch(DAOException e){
             throw new GeralException("BUG.");
  }
-    
+ }    
 
 
 

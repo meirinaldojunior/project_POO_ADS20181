@@ -40,9 +40,6 @@ public class FachadaAutor {
         rna.alterar(a);
     }
     public void excluirAutor(Autor a) throws GeralException, DAOException, ConexaoException{
-        rna.validarAtributos(a);
-        rna.verificaDuplicidadeNome(a);
-        rna.validaAutor(a);
         rna.excluir(a);
     }
     public ArrayList<Autor> listarAutor() throws ConexaoException, DAOException, GeralException{

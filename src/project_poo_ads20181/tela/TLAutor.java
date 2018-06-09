@@ -42,6 +42,7 @@ public class TLAutor extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         excluirAutor = new javax.swing.JButton();
+        alterarAutor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,11 +70,18 @@ public class TLAutor extends javax.swing.JFrame {
             }
         });
 
+        alterarAutor.setText("Alterar");
+        alterarAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterarAutorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -82,11 +90,12 @@ public class TLAutor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                     .addComponent(txtNome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(excluirAutor))
-                .addGap(121, 121, 121))
+                    .addComponent(excluirAutor)
+                    .addComponent(alterarAutor))
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +114,9 @@ public class TLAutor extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(excluirAutor)))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(alterarAutor)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,19 +145,34 @@ public class TLAutor extends javax.swing.JFrame {
         a.setId(Integer.parseInt(txtId.getText()));
         FachadaAutor fat = new FachadaAutor();
         try{
-            try {
-                fat.excluirAutor(a);
-            } catch (DAOException ex) {
-                Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ConexaoException ex) {
-                Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        JOptionPane.showMessageDialog(this, "Autor excluido com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+            fat.excluirAutor(a);
+            JOptionPane.showMessageDialog(this, "Autor excluido com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         }catch(GeralException e){
-        }catchcatch (DAOException ex)
+            JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+            
+        }
     }//GEN-LAST:event_excluirAutorActionPerformed
 
-    /**
+    private void alterarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAutorActionPerformed
+        Autor a = new Autor();
+        a.setNome(txtNome.getText());
+        a.setId(Integer.parseInt(txtId.getText()));
+        FachadaAutor fat = new FachadaAutor();
+        try{
+            fat.alterarAutor(a);
+            JOptionPane.showMessageDialog(this, "Autor Alterado com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        }catch(GeralException e){
+            JOptionPane.showMessageDialog(this, "Autor nao alterado","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, "Autor nao alterado","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } 
+    }//GEN-LAST:event_alterarAutorActionPerformed
+
+    }/**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -182,6 +208,7 @@ public class TLAutor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton alterarAutor;
     private javax.swing.JButton excluirAutor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
