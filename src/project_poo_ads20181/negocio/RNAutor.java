@@ -39,8 +39,14 @@ public class RNAutor {
         }
         if(a.getNome()==null || a.getNome().trim().isEmpty()){
             throw new GeralException("Nome invalido!");
-        }
+        } for (int i = 0; i < a.getNome().length(); i++) {
+          if (!Character.isAlphabetic((a.getNome().charAt(i)))) {
+              throw new GeralException("Nome invalido!"); 
+          }
      }
+ 
+}
+     
     public void verificaDuplicidadeNome(Autor a)throws GeralException, DAOException {
     DAOAutorImplementa dai = new DAOAutorImplementa();
     try{
