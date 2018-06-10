@@ -15,7 +15,7 @@ import project_poo_ads20181.funcao.ValidaCPF;
  */
 public class RNUsuario {
 
-    public void validaUsuario(Usuario usuario) throws GeralException {
+    public boolean validaUsuario(Usuario usuario) throws GeralException {
         if (usuario.getNome().isEmpty() || usuario.getSenha().isEmpty() || usuario.getcpf().isEmpty()) {
             throw new GeralException("Os campos não podem ficar em branco");
         } else {
@@ -28,5 +28,7 @@ public class RNUsuario {
                 throw new GeralException("CPF inválido");
             }
         }
+        return true;
     }
+    
 }

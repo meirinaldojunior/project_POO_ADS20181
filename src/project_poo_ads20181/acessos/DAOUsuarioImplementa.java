@@ -18,6 +18,7 @@ import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.funcao.CriptografaMD5;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
@@ -33,26 +34,28 @@ public class DAOUsuarioImplementa implements DAOUsuario {
      * @throws DAOException
      */
     @Override
-    public void inserir(Usuario usuario) throws ConexaoException, DAOException {
+    public boolean inserir(Usuario usuario) throws ConexaoException, DAOException, GeralException {
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
-        Usuario usu = new Usuario();
 
-        String sql = "INSERT INTO Usuario (Cpf, Nome, Senha)VALUES(?,?,?)";
+        String sql = "INSERT INTO Usuario (Cpf, Nome, Senha, Tipo)VALUES(?,?,?,?)";
 
         PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setString(1, usu.getcpf());
-            pstm.setString(2, usu.getNome());
-            pstm.setString(3, CriptografaMD5.criptografa(usu.getSenha()));
+            pstm.setString(1, usuario.getcpf());
+            pstm.setString(2, usuario.getNome());
+            pstm.setString(3, CriptografaMD5.criptografa(usuario.getSenha()));
+            pstm.setInt(4, usuario.getTipo());
             pstm.executeUpdate();
+            
+            return true;
 
         } catch (SQLException e) {
-            throw new DAOException();
+            throw  new GeralException("Erro na operação: "+e.getMessage());
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(DAOUsuarioImplementa.class.getName()).log(Level.SEVERE, null, ex);
+            throw  new GeralException("Erro ao realizar a criptografia");
         } finally {
             gc.desconectar(c);
         }

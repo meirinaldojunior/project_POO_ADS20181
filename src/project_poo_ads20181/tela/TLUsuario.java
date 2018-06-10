@@ -7,6 +7,7 @@ package project_poo_ads20181.tela;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaUsuario;
 
@@ -16,20 +17,22 @@ import project_poo_ads20181.fachada.FachadaUsuario;
  */
 public class TLUsuario extends javax.swing.JFrame {
 
+    FachadaUsuario fu;
+
     /**
      * Creates new form TLUsuario
      */
     public TLUsuario() throws GeralException {
         initComponents();
-        FachadaUsuario fu = new FachadaUsuario();
-        
+        fu = new FachadaUsuario();
+
         //Carrega os tipos de usuário na tela de cadastro do usuário
         try {
             for (int i = 0; i < fu.listaTipoUsuario().size(); i++) {
                 itemTipo.addItem(fu.listaTipoUsuario().get(i).toString());
             }
         } catch (Exception e) {
-            throw new GeralException("Erro ao lista os tipos de usuários: "+e.getMessage());
+            throw new GeralException("Erro ao lista os tipos de usuários: " + e.getMessage());
         }
     }
 
@@ -183,6 +186,17 @@ public class TLUsuario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //cadastra usuário
+        Usuario usuario = new Usuario();
+        usuario.setNome(txtNome.getText());
+        usuario.setCpf(txtCpf.getText());
+        usuario.setSenha(txtSenha.getText());
+        usuario.setTipoUsuario(itemTipo.getSelectedIndex());
+
+        try {
+            fu.cadastraUsuario(usuario);
+        } catch (GeralException ex) {
+            Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

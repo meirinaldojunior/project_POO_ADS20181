@@ -5,6 +5,10 @@
  */
 package project_poo_ads20181.tela;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import project_poo_ads20181.erro.GeralException;
+
 /**
  *
  * @author meirinaldojunior
@@ -157,7 +161,12 @@ public class TLMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        TLUsuario t = new TLUsuario();
+        TLUsuario t;
+        try {
+            t = new TLUsuario();
+        } catch (GeralException ex) {
+            Logger.getLogger(TLMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 

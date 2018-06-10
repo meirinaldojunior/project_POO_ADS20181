@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
 
 public interface DAOUsuario {
 
-    public void inserir(Usuario usuario) throws ConexaoException, DAOException;
+    public boolean inserir(Usuario usuario) throws ConexaoException, DAOException, GeralException;
 
     public void alterar(Usuario usuario) throws ConexaoException, DAOException;
 
