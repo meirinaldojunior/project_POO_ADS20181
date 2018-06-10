@@ -81,18 +81,17 @@ public class DAOUsuarioImplementa implements DAOUsuario {
         }
     }
 
-    @Override
+    
     public void excluir(Usuario usuario) throws ConexaoException, DAOException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "DELETE FROM Usuario WHERE Cpf=?";
+        String sql = "DELETE FROM Usuario WHERE Id_Usuario=?";
         PreparedStatement pstm;
-        Usuario usu = new Usuario();
+        
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setString(1, usu.getcpf());
-            pstm.setString(2, usu.getNome());
+            pstm.setInt(1, usuario.getIdUsuario());
             pstm.executeUpdate();
-            // JOptionPane.showMessageDialog(null, "Alterado com sucesso...");
+            
         } catch (SQLException e) {
             throw new DAOException();
         } finally {

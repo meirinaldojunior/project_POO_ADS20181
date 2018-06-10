@@ -39,4 +39,9 @@ public class FachadaUsuario {
         return true;
     }
     
+    public Boolean excluir(Usuario usuario) throws GeralException, ConexaoException{
+        rn.excluir(usuario);
+        return true;
+    }
+    
 }

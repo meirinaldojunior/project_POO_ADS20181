@@ -109,17 +109,25 @@ public class RNUsuario {
     }
     
     public Boolean alterar(Usuario usuario) throws GeralException{
-        
         DAOUsuario dao = new DAOUsuarioImplementa();
-        
         try {
             dao.alterar(usuario);
         } catch (Exception e) {
             throw new GeralException("Falha ao editar este usuário, fomos informados e estamos tratado... "+e.getMessage());
         }
-        
-        
         return true;
+    }
+    
+    public Boolean excluir(Usuario usuario) throws GeralException{
+        DAOUsuario dao = new DAOUsuarioImplementa();
+        try {
+            dao.excluir(usuario);
+            return true;
+        } catch (ConexaoException ex) {
+            throw new GeralException("Problema ao processar sua requisição, verifique sua conexão e tente novamente. "+ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro na instrução. "+ex.getMessage());
+        }
     }
 
 }

@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.scripts.JO;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.GeralException;
@@ -22,6 +23,7 @@ public class TLUsuario extends javax.swing.JFrame {
 
     FachadaUsuario fu;
     DefaultTableModel tabelaModelo;
+
     /**
      * Creates new form TLUsuario
      */
@@ -31,57 +33,55 @@ public class TLUsuario extends javax.swing.JFrame {
 
         //desabilita botão alterar senha
         btnReseteSenha.disable();
-        
+
         //Carrega os tipos de usuário na tela de cadastro do usuário
         try {
             for (int i = 0; i < fu.listaTipoUsuario().size(); i++) {
                 itemTipo.addItem(fu.listaTipoUsuario().get(i).toString());
             }
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(this, "Erro ao listar tipos de usuários, tente novamente em uma hora.","Erro...",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao listar tipos de usuários, tente novamente em uma hora.", "Erro...", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         //inicializa tabela
         tabelaModelo = (DefaultTableModel) jtable.getModel();
-        
+
         jtable.setFocusable(false);
         jtable.setRowSelectionAllowed(true);
-        
+
         //carrega tabela
         carregaTabela();
-        
+
     }
-    
-    public void limpaTabela(){
-        for(int i = 0; i < tabelaModelo.getRowCount(); i++){
+
+    public void limpaTabela() {
+        for (int i = 0; i < tabelaModelo.getRowCount(); i++) {
             tabelaModelo.removeRow(i);
         }
     }
-    
-    public void limpaCampos(){
+
+    public void limpaCampos() {
         txtId.setText("");
         txtNome.setText("");
         txtCpf.setText("");
         txtSenha.setText("");
         btnReseteSenha.setEnabled(false);
     }
-    
-    public void carregaTabela(){
+
+    public void carregaTabela() {
         limpaTabela();
         try {
-            for(Usuario usuario : fu.listarUsuarios()){
+            for (Usuario usuario : fu.listarUsuarios()) {
                 tabelaModelo.addRow(new Object[]{
                     usuario.getIdUsuario(),
                     usuario.getNome(),
                     usuario.getcpf(),
-                    usuario.getTipo(),
-                });
+                    usuario.getTipo(),});
             }
         } catch (GeralException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao listar usuários, tente novamente em uma hora.","Erro...",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao listar usuários, tente novamente em uma hora.", "Erro...", JOptionPane.ERROR_MESSAGE);
         }
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +111,9 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,6 +191,12 @@ public class TLUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("A alteração da senha precisa ser feita");
+
+        jLabel8.setText("da criptografia.");
+
+        jLabel9.setText("atráves do botão \"alterar senha\", por conta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,7 +204,6 @@ public class TLUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5)
@@ -203,43 +211,60 @@ public class TLUsuario extends javax.swing.JFrame {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtId)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, 0))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNome))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCpf))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(itemTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtSenha))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNome))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCpf))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(itemTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtSenha))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReseteSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnReseteSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,20 +301,17 @@ public class TLUsuario extends javax.swing.JFrame {
         usuario.setSenha(txtSenha.getText());
         usuario.setTipoUsuario(itemTipo.getSelectedIndex());
 
-       
         try {
             fu.cadastra(usuario);
             carregaTabela();
             JOptionPane.showMessageDialog(this, "Salvo com sucesso...");
         } catch (GeralException ex) {
-            JOptionPane.showMessageDialog(this, ex,"Erro...",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex, "Erro...", JOptionPane.ERROR_MESSAGE);
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(this, ex,"Erro...",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex, "Erro...", JOptionPane.ERROR_MESSAGE);
         }
-            
-       
-        
-     
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -300,38 +322,49 @@ public class TLUsuario extends javax.swing.JFrame {
         usuario.setCpf(txtCpf.getText());
         usuario.setSenha(txtSenha.getText());
         usuario.setTipoUsuario(itemTipo.getSelectedIndex());
-        
+
         try {
             fu.altera(usuario);
             carregaTabela();
             JOptionPane.showMessageDialog(this, "Alterado com sucesso...");
         } catch (ConexaoException | GeralException e) {
-            JOptionPane.showMessageDialog(this,e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
         // Editar dados
         int indice = jtable.getSelectedRow();
-        
+
         txtId.setText(jtable.getValueAt(indice, 0).toString());
         txtNome.setText(jtable.getValueAt(indice, 1).toString());
         txtCpf.setText(jtable.getValueAt(indice, 2).toString());
         txtSenha.setText("0000000000");
-        
+
         btnReseteSenha.setEnabled(true);
-        
+
     }//GEN-LAST:event_jtableMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        //Excluir usuário
+        if (JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir??") == 0) {
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(Integer.parseInt(txtId.getText()));
+            try {
+                fu.excluir(usuario);
+                JOptionPane.showMessageDialog(this, "Excluído com sucesso...");
+            } catch (GeralException | ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+            carregaTabela();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnReseteSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReseteSenhaActionPerformed
         String novaSena = JOptionPane.showInputDialog(this, "Digite a nova senha para este usuário...");
-        
+
     }//GEN-LAST:event_btnReseteSenhaActionPerformed
 
     /**
@@ -348,16 +381,24 @@ public class TLUsuario extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TLUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TLUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TLUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TLUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TLUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TLUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TLUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TLUsuario.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -381,6 +422,9 @@ public class TLUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
