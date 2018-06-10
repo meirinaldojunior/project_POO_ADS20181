@@ -117,8 +117,8 @@ public class DAOUsuarioImplementa implements DAOUsuario {
                 usu.setTipoUsuario(rs.getInt("Tipo"));
                 lista.add(usu);
             }
+            
             return lista;
-
         } catch (SQLException e) {
             System.out.println("ERRO " + e);
             throw new DAOException();
