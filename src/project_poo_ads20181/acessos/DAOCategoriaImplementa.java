@@ -134,4 +134,32 @@ public class DAOCategoriaImplementa implements DAOCategoria {
        }
    }
    
+    @Override
+   public boolean checkID(Categoria ct) throws DAOException, ConexaoException {
+     GerenciadorConexao gc;
+     gc = GerenciadorConexaoMySql.getInstancia();
+     Connection c = gc.conectar();
+     
+     String sql = "SELECT Id_categoria FROM Categoria WHERE Id_categoria=?";
+     
+     PreparedStatement pstm;
+     try{
+     
+     pstm = c.prepareStatement(sql);
+     pstm.setInt(1, ct.getIdCategoria());
+     ResultSet rs = pstm.executeQuery();
+     while(rs.next()){
+         return true;
+     }
+     return false;
+     }
+     catch(SQLException e) {
+         
+         throw new DAOException();
+     }
+     finally {
+         gc.desconectar(c);
+     }
+   }
+   
 }
