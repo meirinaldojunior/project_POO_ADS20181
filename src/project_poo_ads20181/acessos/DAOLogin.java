@@ -10,6 +10,7 @@ import project_poo_ads20181.classes.Login;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
 
 /**
  *
@@ -17,6 +18,6 @@ import project_poo_ads20181.erro.DAOException;
  */
 public interface DAOLogin  {
     
-    public Boolean login(String cpf, String senha) throws DAOException, ConexaoException,NoSuchAlgorithmException;
+    public Boolean login(String cpf, String senha) throws DAOException, GeralException, ConexaoException,NoSuchAlgorithmException;
     
 }

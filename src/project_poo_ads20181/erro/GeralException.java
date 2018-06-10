@@ -8,7 +8,6 @@ public class GeralException extends Exception{
     }
     
     public GeralException(String x){
-        //super(x);
-        JOptionPane.showMessageDialog(null, x,"Ops...", JOptionPane.ERROR_MESSAGE);
+        super(x);
     }
 }

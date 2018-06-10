@@ -16,6 +16,7 @@ import project_poo_ads20181.classes.Login;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.funcao.CriptografaMD5;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
@@ -25,20 +26,21 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
  * @author meirinaldojunior
  */
 public class DAOLoginImplementa implements DAOLogin {
-
     
-    @Override
-    public Boolean login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException {
+    
+    public Boolean login(String cpf, String senha) throws GeralException, DAOException, ConexaoException, NoSuchAlgorithmException {
         
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
 
-        Usuario usu = null;
-
-        String sql = "SELECT * FROM Usuario WHERE Cpf=? AND senha=?";
+        String sql = "SELECT * FROM Usuario WHERE Cpf=? AND Senha=?";
 
         PreparedStatement pstm;
+        
+        System.err.println(cpf);
+        System.err.println(CriptografaMD5.criptografa(senha));
+        
         try {
             pstm = c.prepareStatement(sql);
             pstm.setString(1, cpf);
@@ -49,7 +51,7 @@ public class DAOLoginImplementa implements DAOLogin {
                 return true;
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+           throw new GeralException("Erro na instrução SQL: "+e.getMessage());
         } finally {
             gc.desconectar(c);
         }
