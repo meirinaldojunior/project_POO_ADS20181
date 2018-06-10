@@ -110,6 +110,7 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
         }catch(DAOException e){
             throw new GeralException("BUG.");
  }
+<<<<<<< HEAD
  }
  public boolean checkid(Autor a) throws DAOException, ConexaoException, GeralException{
      DAOAutorImplementa dai = new DAOAutorImplementa();
@@ -124,5 +125,10 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
      
  
 
+=======
+    
+ }
+ }
+>>>>>>> 8e4229c87046b4e5c2d72663d157db1f40e96a75
 
 

@@ -5,6 +5,7 @@ package project_poo_ads20181.acessos;
 * @author Hugo Felipe
 */
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +19,10 @@ import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.funcao.CriptografaMD5;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
+import sun.security.provider.MD5;
 
 public class DAOUsuarioImplementa implements DAOUsuario {
 	
@@ -36,18 +39,23 @@ public class DAOUsuarioImplementa implements DAOUsuario {
         Connection c = gc.conectar();
         Usuario usu = new Usuario();
                
-        String sql = "INSERT INTO Usuario (Cpf, Nome)VALUES(?,?)";
+        String sql = "INSERT INTO Usuario (Cpf, Nome, Senha)VALUES(?,?,?)";
+        
+        
         
         PreparedStatement pstm;
         try {
              pstm = c.prepareStatement(sql);
              pstm.setString(1,usu.getcpf());
              pstm.setString(2,usu.getNome());
+             pstm.setString(3,CriptografaMD5.criptografa(usu.getSenha()));
              pstm.executeUpdate();
              
         }catch(SQLException e){
             throw new DAOException();
-        }finally{
+        }   catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(DAOUsuarioImplementa.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
             gc.desconectar(c);
         }	
 }

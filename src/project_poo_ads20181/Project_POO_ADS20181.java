@@ -72,7 +72,7 @@ public class Project_POO_ADS20181 {
          * QUANDO INCLUIR A GUI
          */
     }
-
+    
     public static void testaCadastroAluguel() throws ConexaoException, DAOException {
         Aluguel alu = new Aluguel();
 
@@ -80,7 +80,7 @@ public class Project_POO_ADS20181 {
         alu.getIdAtendente().setIdAtendente(12);
         alu.getIdExemplar().setIdExemplar(2);
         alu.getIdUsuario().setIdUsuario(2);
-        alu.setValor(20.00);
+        alu.setValor(20);
 
         DAOAluguelImplementa DAOAddAluguel = new DAOAluguelImplementa();
         try {
@@ -102,7 +102,7 @@ public class Project_POO_ADS20181 {
         alu.setIdAtendente(ate);
         alu.setIdExemplar(exe);
         alu.setIdUsuario(usu);
-        alu.setValor(100.53);
+        alu.setValor(100);
         alu.setIdAluguel(17);
 
         ate.setIdAtendente(11);
@@ -401,7 +401,7 @@ public class Project_POO_ADS20181 {
             DAOAddCategoria.inserir(ct);
             System.out.println("Categoria cadastrada!");
         } catch (Exception e) {
-            System.out.println("PAU");
+            System.out.println("Erro ao cadastrar Categoria");
         }
     }
 
@@ -412,9 +412,9 @@ public class Project_POO_ADS20181 {
         DAOCategoriaImplementa cat = new DAOCategoriaImplementa();
         try {
             cat.alterar(ct);
-            System.out.println("categoria alterada com sucesso");
+            System.out.println("Categoria alterada com sucesso");
         } catch (DAOException dae) {
-            System.out.println("pau");
+            System.out.println("Erro ao alterar categoria");
         }
     }
 
@@ -424,9 +424,9 @@ public class Project_POO_ADS20181 {
         DAOCategoriaImplementa Cat = new DAOCategoriaImplementa();
         try {
             Cat.excluir(ct);
-            System.out.println("categoria excluida");
+            System.out.println("Categoria excluida");
         } catch (Exception e) {
-            System.out.println("pau");
+            System.out.println("Erro ao excluir categoria!");
         }
     }
 
@@ -434,12 +434,12 @@ public class Project_POO_ADS20181 {
         DAOCategoriaImplementa ct = new DAOCategoriaImplementa();
         try {
             ArrayList<Categoria> lista = ct.listar();
-            System.out.println("Lista dos ids da categoria:");
+            System.out.println("Lista de categorias:");
             lista.stream().forEach((cat) -> {
                 System.out.println(cat.getIdCategoria());
             });
         } catch (DAOException e) {
-            System.out.println("pau!! " + e.getMessage());
+            System.out.println("Erro ao listar categorias! " + e.getMessage());
         }
     }
 

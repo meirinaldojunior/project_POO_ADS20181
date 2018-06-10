@@ -98,7 +98,7 @@ public class DAOAutorImplementa implements DAOAutor {
     }
 
     @Override
-    public Autor buscaPorId(int id) throws ConexaoException, DAOException {
+    public Autor buscaPorId(Integer id) throws ConexaoException, DAOException {
        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
         
         Autor a = null;

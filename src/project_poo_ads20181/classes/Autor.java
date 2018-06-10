@@ -2,7 +2,7 @@
 package project_poo_ads20181.classes;
 
 public class Autor {
-    private int id;
+    private Integer id;
     private String nome;
     
      public Autor(){
@@ -14,11 +14,11 @@ public class Autor {
         
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

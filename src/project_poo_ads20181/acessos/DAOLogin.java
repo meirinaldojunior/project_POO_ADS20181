@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project_poo_ads20181.negocio;
-
-import project_poo_ads20181.classes.Usuario;
+package project_poo_ads20181.acessos;
 
 /**
  *
  * @author meirinaldojunior
  */
-public class RNLogin {
-    
-    public boolean valida(String login, String senha){
-        return (!login.isEmpty() && !login.isEmpty());
-    }
+public interface DAOLogin  {
     
 }

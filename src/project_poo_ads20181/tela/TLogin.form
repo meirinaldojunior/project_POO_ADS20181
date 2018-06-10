@@ -83,9 +83,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_login">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_loginActionPerformed"/>
       </Events>
@@ -96,9 +93,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_pass">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_passActionPerformed"/>
       </Events>

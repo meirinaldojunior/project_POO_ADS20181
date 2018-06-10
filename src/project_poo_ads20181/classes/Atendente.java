@@ -6,11 +6,11 @@ package project_poo_ads20181.classes;
  * @author Meirinaldo Júnior
  */
 public class Atendente {
-    private int idAtendente;
+    private Integer idAtendente;
     private String nome;
     private String cpf;
 
-    public Atendente(int idAtendente, String nome, String cpf) {
+    public Atendente(Integer idAtendente, String nome, String cpf) {
         this.idAtendente = idAtendente;
         this.nome = nome;
         this.cpf = cpf;
@@ -19,11 +19,11 @@ public class Atendente {
     public Atendente() {
     }
 
-    public int getIdAtendente() {
+    public Integer getIdAtendente() {
         return idAtendente;
     }
 
-    public void setIdAtendente(int idAtendente) {
+    public void setIdAtendente(Integer idAtendente) {
         this.idAtendente = idAtendente;
     }
 

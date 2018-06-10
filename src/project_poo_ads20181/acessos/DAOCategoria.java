@@ -31,5 +31,5 @@ public interface DAOCategoria {
     
     public void excluir(Categoria ct)throws ConexaoException,DAOException;
     
-    Categoria consultaCategoria(String nomeCategoria) throws ConexaoException, DAOException;
+    Categoria consultaIdCategoria(Integer idCategoria) throws ConexaoException, DAOException;
 }
