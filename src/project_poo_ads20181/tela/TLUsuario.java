@@ -7,6 +7,7 @@ package project_poo_ads20181.tela;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
@@ -24,7 +25,7 @@ public class TLUsuario extends javax.swing.JFrame {
     /**
      * Creates new form TLUsuario
      */
-    public TLUsuario() throws GeralException {
+    public TLUsuario() {
         initComponents();
         fu = new FachadaUsuario();
 
@@ -34,7 +35,7 @@ public class TLUsuario extends javax.swing.JFrame {
                 itemTipo.addItem(fu.listaTipoUsuario().get(i).toString());
             }
         } catch (Exception e) {
-            throw new GeralException("Erro ao lista os tipos de usuários: " + e.getMessage());
+             JOptionPane.showMessageDialog(this, "Erro ao listar tipos de usuários, tente novamente em uma hora.","Erro...",JOptionPane.ERROR_MESSAGE);
         }
         
         //inicializa tabela
@@ -51,17 +52,22 @@ public class TLUsuario extends javax.swing.JFrame {
         }
     }
     
-    public void carregaTabela() throws GeralException{
+    public void carregaTabela(){
         limpaTabela();
-        for(Usuario usuario : fu.listarUsuarios()){
-            tabelaModelo.addRow(new Object[]{
-                usuario.getIdUsuario(),
-                usuario.getNome(),
-                usuario.getcpf(),
-                usuario.getTipo(),
-            });
+        try {
+            for(Usuario usuario : fu.listarUsuarios()){
+                tabelaModelo.addRow(new Object[]{
+                    usuario.getIdUsuario(),
+                    usuario.getNome(),
+                    usuario.getcpf(),
+                    usuario.getTipo(),
+                });
+            }
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar usuários, tente novamente em uma hora.","Erro...",JOptionPane.ERROR_MESSAGE);
         }
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,14 +222,20 @@ public class TLUsuario extends javax.swing.JFrame {
         usuario.setSenha(txtSenha.getText());
         usuario.setTipoUsuario(itemTipo.getSelectedIndex());
 
+       
         try {
             fu.cadastraUsuario(usuario);
             carregaTabela();
+            JOptionPane.showMessageDialog(this, "Salvo com sucesso...");
         } catch (GeralException ex) {
-            Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex,"Erro...",JOptionPane.ERROR_MESSAGE);
         } catch (ConexaoException ex) {
-            Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex,"Erro...",JOptionPane.ERROR_MESSAGE);
         }
+            
+       
+        
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -256,11 +268,7 @@ public class TLUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new TLUsuario().setVisible(true);
-                } catch (GeralException ex) {
-                    Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new TLUsuario().setVisible(true);
             }
         });
     }

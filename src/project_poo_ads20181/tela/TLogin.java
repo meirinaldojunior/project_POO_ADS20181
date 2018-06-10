@@ -8,6 +8,7 @@ package project_poo_ads20181.tela;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaLogin;
 
@@ -110,15 +111,12 @@ public class TLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FachadaLogin login = new FachadaLogin();
         try {
-            if(login.logar(txtLogin.getText(), txtSenha.getText())){
-                this.dispose();
-                TLMenu tm = new TLMenu();
-                tm.setVisible(true);
-            }else{
-                throw new GeralException("Login ou senha inválido");
-            }
+            login.logar(txtLogin.getText(), txtSenha.getText());
+            this.dispose();
+            TLMenu tm = new TLMenu();
+            tm.setVisible(true);
         } catch (GeralException ex) {
-            System.err.println("Erro... ");
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

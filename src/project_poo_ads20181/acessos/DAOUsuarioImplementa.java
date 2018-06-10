@@ -51,7 +51,6 @@ public class DAOUsuarioImplementa implements DAOUsuario {
             pstm.executeUpdate();
             
             return true;
-
         } catch (SQLException e) {
             throw  new GeralException("Erro na operação: "+e.getMessage());
         } catch (NoSuchAlgorithmException ex) {

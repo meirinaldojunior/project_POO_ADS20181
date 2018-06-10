@@ -26,8 +26,10 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
  */
 public class DAOLoginImplementa implements DAOLogin {
 
+    
     @Override
     public Boolean login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException {
+        
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
