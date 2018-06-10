@@ -25,7 +25,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
         
-        String sql = "INSERT INTO Categoria (Nome_categoria) VALUES(?)";
+        String sql = "INSERT INTO Categoria (Nome_Categoria) VALUES(?)";
         
         PreparedStatement pstm;
         try{
@@ -42,7 +42,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
     @Override
     public void alterar(Categoria ct)throws ConexaoException,DAOException{
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Categoria SET Nome_categoria=? WHERE Id_categoria=?";
+        String sql = "UPDATE Categoria SET Nome_Categoria=? WHERE Id_Categoria=?";
         PreparedStatement pstm;
          try{
             pstm = c.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
     public void excluir(Categoria ct) throws ConexaoException, DAOException{
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         //
-        String sql = "DELETE FROM Categoria WHERE Id_categoria=?";
+        String sql = "DELETE FROM Categoria WHERE Id_Categoria=?";
         
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
            
            if(rs.next()){
                ct = new Categoria();
-               ct.setIdCategoria(rs.getInt("Id_categoria"));
+               ct.setIdCategoria(rs.getInt("Id_Categoria"));
            }
            return ct;
        }catch(SQLException e){
@@ -140,7 +140,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
      gc = GerenciadorConexaoMySql.getInstancia();
      Connection c = gc.conectar();
      
-     String sql = "SELECT Id_categoria FROM Categoria WHERE Id_categoria=?";
+     String sql = "SELECT Id_Categoria FROM Categoria WHERE Id_Categoria=?";
      
      PreparedStatement pstm;
      try{

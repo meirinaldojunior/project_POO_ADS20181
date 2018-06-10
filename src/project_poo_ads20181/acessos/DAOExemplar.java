@@ -26,4 +26,5 @@ public interface DAOExemplar {
 	    
 	Exemplar consultaIdExemplar(Integer idExemplar) throws ConexaoException, DAOException;
     
+        public Exemplar get(Integer idExemplar) throws ConexaoException, DAOException;
 }
