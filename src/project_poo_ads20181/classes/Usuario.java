@@ -7,7 +7,7 @@ package project_poo_ads20181.classes;
 
 public class Usuario {
 
-        private int idUsuario;
+        private Integer idUsuario;
     	private String cpf;
 	private String nome;
 	
@@ -29,10 +29,10 @@ public class Usuario {
         return this.nome;
     }
     
-    public void setIdUsuario (int idUsuario){
+    public void setIdUsuario (Integer idUsuario){
         this.idUsuario = idUsuario;
     }
-    public int getIdUsuario(){
+    public Integer getIdUsuario(){
         return this.idUsuario;
     }
 	

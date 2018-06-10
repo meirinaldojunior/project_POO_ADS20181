@@ -116,7 +116,8 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
         }catch(DAOException e){
             throw new GeralException("BUG.");
  }
- }    
-
+    
+ }
+ }
 
 

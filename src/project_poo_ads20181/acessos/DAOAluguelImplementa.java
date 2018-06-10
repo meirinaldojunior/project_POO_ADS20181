@@ -111,7 +111,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
             while (rs.next()) {
                 Aluguel alu = new Aluguel();
                 alu.setIdAluguel(rs.getInt("Id_Aluguel"));
-                alu.setValor(rs.getDouble("Valor"));
+                alu.setValor(rs.getInt("Valor"));
                 lista.add(alu);
             }
             return lista;
@@ -125,7 +125,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
     }
     
     @Override
-    public Aluguel consultaAluguel (int idAluguel) throws ConexaoException, DAOException {
+    public Aluguel consultaAluguel (Integer idAluguel) throws ConexaoException, DAOException {
          GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
@@ -146,7 +146,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
                 alu.setIdAluguel(rs.getInt("Id_atendente"));
                 alu.setIdAluguel(rs.getInt("Id_exemplar"));
                 alu.setIdAluguel(rs.getInt("Cpf"));
-                alu.setValor(rs.getDouble("Valor"));
+                alu.setValor(rs.getInt("Valor"));
             }
             return alu;
             
@@ -156,4 +156,40 @@ public class DAOAluguelImplementa implements DAOAluguel{
             gc.desconectar(c);
         }
     }
+
+    @Override
+    public Aluguel get(Integer idAluguel) throws ConexaoException, DAOException {
+        GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+        
+        Aluguel alu = null;
+        
+        String sql = "SELECT Id_Aluguel , Id_atendente , Id_exemplar , Cpf,  Valor FROM aluguel WHERE Id_Aluguel=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, idAluguel);
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()){
+                alu = new Aluguel();
+                alu.setIdAluguel(rs.getInt("Id_Aluguel"));
+                alu.setIdAluguel(rs.getInt("Id_atendente"));
+                alu.setIdAluguel(rs.getInt("Id_exemplar"));
+                alu.setIdAluguel(rs.getInt("Cpf"));
+                alu.setValor(rs.getInt("Valor"));
+            }
+            
+            return alu;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            gc.desconectar(c);
+        }
+    }
+
+    
 }

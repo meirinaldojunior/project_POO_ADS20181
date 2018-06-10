@@ -122,7 +122,7 @@ public class DAOExemplarImplementa implements DAOExemplar {
     }
     
     @Override
-    public Exemplar consultaIdExemplar (int idExemplar) throws ConexaoException, DAOException {
+    public Exemplar consultaIdExemplar (Integer idExemplar) throws ConexaoException, DAOException {
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
         Exemplar exe = null;
         

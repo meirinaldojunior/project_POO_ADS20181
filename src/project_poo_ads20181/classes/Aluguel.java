@@ -7,17 +7,17 @@ package project_poo_ads20181.classes;
 
 public class Aluguel {
 
-	private int idAluguel;
+	private Integer idAluguel;
 	private Atendente idAtendente = new Atendente();
 	private Exemplar idExemplar = new Exemplar();
 	private Usuario idUsuario = new Usuario();
-	private double valor;
+	private Integer valor;
 	
-	public void setIdAluguel (int idAluguel){
+	public void setIdAluguel (Integer idAluguel){
         this.idAluguel = idAluguel;
         
         }
-    public int getIdAluguel(){
+    public Integer getIdAluguel(){
         return this.idAluguel;
     }
     
@@ -42,10 +42,13 @@ public class Aluguel {
         return this.idUsuario;
     }
     
-    public void setValor(double valor){
+    public void setValor(Integer valor){
         this.valor = valor;
     }
-    public double getValor(){
+    public Integer getValor(){
         return this.valor;
     }
-}
+
+    }
+   
+
