@@ -51,7 +51,7 @@ public interface DAOAutor {
      * @throws ConexaoException
      * @throws DAOException 
      */
-    public Autor buscaPorId(int id)throws ConexaoException,DAOException;
+    public Autor buscaPorId(Integer id)throws ConexaoException,DAOException;
      /**
      * retorna um objeto com o nome informado
      * @param nome

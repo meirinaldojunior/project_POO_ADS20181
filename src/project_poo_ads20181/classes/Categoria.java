@@ -2,14 +2,14 @@ package project_poo_ads20181.classes;
 
 public class Categoria {
 
-    private int idCategoria;
+    private Integer idCategoria;
     private String nomeCategoria;
     
-    public int getIdCategoria() {
+    public Integer getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
+    public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
     

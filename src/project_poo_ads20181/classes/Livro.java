@@ -6,7 +6,7 @@ package project_poo_ads20181.classes;
  */
 public class Livro {
   
-    private int idLivro;
+    private Integer idLivro;
     private String nomeLivro;
     private Categoria cat = new Categoria();
     private Autor autor = new Autor();
