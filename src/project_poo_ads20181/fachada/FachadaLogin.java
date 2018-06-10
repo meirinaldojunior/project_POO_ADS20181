@@ -27,7 +27,6 @@ public class FachadaLogin {
         if (rnl.valida(login, senha)) {
             try {
                 DAOLoginImplementa l = new DAOLoginImplementa();
-                
                 return (l.login(login, senha));
             } catch (Exception e) {
                 throw new GeralException("Login ou senha inválido...");
