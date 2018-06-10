@@ -123,6 +123,7 @@ public class TLogin extends javax.swing.JFrame {
         FachadaLogin login = new FachadaLogin();
         try {
             if(login.logar(txtLogin.getText(), txtSenha.getText())){
+                this.dispose();
                 TLMenu tm = new TLMenu();
                 tm.setVisible(true);
             }else{

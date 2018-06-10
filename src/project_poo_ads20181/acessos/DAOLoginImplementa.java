@@ -40,16 +40,18 @@ public class DAOLoginImplementa implements DAOLogin {
         try {
             pstm = c.prepareStatement(sql);
             pstm.setString(1, cpf);
+            pstm.setString(2, CriptografaMD5.criptografa(senha));
             ResultSet rs = pstm.executeQuery();
 
             if (rs.next()) {
                 return true;
             }
         } catch (SQLException e) {
-            throw new DAOException();
+            System.err.println(e.getMessage());
         } finally {
             gc.desconectar(c);
         }
+        return null;
     }
 
 }
