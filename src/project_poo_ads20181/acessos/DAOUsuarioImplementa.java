@@ -59,21 +59,23 @@ public class DAOUsuarioImplementa implements DAOUsuario {
             gc.desconectar(c);
         }
     }
-
-    @Override
-    public void alterar(Usuario usuario) throws ConexaoException, DAOException {
+    
+    
+    
+    public void alterar(Usuario usuario) throws ConexaoException, DAOException, GeralException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Usuario SET Cpf=?, Nome=? WHERE Cpf=?";
+        String sql = "UPDATE Usuario SET Cpf=?, Nome=? WHERE Id_Usuario=?";
         PreparedStatement pstm;
-        Usuario usu = new Usuario();
+        
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setString(1, usu.getcpf());
-            pstm.setString(2, usu.getNome());
+            pstm.setString(1, usuario.getcpf());
+            pstm.setString(2, usuario.getNome());
+            pstm.setInt(3, usuario.getIdUsuario());
             pstm.executeUpdate();
-            // JOptionPane.showMessageDialog(null, "Alterado com sucesso...");
+            
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new GeralException("Erro na instrução SQL: "+e.getMessage());
         } finally {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }

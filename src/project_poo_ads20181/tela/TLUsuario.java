@@ -278,7 +278,7 @@ public class TLUsuario extends javax.swing.JFrame {
 
        
         try {
-            fu.cadastraUsuario(usuario);
+            fu.cadastra(usuario);
             carregaTabela();
             JOptionPane.showMessageDialog(this, "Salvo com sucesso...");
         } catch (GeralException ex) {
@@ -294,16 +294,26 @@ public class TLUsuario extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Editar item selecionado
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(Integer.parseInt(txtId.getText()));
+        usuario.setNome(txtNome.getText());
+        usuario.setCpf(txtCpf.getText());
+        usuario.setSenha(txtSenha.getText());
+        usuario.setTipoUsuario(itemTipo.getSelectedIndex());
         
+        try {
+            fu.altera(usuario);
+            carregaTabela();
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso...");
+        } catch (ConexaoException | GeralException e) {
+            JOptionPane.showMessageDialog(this,e.getMessage());
+        }
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
         // Editar dados
-        
-        txtSenha.setEnabled(false);
-        
         int indice = jtable.getSelectedRow();
         
         txtId.setText(jtable.getValueAt(indice, 0).toString());

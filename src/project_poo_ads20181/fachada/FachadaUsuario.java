@@ -19,8 +19,8 @@ public class FachadaUsuario {
 
     RNUsuario rn = new RNUsuario();
 
-    public boolean cadastraUsuario(Usuario usuario) throws GeralException, ConexaoException {
-        rn.validaUsuario(usuario);
+    public boolean cadastra(Usuario usuario) throws GeralException, ConexaoException {
+        rn.validaCadastro(usuario);
         rn.inserir(usuario);
         return true;
     }
@@ -31,6 +31,12 @@ public class FachadaUsuario {
 
     public ArrayList<Usuario> listaTipoUsuario() throws GeralException {
         return rn.listarUsuarios();
-
     }
+    
+    public Boolean altera(Usuario usuario) throws GeralException, ConexaoException{
+        rn.validaEdicao(usuario);
+        rn.alterar(usuario);
+        return true;
+    }
+    
 }

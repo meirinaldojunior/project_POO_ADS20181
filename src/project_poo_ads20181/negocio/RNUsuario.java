@@ -28,7 +28,7 @@ public class RNUsuario {
         u = new DAOUsuarioImplementa();
     }
 
-    public boolean validaUsuario(Usuario usuario) throws GeralException, ConexaoException {
+    public boolean validaCadastro(Usuario usuario) throws GeralException, ConexaoException {
 
         //valida se usuário se campos está vazio
         if (usuario.getNome().isEmpty() || usuario.getSenha().isEmpty() || usuario.getcpf().isEmpty()) {
@@ -52,6 +52,36 @@ public class RNUsuario {
                 }
             } catch (DAOException ex) {
                 throw new GeralException("Falha ao consultar duplicidade de registro");
+            }
+
+        }
+        return true;
+    }
+    
+    public boolean validaEdicao(Usuario usuario) throws GeralException, ConexaoException {
+
+        //valida se usuário se campos está vazio
+        if (usuario.getNome().isEmpty() || usuario.getcpf().isEmpty()) {
+            throw new GeralException("Os campos não podem ficar em branco");
+        } else {
+            //valida o nome
+            for (int i = 0; i < usuario.getNome().length(); i++) {
+                if (!Character.isAlphabetic((usuario.getNome().charAt(i)))) {
+                    throw new GeralException("Nome invalido!");
+                }
+            }
+            //valida o CPF
+            if (!ValidaCPF.isValid(usuario.getcpf())) {
+                throw new GeralException("CPF inválido");
+            }
+
+            //verifica duplicidade de registro
+            try {
+                if (u.consultaCpf(usuario.getcpf()) == null) {
+                    throw new GeralException("O usuário que você está alterando não existe");
+                }
+            } catch (DAOException ex) {
+                throw new GeralException("Falha ao consultar registro");
             }
 
         }
@@ -83,7 +113,6 @@ public class RNUsuario {
         DAOUsuario dao = new DAOUsuarioImplementa();
         
         try {
-            
             dao.alterar(usuario);
         } catch (Exception e) {
             throw new GeralException("Falha ao editar este usuário, fomos informados e estamos tratado... "+e.getMessage());

@@ -14,7 +14,7 @@ public interface DAOUsuario {
 
     public boolean inserir(Usuario usuario) throws ConexaoException, DAOException, GeralException;
 
-    public void alterar(Usuario usuario) throws ConexaoException, DAOException;
+    public void alterar(Usuario usuario) throws ConexaoException, DAOException, GeralException;
 
     public void excluir(Usuario usuario) throws ConexaoException, DAOException;
 
