@@ -22,4 +22,5 @@ public interface DAOUsuario {
 
     Usuario consultaCpf(String cpf) throws ConexaoException, DAOException;
 
+    public ArrayList<Usuario> lista(Integer param) throws ConexaoException, DAOException;
 }

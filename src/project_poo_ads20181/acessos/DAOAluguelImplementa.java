@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import project_poo_ads20181.classes.Aluguel;
-import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.util.GerenciadorConexao;
@@ -38,7 +37,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
         PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
+            pstm.setInt(1, aluguel.getIdUsuario().getIdUsuario());
             pstm.setInt(2, aluguel.getIdExemplar().getIdExemplar());
             pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
             pstm.setDouble(4, aluguel.getValor());
@@ -62,7 +61,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
         PreparedStatement pstm;
         try {
              pstm = c.prepareStatement(sql);
-             pstm.setInt(1, aluguel.getIdAtendente().getIdAtendente());
+             pstm.setInt(1, aluguel.getIdUsuario().getIdUsuario());
              pstm.setInt(2,aluguel.getIdExemplar().getIdExemplar());
              pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
              pstm.setDouble(4,aluguel.getValor());
@@ -145,7 +144,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
                 alu.setIdAluguel(rs.getInt("Id_Aluguel"));
                 alu.setIdAluguel(rs.getInt("Id_atendente"));
                 alu.setIdAluguel(rs.getInt("Id_exemplar"));
-                alu.setIdAluguel(rs.getInt("Cpf"));
+                alu.setIdAluguel(rs.getInt("Id_Usuario"));
                 alu.setValor(rs.getInt("Valor"));
             }
             return alu;
@@ -165,7 +164,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
         
         Aluguel alu = null;
         
-        String sql = "SELECT Id_Aluguel , Id_atendente , Id_exemplar , Cpf,  Valor FROM aluguel WHERE Id_Aluguel=?";
+        String sql = "SELECT Id_Aluguel , Id_atendente , Id_exemplar , Id_Usuario,  Valor FROM aluguel WHERE Id_Aluguel=?";
         
         PreparedStatement pstm;
         try{
@@ -178,7 +177,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
                 alu.setIdAluguel(rs.getInt("Id_Aluguel"));
                 alu.setIdAluguel(rs.getInt("Id_atendente"));
                 alu.setIdAluguel(rs.getInt("Id_exemplar"));
-                alu.setIdAluguel(rs.getInt("Cpf"));
+                alu.setIdAluguel(rs.getInt("Id_Usuario"));
                 alu.setValor(rs.getInt("Valor"));
             }
             

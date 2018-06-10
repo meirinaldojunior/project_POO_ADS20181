@@ -5,10 +5,13 @@
  */
 package project_poo_ads20181.tela;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Aluguel;
-import project_poo_ads20181.classes.Atendente;
+import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaAluguel;
@@ -29,7 +32,18 @@ public class TAluguel extends javax.swing.JFrame {
     public TAluguel() {
         initComponents();
         falu = new FachadaAluguel();
+        fusu = new FachadaUsuario();
         
+        try {
+            ArrayList<Usuario> listaUsu = new ArrayList();
+            
+            listaUsu = fusu.listarUsuarios(0);
+        for (Usuario u: listaUsu){
+           jComboBox1.addItem(u.getNome());
+        }
+        } catch (GeralException ex) {
+            Logger.getLogger(TAluguel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

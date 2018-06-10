@@ -28,6 +28,10 @@ public class FachadaUsuario {
     public ArrayList<Usuario> listarUsuarios() throws GeralException {
         return rn.listarUsuarios();
     }
+    
+    public ArrayList<Usuario> listarUsuarios(Integer param) throws GeralException {
+        return rn.listarUsuarios(param);
+    }
 
     public ArrayList<String> listaTipoUsuario() throws GeralException {
         return rn.listarTipos();

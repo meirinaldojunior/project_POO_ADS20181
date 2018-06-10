@@ -129,6 +129,37 @@ public class DAOUsuarioImplementa implements DAOUsuario {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
     }
+    
+     @Override
+    public ArrayList<Usuario> lista(Integer param) throws ConexaoException, DAOException {
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        ArrayList<Usuario> lista = new ArrayList();
+        String sql = "SELECT * FROM Usuario";
+        Statement stm;
+
+        try {
+            stm = c.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                Usuario usu = new Usuario();
+                usu.setIdUsuario(rs.getInt("Id_Usuario"));
+                usu.setCpf(rs.getString("Cpf"));
+                usu.setNome(rs.getString("Nome"));
+                usu.setTipoUsuario(rs.getInt("Tipo"));
+                lista.add(usu);
+            }
+            
+            
+            
+            return lista;
+        } catch (SQLException e) {
+            System.out.println("ERRO " + e);
+            throw new DAOException();
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
 
     @Override
     public Usuario consultaCpf(String cpf) throws ConexaoException, DAOException {

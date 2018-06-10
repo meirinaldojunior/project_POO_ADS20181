@@ -5,6 +5,7 @@
  */
 package project_poo_ads20181.negocio;
 
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,6 +101,16 @@ public class RNUsuario {
     public ArrayList<Usuario> listarUsuarios() throws GeralException {
         try {
             return u.lista();
+        } catch (ConexaoException ex) {
+            throw new GeralException("Problema interno no sistema, tente novamente em uma hora.");
+        } catch (DAOException ex) {
+            throw new GeralException("Problema ao processar sua requisição, o suporte foi avisado do problema.");
+        }
+    }
+    
+     public ArrayList<Usuario> listarUsuarios(Integer param) throws GeralException {
+        try {
+            return u.lista(param);
         } catch (ConexaoException ex) {
             throw new GeralException("Problema interno no sistema, tente novamente em uma hora.");
         } catch (DAOException ex) {
