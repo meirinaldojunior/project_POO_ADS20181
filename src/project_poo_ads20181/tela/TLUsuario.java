@@ -16,6 +16,7 @@ public class TLUsuario extends javax.swing.JFrame {
      */
     public TLUsuario() {
         initComponents();
+        itemTipo.addItem("teste");
     }
 
     /**
@@ -66,8 +67,6 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel3.setText("CPF");
 
         jLabel4.setText("Tipo:");
-
-        itemTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Salvar");
 
