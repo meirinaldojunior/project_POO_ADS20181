@@ -5,7 +5,13 @@
  */
 package project_poo_ads20181.negocio;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import project_poo_ads20181.acessos.DAOUsuario;
+import project_poo_ads20181.acessos.DAOUsuarioImplementa;
 import project_poo_ads20181.classes.Usuario;
+import project_poo_ads20181.erro.ConexaoException;
+import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.funcao.ValidaCPF;
 
@@ -15,18 +21,34 @@ import project_poo_ads20181.funcao.ValidaCPF;
  */
 public class RNUsuario {
 
-    public boolean validaUsuario(Usuario usuario) throws GeralException {
+    public boolean validaUsuario(Usuario usuario) throws GeralException, ConexaoException {
+        
+        DAOUsuarioImplementa u = new DAOUsuarioImplementa();
+        
+        //valida se usuário se campos está vazio
         if (usuario.getNome().isEmpty() || usuario.getSenha().isEmpty() || usuario.getcpf().isEmpty()) {
             throw new GeralException("Os campos não podem ficar em branco");
         } else {
+            //valida o nome
             for (int i = 0; i < usuario.getNome().length(); i++) {
                 if (!Character.isAlphabetic((usuario.getNome().charAt(i)))) {
                     throw new GeralException("Nome invalido!");
                 }
             }
+            //valida o CPF
             if (!ValidaCPF.isValid(usuario.getcpf())) {
                 throw new GeralException("CPF inválido");
             }
+            
+            //verifica duplicidade de registro
+            try {
+                if(u.consultaCpf(usuario.getcpf()) != null){
+                    throw new GeralException("Já existe um usuário com este CPF");
+                }
+            } catch (DAOException ex) {
+                throw new GeralException("Falha ao consultar duplicidade de registro");
+            }
+            
         }
         return true;
     }

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import project_poo_ads20181.acessos.DAOUsuario;
 import project_poo_ads20181.acessos.DAOUsuarioImplementa;
 import project_poo_ads20181.classes.Usuario;
+import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.negocio.RNUsuario;
 
@@ -22,11 +23,10 @@ public class FachadaUsuario {
 
     RNUsuario rn = new RNUsuario();
 
-    public boolean cadastraUsuario(Usuario usuario) throws GeralException {
+    public boolean cadastraUsuario(Usuario usuario) throws GeralException, ConexaoException {
         DAOUsuarioImplementa u = new DAOUsuarioImplementa();
 
         if (rn.validaUsuario(usuario)) {
-
             try {
                 u.inserir(usuario);
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso...");
