@@ -5,6 +5,11 @@
  */
 package project_poo_ads20181.tela;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import project_poo_ads20181.erro.GeralException;
+import project_poo_ads20181.fachada.FachadaUsuario;
+
 /**
  *
  * @author meirinaldojunior
@@ -14,9 +19,18 @@ public class TLUsuario extends javax.swing.JFrame {
     /**
      * Creates new form TLUsuario
      */
-    public TLUsuario() {
+    public TLUsuario() throws GeralException {
         initComponents();
-        itemTipo.addItem("teste");
+        FachadaUsuario fu = new FachadaUsuario();
+        
+        //Carrega os tipos de usuário na tela de cadastro do usuário
+        try {
+            for (int i = 0; i < fu.listaTipoUsuario().size(); i++) {
+                itemTipo.addItem(fu.listaTipoUsuario().get(i).toString());
+            }
+        } catch (Exception e) {
+            throw new GeralException("Erro ao lista os tipos de usuários: "+e.getMessage());
+        }
     }
 
     /**
@@ -69,6 +83,11 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel4.setText("Tipo:");
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,6 +181,10 @@ public class TLUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //cadastra usuário
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,7 +215,11 @@ public class TLUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TLUsuario().setVisible(true);
+                try {
+                    new TLUsuario().setVisible(true);
+                } catch (GeralException ex) {
+                    Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

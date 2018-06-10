@@ -157,7 +157,7 @@ public class DAOUsuarioImplementa implements DAOUsuario {
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
 
-        ArrayList<String> lista = null;
+        ArrayList<String> lista = new ArrayList();
 
         String sql = "SELECT * FROM Usuario_tipo";
 
@@ -167,7 +167,7 @@ public class DAOUsuarioImplementa implements DAOUsuario {
             stm = c.createStatement();
             ResultSet rs = stm.executeQuery(sql);
 
-            if (rs.next()) {
+            while (rs.next()) {
                 lista.add(rs.getString("tipo_usuario"));
             }
             

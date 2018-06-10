@@ -1,6 +1,7 @@
 package project_poo_ads20181.util;
 
 import java.sql.Connection;
+import java.sql.Statement;
 import project_poo_ads20181.erro.ConexaoException;
 
 public interface GerenciadorConexao {
@@ -16,4 +17,6 @@ public interface GerenciadorConexao {
      * @param c Objeto com a conexao a ser fechada
      */
     public void desconectar(Connection c)throws ConexaoException;
+
+    public Statement createStatement();
 }
