@@ -5,14 +5,24 @@
  */
 package project_poo_ads20181.fachada;
 
+import project_poo_ads20181.negocio.RNLogin;
+
 /**
  *
  * @author meirinaldojunior
  */
 public class FachadaLogin {
     
-    public boolean logar(){
-        
+    private RNLogin rnl;
+    
+    public FachadaLogin(){
+        rnl = new RNLogin();
+    }
+    
+    public boolean logar(String login, String senha){
+        if(rnl.valida(login, senha)){
+            
+        }
         return true;
     }
     

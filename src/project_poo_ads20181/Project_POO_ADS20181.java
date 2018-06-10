@@ -72,7 +72,7 @@ public class Project_POO_ADS20181 {
          * QUANDO INCLUIR A GUI
          */
     }
-
+    
     public static void testaCadastroAluguel() throws ConexaoException, DAOException {
         Aluguel alu = new Aluguel();
 

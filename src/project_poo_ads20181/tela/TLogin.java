@@ -38,7 +38,6 @@ public class TLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Login");
 
-        txt_login.setText("jTextField1");
         txt_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_loginActionPerformed(evt);
@@ -47,7 +46,6 @@ public class TLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Senha");
 
-        txt_pass.setText("jTextField1");
         txt_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_passActionPerformed(evt);
