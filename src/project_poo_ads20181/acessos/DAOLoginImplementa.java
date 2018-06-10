@@ -28,9 +28,7 @@ public class DAOLoginImplementa implements DAOLogin{
     public Login login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();        
         Login usuarioLogado = null;
-        
-        
-
+       
         String sql = "SELECT * FROM Usuario WHERE Cpf = ? AND Senha = ?";
         PreparedStatement stm;
 

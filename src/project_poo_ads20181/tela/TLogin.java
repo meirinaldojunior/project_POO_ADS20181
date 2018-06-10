@@ -7,6 +7,7 @@ package project_poo_ads20181.tela;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaLogin;
 
@@ -107,6 +108,7 @@ public class TLogin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
@@ -120,7 +122,12 @@ public class TLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FachadaLogin login = new FachadaLogin();
         try {
-            login.logar(txtLogin.getText(), txtLogin.getText());
+            if(login.logar(txtLogin.getText(), txtSenha.getText())){
+                TLMenu tm = new TLMenu();
+                tm.setVisible(true);
+            }else{
+                throw new GeralException("Login ou senha inválido");
+            }
         } catch (GeralException ex) {
             System.err.println("Erro... "+ex.getMessage());
         }

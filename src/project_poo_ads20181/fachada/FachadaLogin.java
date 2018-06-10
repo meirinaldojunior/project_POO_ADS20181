@@ -5,6 +5,7 @@
  */
 package project_poo_ads20181.fachada;
 
+import javax.swing.JFrame;
 import project_poo_ads20181.acessos.DAOLoginImplementa;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.funcao.CriptografaMD5;
@@ -27,7 +28,8 @@ public class FachadaLogin {
             try {
                 System.err.println(CriptografaMD5.criptografa(senha));
                 DAOLoginImplementa l = new DAOLoginImplementa();
-                return (l.login(login, senha) != null);
+                
+                return (l != null);
             } catch (Exception e) {
                 throw new GeralException("Erro ao logar: "+e.getMessage());
             }
