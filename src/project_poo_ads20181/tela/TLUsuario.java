@@ -5,8 +5,10 @@
  */
 package project_poo_ads20181.tela;
 
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.internal.scripts.JO;
@@ -66,6 +68,9 @@ public class TLUsuario extends javax.swing.JFrame {
         txtCpf.setText("");
         txtSenha.setText("");
         btnReseteSenha.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton1.setEnabled(true);
     }
 
     public void carregaTabela() {
@@ -215,8 +220,7 @@ public class TLUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel8))
-                        .addGap(0, 0, 0))
+                            .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
@@ -252,19 +256,21 @@ public class TLUsuario extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(24, 24, 24)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(0, 0, 0)
+                                .addComponent(jLabel8)))
+                        .addGap(0, 37, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,7 +290,7 @@ public class TLUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(itemTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(47, 47, 47)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -300,10 +306,11 @@ public class TLUsuario extends javax.swing.JFrame {
         usuario.setCpf(txtCpf.getText());
         usuario.setSenha(txtSenha.getText());
         usuario.setTipoUsuario(itemTipo.getSelectedIndex());
-
+        
         try {
             fu.cadastra(usuario);
             carregaTabela();
+            limpaCampos();
             JOptionPane.showMessageDialog(this, "Salvo com sucesso...");
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex, "Erro...", JOptionPane.ERROR_MESSAGE);
@@ -327,6 +334,7 @@ public class TLUsuario extends javax.swing.JFrame {
             fu.altera(usuario);
             carregaTabela();
             JOptionPane.showMessageDialog(this, "Alterado com sucesso...");
+            limpaCampos();
         } catch (ConexaoException | GeralException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -344,6 +352,9 @@ public class TLUsuario extends javax.swing.JFrame {
         txtSenha.setText("0000000000");
 
         btnReseteSenha.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton1.setEnabled(false);
 
     }//GEN-LAST:event_jtableMouseClicked
 
@@ -354,6 +365,7 @@ public class TLUsuario extends javax.swing.JFrame {
             usuario.setIdUsuario(Integer.parseInt(txtId.getText()));
             try {
                 fu.excluir(usuario);
+                limpaCampos();
                 JOptionPane.showMessageDialog(this, "Excluído com sucesso...");
             } catch (GeralException | ConexaoException ex) {
                 JOptionPane.showMessageDialog(this, ex);

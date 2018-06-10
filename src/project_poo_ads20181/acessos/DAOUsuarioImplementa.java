@@ -119,6 +119,8 @@ public class DAOUsuarioImplementa implements DAOUsuario {
                 lista.add(usu);
             }
             
+            
+            
             return lista;
         } catch (SQLException e) {
             System.out.println("ERRO " + e);

@@ -15,6 +15,7 @@ import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.funcao.ValidaCPF;
+import project_poo_ads20181.funcao.ValidaNome;
 
 /**
  *
@@ -35,10 +36,8 @@ public class RNUsuario {
             throw new GeralException("Os campos não podem ficar em branco");
         } else {
             //valida o nome
-            for (int i = 0; i < usuario.getNome().length(); i++) {
-                if (!Character.isAlphabetic((usuario.getNome().charAt(i)))) {
-                    throw new GeralException("Nome invalido!");
-                }
+            if(!ValidaNome.valida(usuario.getNome())){
+                throw new GeralException("Nome invalido!");
             }
             //valida o CPF
             if (!ValidaCPF.isValid(usuario.getcpf())) {
@@ -106,6 +105,16 @@ public class RNUsuario {
         } catch (DAOException ex) {
             throw new GeralException("Problema ao processar sua requisição, o suporte foi avisado do problema.");
         }
+    }
+    
+    public ArrayList<String> listarTipos() throws GeralException{
+        
+        try {
+            return u.listaTipos();
+        } catch (Exception e) {
+             throw new GeralException("Problema ao processar sua requisição, o suporte foi avisado do problema.");
+        }
+        
     }
     
     public Boolean alterar(Usuario usuario) throws GeralException{

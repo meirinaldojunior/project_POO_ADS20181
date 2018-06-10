@@ -29,8 +29,8 @@ public class FachadaUsuario {
         return rn.listarUsuarios();
     }
 
-    public ArrayList<Usuario> listaTipoUsuario() throws GeralException {
-        return rn.listarUsuarios();
+    public ArrayList<String> listaTipoUsuario() throws GeralException {
+        return rn.listarTipos();
     }
     
     public Boolean altera(Usuario usuario) throws GeralException, ConexaoException{
