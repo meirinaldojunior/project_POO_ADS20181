@@ -1,6 +1,7 @@
 
 package project_poo_ads20181.acessos;
 
+import static java.lang.System.gc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -150,6 +151,30 @@ public class DAOAutorImplementa implements DAOAutor {
             throw new DAOException();
         }finally{
            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+
+    @Override
+    public boolean checkID(Autor a) throws DAOException, ConexaoException {
+        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+           String sql = "SELECT Id_Autor FROM Autor WHERE Id_Autor=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1,a.getId());
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                return true;
+            }
+            
+            return false;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
     }
         

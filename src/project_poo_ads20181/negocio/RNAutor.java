@@ -39,14 +39,8 @@ public class RNAutor {
         }
         if(a.getNome()==null || a.getNome().trim().isEmpty()){
             throw new GeralException("Nome invalido!");
-        } for (int i = 0; i < a.getNome().length(); i++) {
-          if (!Character.isAlphabetic((a.getNome().charAt(i)))) {
-              throw new GeralException("Nome invalido!"); 
-          }
+        }
      }
- 
-}
-     
     public void verificaDuplicidadeNome(Autor a)throws GeralException, DAOException {
     DAOAutorImplementa dai = new DAOAutorImplementa();
     try{
@@ -116,7 +110,19 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
         }catch(DAOException e){
             throw new GeralException("BUG.");
  }
- }    
+ }
+ public boolean checkid(Autor a) throws DAOException, ConexaoException, GeralException{
+     DAOAutorImplementa dai = new DAOAutorImplementa();
+     try{
+        boolean checkId = dai.checkID(a);
+     return checkId;}
+     {catch(ConexaoException e)
+            throw new GeralException("Contacte o ADM.");
+        }catch(DAOException e){
+            throw new GeralException("BUG.");
+     }
+     
+ 
 
 
 
