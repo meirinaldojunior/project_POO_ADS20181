@@ -200,11 +200,7 @@ public class TLMenu extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         TLUsuario t = null;
-        try {
-            t = new TLUsuario();
-        } catch (GeralException ex) {
-            Logger.getLogger(TLMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        t = new TLUsuario();
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
