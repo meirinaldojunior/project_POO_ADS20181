@@ -26,10 +26,8 @@ public class FachadaLogin {
     public boolean logar(String login, String senha) throws GeralException{
         if (rnl.valida(login, senha)) {
             try {
-                System.err.println(CriptografaMD5.criptografa(senha));
                 DAOLoginImplementa l = new DAOLoginImplementa();
-                
-                return (l != null);
+                return (l.login(login, senha));
             } catch (Exception e) {
                 throw new GeralException("Erro ao logar: "+e.getMessage());
             }

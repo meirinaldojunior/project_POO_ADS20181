@@ -17,6 +17,6 @@ import project_poo_ads20181.erro.DAOException;
  */
 public interface DAOLogin  {
     
-    public Login login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException;
+    public Boolean login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException;
     
 }

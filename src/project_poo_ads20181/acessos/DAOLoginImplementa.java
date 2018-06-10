@@ -17,47 +17,39 @@ import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.funcao.CriptografaMD5;
+import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
 
 /**
  *
  * @author meirinaldojunior
  */
-public class DAOLoginImplementa implements DAOLogin{
-    
-    public Login login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException {
-        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();        
-        Login usuarioLogado = null;
-       
-        String sql = "SELECT * FROM Usuario WHERE Cpf = ? AND Senha = ?";
-        PreparedStatement stm;
+public class DAOLoginImplementa implements DAOLogin {
 
+    @Override
+    public Boolean login(String cpf, String senha) throws DAOException, ConexaoException, NoSuchAlgorithmException {
+        GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+
+        Usuario usu = null;
+
+        String sql = "SELECT * FROM Usuario WHERE Cpf=? AND senha=?";
+
+        PreparedStatement pstm;
         try {
-            stm = c.prepareStatement(sql);
-            stm.setString(1, cpf);
-            stm.setString(2, CriptografaMD5.criptografa(senha));
-            ResultSet rs = stm.executeQuery(sql);
-                        
-            Usuario u = new Usuario();
-            
-            while(rs.next()){
-                u.setIdUsuario(rs.getInt("Id_Usuario"));
-                u.setNome(rs.getString("Nome"));
-                u.setCpf(rs.getString("Cpf"));
-                u.setTipoUsuario(rs.getInt("Tipo"));
-            }
-            
-            usuarioLogado.setUsuarioLogado(u);
-            
-            return usuarioLogado;
+            pstm = c.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            ResultSet rs = pstm.executeQuery();
 
+            if (rs.next()) {
+                return true;
+            }
         } catch (SQLException e) {
-            System.out.println("ERRO " + e);
             throw new DAOException();
         } finally {
-            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+            gc.desconectar(c);
         }
     }
 
-    
 }

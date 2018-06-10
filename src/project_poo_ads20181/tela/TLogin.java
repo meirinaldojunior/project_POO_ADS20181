@@ -129,7 +129,7 @@ public class TLogin extends javax.swing.JFrame {
                 throw new GeralException("Login ou senha inválido");
             }
         } catch (GeralException ex) {
-            System.err.println("Erro... "+ex.getMessage());
+            System.err.println("Erro... ");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
