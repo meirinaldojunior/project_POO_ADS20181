@@ -312,8 +312,10 @@ public class Project_POO_ADS20181 {
 
     }
 
-    private static void testaAlterarAutor(Autor a) throws ConexaoException, DAOException {
-     
+    private static void TestaAlterarAutor() throws ConexaoException, DAOException {
+        Autor a = new Autor();
+        a.setNome("julius");
+        a.setId(101);
         DAOAutorImplementa dai = new DAOAutorImplementa();
         try {
             dai.alterar(a);

@@ -14,10 +14,10 @@ import project_poo_ads20181.negocio.RNAutor;
 
 /**
  *
- * @author valter
+ * @author valte
  */
 public class FachadaAutor {
-    private RNAutor rna;
+     private RNAutor rna;
     
     public FachadaAutor(){
     rna = new RNAutor();
@@ -52,4 +52,9 @@ public class FachadaAutor {
         rna.validaAutor(a);
         return a;
     }
+    public boolean checkId(Autor a) throws DAOException, ConexaoException, GeralException{
+        boolean checkid = rna.checkid(a);
+        return checkid;
+    }
+    
 }

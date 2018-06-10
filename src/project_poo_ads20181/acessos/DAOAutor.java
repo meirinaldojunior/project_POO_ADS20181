@@ -60,4 +60,9 @@ public interface DAOAutor {
      * @throws DAOException 
     */
     public Autor consultaNome(String nome)throws ConexaoException, DAOException;
+    
+    public boolean checkID (Autor a) throws DAOException,ConexaoException;
+        
+
 }
+
