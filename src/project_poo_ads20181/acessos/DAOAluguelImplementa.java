@@ -43,7 +43,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
             pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
             pstm.setDouble(4, aluguel.getValor());
             pstm.executeUpdate();
-            System.out.println("Inserido com sucesso!");
+            System.out.println("Aluguel inserido com sucesso!");
         } catch (SQLException e) {
             throw new DAOException();
         } finally {
@@ -68,7 +68,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
              pstm.setDouble(4,aluguel.getValor());
              pstm.setInt(5, aluguel.getIdAluguel());
              pstm.executeUpdate();
-             
+             System.out.println("Aluguel alterado com sucesso!");
         }catch(SQLException e){
             throw new DAOException();
         }finally{
@@ -89,7 +89,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
             pstm.setInt(1 , aluguel.getIdAluguel());
 
             pstm.executeUpdate();
-      
+            System.out.println("Aluguel excluído com sucesso!");
         } catch (SQLException e) {
             throw new DAOException();
         } finally {

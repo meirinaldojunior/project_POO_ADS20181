@@ -38,7 +38,7 @@ public class RNAluguel {
     // não valida o ID, apenas as chaves de outras classes
     public void validarAtributos(Aluguel alu)throws GeralException{
         if(alu==null){
-            throw new GeralException("Inválido!");
+            throw new GeralException("Informações inválidas!");
         }
         /*if(alu.getIdAtendente()== null || alu.getIdAtendente() < 1){
             throw new GeralException("Atendente não cadastrado!");
@@ -58,7 +58,7 @@ public class RNAluguel {
         DAOAluguel dao = new DAOAluguelImplementa();
         try{
             if(dao.consultaAluguel( aluguel.getIdAluguel() )!=null){
-                throw new GeralException("Produto ja existe.");
+                throw new GeralException("Aluguel já existe.");
             }
         }
         catch(ConexaoException e){
@@ -74,9 +74,9 @@ public class RNAluguel {
         try{
             dao.inserir(aluguel);
         }catch(ConexaoException e){
-            throw new GeralException("Contacte o ADM.");
+            throw new GeralException("Contacte o Administrador do Sistema.");
         }catch(DAOException e){
-            throw new GeralException("BUG.");
+            throw new GeralException("Erro. Contacte o Administrador do Sistema");
         }
     }
     
