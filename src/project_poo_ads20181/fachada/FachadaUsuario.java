@@ -22,9 +22,9 @@ import project_poo_ads20181.negocio.RNUsuario;
 public class FachadaUsuario {
 
     RNUsuario rn = new RNUsuario();
+    DAOUsuarioImplementa u = new DAOUsuarioImplementa();
 
     public boolean cadastraUsuario(Usuario usuario) throws GeralException, ConexaoException {
-        DAOUsuarioImplementa u = new DAOUsuarioImplementa();
 
         if (rn.validaUsuario(usuario)) {
             try {
@@ -38,13 +38,19 @@ public class FachadaUsuario {
         return true;
     }
 
+    public ArrayList<Usuario> listarUsuarios() throws GeralException {
+        try {
+            return u.lista();
+        } catch (Exception e) {
+            throw new GeralException("Não foi possível listar os usuários");
+        }
+    }
+
     public ArrayList<String> listaTipoUsuario() throws GeralException {
-        DAOUsuarioImplementa u = new DAOUsuarioImplementa();
         try {
             return u.listaTipos();
         } catch (Exception e) {
             throw new GeralException("Não foi possível listar os tipos de usuários: " + e.getMessage());
         }
-
     }
 }

@@ -112,8 +112,10 @@ public class DAOUsuarioImplementa implements DAOUsuario {
 
             while (rs.next()) {
                 Usuario usu = new Usuario();
+                usu.setIdUsuario(rs.getInt("Id_Usuario"));
                 usu.setCpf(rs.getString("Cpf"));
                 usu.setNome(rs.getString("Nome"));
+                usu.setTipoUsuario(rs.getInt("Tipo"));
                 lista.add(usu);
             }
             return lista;

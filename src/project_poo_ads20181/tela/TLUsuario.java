@@ -7,7 +7,9 @@ package project_poo_ads20181.tela;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Usuario;
+import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaUsuario;
 
@@ -18,7 +20,7 @@ import project_poo_ads20181.fachada.FachadaUsuario;
 public class TLUsuario extends javax.swing.JFrame {
 
     FachadaUsuario fu;
-
+    DefaultTableModel tabelaModelo;
     /**
      * Creates new form TLUsuario
      */
@@ -33,6 +35,31 @@ public class TLUsuario extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             throw new GeralException("Erro ao lista os tipos de usuários: " + e.getMessage());
+        }
+        
+        //inicializa tabela
+        tabelaModelo = (DefaultTableModel) jtable.getModel();
+        
+        //carrega tabela
+        carregaTabela();
+        
+    }
+    
+    public void limpaTabela(){
+        for(int i = 0; i < tabelaModelo.getRowCount(); i++){
+            tabelaModelo.removeRow(i);
+        }
+    }
+    
+    public void carregaTabela() throws GeralException{
+        limpaTabela();
+        for(Usuario usuario : fu.listarUsuarios()){
+            tabelaModelo.addRow(new Object[]{
+                usuario.getIdUsuario(),
+                usuario.getNome(),
+                usuario.getcpf(),
+                usuario.getTipo(),
+            });
         }
     }
 
@@ -57,7 +84,7 @@ public class TLUsuario extends javax.swing.JFrame {
         itemTipo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -92,18 +119,15 @@ public class TLUsuario extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "CPF", "Tipo"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jtable);
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel5.setText("Cadastro de Usuários");
@@ -194,7 +218,10 @@ public class TLUsuario extends javax.swing.JFrame {
 
         try {
             fu.cadastraUsuario(usuario);
+            carregaTabela();
         } catch (GeralException ex) {
+            Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConexaoException ex) {
             Logger.getLogger(TLUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -251,7 +278,7 @@ public class TLUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jtable;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
