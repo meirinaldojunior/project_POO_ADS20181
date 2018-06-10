@@ -213,6 +213,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
     }
+        
     
     
 }

@@ -40,15 +40,6 @@ public class RNAluguel {
         if(alu==null){
             throw new GeralException("Informações inválidas!");
         }
-        /*if(alu.getIdAtendente()== null || alu.getIdAtendente() < 1){
-            throw new GeralException("Atendente não cadastrado!");
-        }
-        if(alu.getIdExemplar()==null || alu.getIdExemplar()< 1){
-            throw new GeralException("Número do exemplar não cadastrado!");
-        }
-        if(alu.getIdUsuario() == null || alu.getIdUsuario() < 0){
-            throw new GeralException("Usuário inválido!");
-        }*/
         if(alu.getValor() == null || alu.getValor() < 0) {
             throw new GeralException("Valor invalido!");
         }
