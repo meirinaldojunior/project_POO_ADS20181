@@ -58,6 +58,14 @@ public class TLUsuario extends javax.swing.JFrame {
         }
     }
     
+    public void limpaCampos(){
+        txtId.setText("");
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtSenha.setText("");
+        btnReseteSenha.setEnabled(false);
+    }
+    
     public void carregaTabela(){
         limpaTabela();
         try {
@@ -92,7 +100,6 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtCpf = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
         itemTipo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -103,6 +110,7 @@ public class TLUsuario extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        txtSenha = new javax.swing.JPasswordField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,8 +227,7 @@ public class TLUsuario extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnReseteSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, 0)))
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -245,8 +252,8 @@ public class TLUsuario extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -295,14 +302,16 @@ public class TLUsuario extends javax.swing.JFrame {
     private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
         // Editar dados
         
+        txtSenha.setEnabled(false);
+        
         int indice = jtable.getSelectedRow();
         
         txtId.setText(jtable.getValueAt(indice, 0).toString());
         txtNome.setText(jtable.getValueAt(indice, 1).toString());
         txtCpf.setText(jtable.getValueAt(indice, 2).toString());
+        txtSenha.setText("0000000000");
         
-        btnReseteSenha.enable();
-        btnReseteSenha.enable(true);
+        btnReseteSenha.setEnabled(true);
         
     }//GEN-LAST:event_jtableMouseClicked
 
@@ -369,6 +378,6 @@ public class TLUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

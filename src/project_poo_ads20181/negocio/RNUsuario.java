@@ -77,5 +77,20 @@ public class RNUsuario {
             throw new GeralException("Problema ao processar sua requisição, o suporte foi avisado do problema.");
         }
     }
+    
+    public Boolean alterar(Usuario usuario) throws GeralException{
+        
+        DAOUsuario dao = new DAOUsuarioImplementa();
+        
+        try {
+            
+            dao.alterar(usuario);
+        } catch (Exception e) {
+            throw new GeralException("Falha ao editar este usuário, fomos informados e estamos tratado... "+e.getMessage());
+        }
+        
+        
+        return true;
+    }
 
 }
