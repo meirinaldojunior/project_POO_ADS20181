@@ -190,6 +190,29 @@ public class DAOAluguelImplementa implements DAOAluguel{
             gc.desconectar(c);
         }
     }
-
+    public boolean checkID (Aluguel alu) throws DAOException,ConexaoException{
+    
+        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+           String sql = "SELECT Id_Aluguel FROM aluguel WHERE Id_Aluguel=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1,alu.getIdAluguel());
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                return true;
+            }
+            
+            return false;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
     
 }

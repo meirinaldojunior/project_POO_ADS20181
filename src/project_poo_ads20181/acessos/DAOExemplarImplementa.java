@@ -148,7 +148,40 @@ public class DAOExemplarImplementa implements DAOExemplar {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);    
         }
     }
-
+    
+    @Override
+    public Exemplar get(Integer idExemplar) throws ConexaoException, DAOException{
+            
+        GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+        
+        Exemplar exe = null;
+        
+        String sql = "SELECT Id_exemplar, Id_livro, Id_Categoria, Id_Autor FROM exemplar WHERE Id_exemplar=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, idExemplar);
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()){
+                exe = new Exemplar();
+                exe.setIdExemplar(rs.getInt("Id_exemplar"));
+                exe.setIdExemplar(rs.getInt("Id_livro"));
+                exe.setIdExemplar(rs.getInt("Id_Categoria"));
+                exe.setIdExemplar(rs.getInt("Id_Autor"));
+            }
+            
+            return exe;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            gc.desconectar(c);
+        }
+    }
     
     
 }
