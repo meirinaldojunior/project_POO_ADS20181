@@ -35,6 +35,7 @@ public class TLUsuario extends javax.swing.JFrame {
 
         //desabilita botão alterar senha
         btnReseteSenha.disable();
+        
 
         //Carrega os tipos de usuário na tela de cadastro do usuário
         try {
@@ -74,6 +75,8 @@ public class TLUsuario extends javax.swing.JFrame {
     }
 
     public void carregaTabela() {
+        System.err.println(itemTipo.getSelectedObjects());
+
         limpaTabela();
         try {
             for (Usuario usuario : fu.listarUsuarios()) {
