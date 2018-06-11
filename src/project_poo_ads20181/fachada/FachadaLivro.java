@@ -38,8 +38,7 @@ public class FachadaLivro {
         
         rn.validarAtributos(L);
         rn.validarDuplicidadeNome(L);
-        daoa.checkID(L.getAutor());
-        daoc.checkID(L.getCat());
+        rn.idcatautor(L);
         dao.inserir(L);
         return true;
     }

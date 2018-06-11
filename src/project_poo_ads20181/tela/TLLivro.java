@@ -342,7 +342,11 @@ public class TLLivro extends javax.swing.JFrame {
         Livro livro = new Livro();
         FachadaLivro fl = new FachadaLivro();
         
-        livro.setIdLivro(Integer.parseInt(txtIDLivro.getText()));
+        if(txtIDLivro.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(this,"O campo não pode ficar vazio!");
+            
+        }else{
+            livro.setIdLivro(Integer.parseInt(txtIDLivro.getText()));
         
         try {
             fl.excluirRegistro(livro);
@@ -356,6 +360,10 @@ public class TLLivro extends javax.swing.JFrame {
         }
         
         lista();
+            
+        }
+        
+        
         
     }//GEN-LAST:event_btnExcluirActionPerformed
 

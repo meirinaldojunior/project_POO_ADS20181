@@ -2,6 +2,9 @@
 package project_poo_ads20181.negocio;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import project_poo_ads20181.acessos.DAOAutorImplementa;
+import project_poo_ads20181.acessos.DAOCategoriaImplementa;
 import project_poo_ads20181.acessos.DAOLivroImplementa;
 import project_poo_ads20181.classes.Livro;
 import project_poo_ads20181.erro.ConexaoException;
@@ -72,8 +75,12 @@ public class RNLivro {
     public void excluirRegistro(Livro livro) throws GeralException, DAOException, ConexaoException{
                 
             DAOLivroImplementa dao = new DAOLivroImplementa();
+            
         
                 try{
+                    if(livro.getIdLivro() == null){
+                        JOptionPane.showMessageDialog(null,"Selecione um registro na lista para que seja deletado!");
+                    }
                 
                 dao.excluir(livro);
                 
@@ -120,6 +127,20 @@ public class RNLivro {
                                }
                
                             
+    }
+    
+    public boolean idcatautor(Livro livro) throws DAOException, ConexaoException{
+        DAOCategoriaImplementa daoc = new DAOCategoriaImplementa();
+        DAOAutorImplementa daoa = new DAOAutorImplementa();
+        
+      if(!daoc.checkID(livro.getCat())){
+          JOptionPane.showMessageDialog(null,"A Categoria não existe!");
+   
+    }
+      if(!daoa.checkID(livro.getAutor())){
+                JOptionPane.showMessageDialog(null,"O Autor não existe!");
+      }
+      return true;
     }
     
 }
