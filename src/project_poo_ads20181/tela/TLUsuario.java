@@ -366,6 +366,7 @@ public class TLUsuario extends javax.swing.JFrame {
         txtId.setText(jtable.getValueAt(indice, 0).toString());
         txtNome.setText(jtable.getValueAt(indice, 1).toString());
         txtCpf.setText(jtable.getValueAt(indice, 2).toString());
+        itemTipo.setSelectedIndex(Integer.parseInt(jtable.getValueAt(indice, 3).toString()));
         txtSenha.setText("0000000000");
 
         btnReseteSenha.setEnabled(true);
