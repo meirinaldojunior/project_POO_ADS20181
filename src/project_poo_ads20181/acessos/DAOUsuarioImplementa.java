@@ -82,6 +82,7 @@ public class DAOUsuarioImplementa implements DAOUsuario {
     }
     
    
+    @Override
     public void alterarSenha(Usuario usuario) throws ConexaoException, DAOException, GeralException, NoSuchAlgorithmException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         String sql = "UPDATE Usuario SET Senha=? WHERE Id_Usuario=?";
@@ -155,13 +156,16 @@ public class DAOUsuarioImplementa implements DAOUsuario {
     public ArrayList<Usuario> lista(Integer param) throws ConexaoException, DAOException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Usuario> lista = new ArrayList();
-        String sql = "SELECT * FROM Usuario";
-        Statement stm;
-
+        String sql = "SELECT * FROM Usuario"; //WHERE Tipo = ?";
+        PreparedStatement pstm;
+        
         try {
-            stm = c.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
+            pstm = c.prepareStatement(sql);
+            pstm.setString(0, param.toString());
+            //pstm.executeUpdate(sql);
+            ResultSet rs = pstm.executeQuery(sql);
 
+            
             while (rs.next()) {
                 Usuario usu = new Usuario();
                 usu.setIdUsuario(rs.getInt("Id_Usuario"));
