@@ -45,6 +45,12 @@ public class RNUsuario {
                 throw new GeralException("CPF inválido");
             }
 
+            //valida o Tipo
+            if (usuario.getTipo() != 0 || usuario.getTipo() != 1) {
+                throw new GeralException("Tipo de usuário inválido");
+            }
+
+            
             //verifica duplicidade de registro
             try {
                 if (u.consultaCpf(usuario.getcpf()) != null) {

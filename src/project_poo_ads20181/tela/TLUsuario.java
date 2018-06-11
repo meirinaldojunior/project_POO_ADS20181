@@ -181,7 +181,7 @@ public class TLUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Editar");
+        jButton3.setText("Concluir Edição");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
