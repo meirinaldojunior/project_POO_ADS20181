@@ -41,12 +41,17 @@ public class RNUsuario {
                 throw new GeralException("Nome invalido!");
             }
             //valida o CPF
-            if (!ValidaCPF.isValid(usuario.getcpf())) {
+            if (!ValidaCPF.isValid(usuario.getcpf()) ) {
                 throw new GeralException("CPF inválido");
             }
+            if (usuario.getcpf().length() <= 11 ) {
+                throw new GeralException("O CPF deve conter 11 caracteres números.");
+            }
+            
+            
 
             //valida o Tipo
-            if (usuario.getTipo() != 0 || usuario.getTipo() != 1) {
+            if (usuario.getTipo() != 0 && usuario.getTipo() != 1) {
                 throw new GeralException("Tipo de usuário inválido");
             }
 
@@ -71,14 +76,20 @@ public class RNUsuario {
             throw new GeralException("Os campos não podem ficar em branco");
         } else {
             //valida o nome
-            for (int i = 0; i < usuario.getNome().length(); i++) {
-                if (!Character.isAlphabetic((usuario.getNome().charAt(i)))) {
-                    throw new GeralException("Nome invalido!");
-                }
+            if(!ValidaNome.valida(usuario.getNome())){
+                throw new GeralException("Nome invalido!");
             }
             //valida o CPF
-            if (!ValidaCPF.isValid(usuario.getcpf())) {
+            if (!ValidaCPF.isValid(usuario.getcpf()) ) {
                 throw new GeralException("CPF inválido");
+            }
+            if (usuario.getcpf().length() <= 11 ) {
+                throw new GeralException("O CPF deve conter 11 caracteres números.");
+            }
+
+            //valida o Tipo
+            if (usuario.getTipo() != 0 && usuario.getTipo() != 1) {
+                throw new GeralException("Tipo de usuário inválido");
             }
 
             //verifica duplicidade de registro

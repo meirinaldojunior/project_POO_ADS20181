@@ -53,5 +53,7 @@ public class ValidaCPF {
         Integer digito2 = calcularDigito(cnpj.substring(0,12) + digito1, pesoCNPJ);
         return cnpj.equals(cnpj.substring(0,12) + digito1.toString() + digito2.toString());
     }
+    
+    
 }
 

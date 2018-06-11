@@ -122,6 +122,7 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,6 +146,12 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel3.setText("CPF");
 
         jLabel4.setText("Tipo:");
+
+        itemTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTipoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Criar novo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +212,8 @@ public class TLUsuario extends javax.swing.JFrame {
 
         jLabel9.setText("atráves do botão \"alterar senha\", por conta");
 
+        jLabel10.setText("Apenas números.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,7 +245,10 @@ public class TLUsuario extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCpf))
+                                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10)
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,8 +284,7 @@ public class TLUsuario extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(0, 0, 0)
                                 .addComponent(jLabel8)))
-                        .addGap(0, 37, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 43, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,7 +293,8 @@ public class TLUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jLabel10))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -309,6 +321,8 @@ public class TLUsuario extends javax.swing.JFrame {
         usuario.setCpf(txtCpf.getText());
         usuario.setSenha(txtSenha.getText());
         usuario.setTipoUsuario(itemTipo.getSelectedIndex());
+        
+        System.err.println(txtCpf.getText());
         
         try {
             fu.cadastra(usuario);
@@ -382,6 +396,10 @@ public class TLUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnReseteSenhaActionPerformed
 
+    private void itemTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemTipoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,6 +450,7 @@ public class TLUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

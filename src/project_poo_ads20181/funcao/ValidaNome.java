@@ -15,19 +15,22 @@ public class ValidaNome {
 
     public static boolean valida(String st) throws GeralException {
 
-        if (st.length() < 5 && st.length() > 50) {
-            throw new GeralException("Nome invalido");
-        }
-
-        if (st.substring(0, st.indexOf(" ")) == null && st.substring(st.lastIndexOf(" ") + 1) == null) {
-            throw new GeralException("O nome deve contre o seu nome e sobrenome");
-        }
-
-        if (st.substring(0, st.indexOf(" ")).length() < 2 && st.substring(st.lastIndexOf(" ") + 1).length() < 2) {
-            st = "O nome e o sobrenome deve contrer pelo menos 2 caracteres";
-            throw new GeralException("O nome e o sobrenome deve contrer pelo menos 2 caracteres");
-        }
-
+        
+    if (st.length() < 5 || st.length() > 50)
+    {
+        throw new GeralException("Nome invalido");
+    }
+    
+    
+    if(st.indexOf(" ") == -1)
+    {
+        throw new GeralException("O nome deve contre o seu nome e sobrenome");
+    }
+    
+    if(st.substring(0,st.indexOf(" ")).length() < 2 || st.substring(st.lastIndexOf(" ") + 1).length() < 2)
+    {
+        throw new GeralException("O nome e o sobrenome deve contrer pelo menos 2 caracteres");
+    }
         return true;
     }
 }
