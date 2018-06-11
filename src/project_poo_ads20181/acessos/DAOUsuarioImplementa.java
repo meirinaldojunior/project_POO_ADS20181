@@ -80,6 +80,27 @@ public class DAOUsuarioImplementa implements DAOUsuario {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
     }
+    
+   
+    public void alterarSenha(Usuario usuario) throws ConexaoException, DAOException, GeralException, NoSuchAlgorithmException {
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "UPDATE Usuario SET Senha=? WHERE Id_Usuario=?";
+        PreparedStatement pstm;
+        
+        try {
+            pstm = c.prepareStatement(sql);
+            pstm.setString(1, CriptografaMD5.criptografa(usuario.getSenha()));
+            pstm.setInt(2, usuario.getIdUsuario());
+            pstm.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new GeralException("Erro na instrução SQL: "+e.getMessage());
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    
 
     
     public void excluir(Usuario usuario) throws ConexaoException, DAOException {

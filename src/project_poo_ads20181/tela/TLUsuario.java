@@ -35,7 +35,7 @@ public class TLUsuario extends javax.swing.JFrame {
 
         //desabilita botão alterar senha
         btnReseteSenha.disable();
-       
+
         //Carrega os tipos de usuário na tela de cadastro do usuário
         try {
             for (int i = 0; i < fu.listaTipoUsuario().size(); i++) {
@@ -329,9 +329,9 @@ public class TLUsuario extends javax.swing.JFrame {
         usuario.setCpf(txtCpf.getText());
         usuario.setSenha(txtSenha.getText());
         usuario.setTipoUsuario(itemTipo.getSelectedIndex());
-        
+
         System.err.println(txtCpf.getText());
-        
+
         try {
             fu.cadastra(usuario);
             carregaTabela();
@@ -384,7 +384,26 @@ public class TLUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnReseteSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReseteSenhaActionPerformed
-        String novaSena = JOptionPane.showInputDialog(this, "Digite a nova senha para este usuário...");
+        String novaSenha = JOptionPane.showInputDialog(this, "Digite a nova senha para este usuário...");
+
+        // alterar senha
+        if (!novaSenha.isEmpty()) {
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(Integer.parseInt(txtId.getText()));
+            usuario.setSenha(novaSenha);
+
+            try {
+                fu.alteraSenha(usuario);
+                carregaTabela();
+                JOptionPane.showMessageDialog(this, "Senha alterada com sucesso...");
+                limpaCampos();
+            } catch (ConexaoException | GeralException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Senha inválida...");
+        }
+
 
     }//GEN-LAST:event_btnReseteSenhaActionPerformed
 

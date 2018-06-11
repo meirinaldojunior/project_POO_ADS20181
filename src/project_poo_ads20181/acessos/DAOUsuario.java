@@ -4,6 +4,7 @@ package project_poo_ads20181.acessos;
  *
  * @author Hugo Felipe
  */
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
@@ -16,6 +17,8 @@ public interface DAOUsuario {
 
     public void alterar(Usuario usuario) throws ConexaoException, DAOException, GeralException;
 
+    public void alterarSenha(Usuario usuario) throws ConexaoException, DAOException, GeralException, NoSuchAlgorithmException;
+
     public void excluir(Usuario usuario) throws ConexaoException, DAOException;
 
     public ArrayList<Usuario> lista() throws ConexaoException, DAOException;
@@ -23,4 +26,5 @@ public interface DAOUsuario {
     Usuario consultaCpf(String cpf) throws ConexaoException, DAOException;
 
     public ArrayList<Usuario> lista(Integer param) throws ConexaoException, DAOException;
+
 }

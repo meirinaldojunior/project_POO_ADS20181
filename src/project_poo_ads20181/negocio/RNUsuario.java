@@ -155,6 +155,16 @@ public class RNUsuario {
         return true;
     }
     
+    public Boolean alterarSenha(Usuario usuario) throws GeralException{
+        DAOUsuario dao = new DAOUsuarioImplementa();
+        try {
+            dao.alterarSenha(usuario);
+        } catch (Exception e) {
+            throw new GeralException("Falha ao editar este usuário, fomos informados e estamos tratado... "+e.getMessage());
+        }
+        return true;
+    }
+    
     public Boolean excluir(Usuario usuario) throws GeralException{
         DAOUsuario dao = new DAOUsuarioImplementa();
         try {
