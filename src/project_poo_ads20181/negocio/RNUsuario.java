@@ -44,7 +44,7 @@ public class RNUsuario {
             if (!ValidaCPF.isValid(usuario.getcpf()) ) {
                 throw new GeralException("CPF inválido");
             }
-            if (usuario.getcpf().length() <= 11 ) {
+            if (usuario.getcpf().length() > 11 ) {
                 throw new GeralException("O CPF deve conter 11 caracteres números.");
             }
             
@@ -83,7 +83,7 @@ public class RNUsuario {
             if (!ValidaCPF.isValid(usuario.getcpf()) ) {
                 throw new GeralException("CPF inválido");
             }
-            if (usuario.getcpf().length() <= 11 ) {
+            if (usuario.getcpf().length() > 11 ) {
                 throw new GeralException("O CPF deve conter 11 caracteres números.");
             }
 
