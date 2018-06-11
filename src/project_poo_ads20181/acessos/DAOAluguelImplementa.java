@@ -38,7 +38,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
         try {
             pstm = c.prepareStatement(sql);
             pstm.setInt(1, aluguel.getIdUsuario().getIdUsuario());
-            pstm.setInt(2, aluguel.getIdExemplar().getIdExemplar());
+            //pstm.setInt(2, aluguel.getIdExemplar().getIdExemplar());
             pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
             pstm.setDouble(4, aluguel.getValor());
             pstm.executeUpdate();
@@ -62,7 +62,7 @@ public class DAOAluguelImplementa implements DAOAluguel{
         try {
              pstm = c.prepareStatement(sql);
              pstm.setInt(1, aluguel.getIdUsuario().getIdUsuario());
-             pstm.setInt(2,aluguel.getIdExemplar().getIdExemplar());
+             //pstm.setInt(2,aluguel.getIdExemplar().getIdExemplar());
              pstm.setInt(3, aluguel.getIdUsuario().getIdUsuario());
              pstm.setDouble(4,aluguel.getValor());
              pstm.setInt(5, aluguel.getIdAluguel());
