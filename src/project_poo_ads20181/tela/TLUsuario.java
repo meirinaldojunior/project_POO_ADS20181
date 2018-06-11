@@ -35,8 +35,7 @@ public class TLUsuario extends javax.swing.JFrame {
 
         //desabilita botão alterar senha
         btnReseteSenha.disable();
-        
-
+       
         //Carrega os tipos de usuário na tela de cadastro do usuário
         try {
             for (int i = 0; i < fu.listaTipoUsuario().size(); i++) {
@@ -48,9 +47,6 @@ public class TLUsuario extends javax.swing.JFrame {
 
         //inicializa tabela
         tabelaModelo = (DefaultTableModel) jtable.getModel();
-
-        jtable.setFocusable(false);
-        jtable.setRowSelectionAllowed(true);
 
         //carrega tabela
         carregaTabela();
@@ -110,8 +106,6 @@ public class TLUsuario extends javax.swing.JFrame {
         txtCpf = new javax.swing.JTextField();
         itemTipo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         btnReseteSenha = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -123,6 +117,9 @@ public class TLUsuario extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtable = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,24 +157,6 @@ public class TLUsuario extends javax.swing.JFrame {
             }
         });
 
-        jtable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Nome", "CPF", "Tipo"
-            }
-
-        ));
-        jtable.setEditingColumn(0);
-        jtable.setEditingRow(0);
-        jtable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtableMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jtable);
-
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel5.setText("Cadastro de Usuários");
 
@@ -214,6 +193,31 @@ public class TLUsuario extends javax.swing.JFrame {
 
         jLabel10.setText("Apenas números.");
 
+        jtable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "CPF", "Tipo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jtable);
+
+        jLabel11.setText("Clique duas vezes no usuário que deseja excluir ou editar.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,21 +226,9 @@ public class TLUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtId)))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,28 +255,42 @@ public class TLUsuario extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnReseteSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtId)))
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)))
+                            .addComponent(jLabel11))
+                        .addGap(0, 22, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel9)
                         .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel8)))
-                        .addGap(0, 43, Short.MAX_VALUE)))
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,8 +311,10 @@ public class TLUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(itemTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -359,23 +367,6 @@ public class TLUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
-        // Editar dados
-        int indice = jtable.getSelectedRow();
-
-        txtId.setText(jtable.getValueAt(indice, 0).toString());
-        txtNome.setText(jtable.getValueAt(indice, 1).toString());
-        txtCpf.setText(jtable.getValueAt(indice, 2).toString());
-        itemTipo.setSelectedIndex(Integer.parseInt(jtable.getValueAt(indice, 3).toString()));
-        txtSenha.setText("0000000000");
-
-        btnReseteSenha.setEnabled(true);
-        jButton4.setEnabled(true);
-        jButton3.setEnabled(true);
-        jButton1.setEnabled(false);
-
-    }//GEN-LAST:event_jtableMouseClicked
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         //Excluir usuário
         if (JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir??") == 0) {
@@ -400,6 +391,22 @@ public class TLUsuario extends javax.swing.JFrame {
     private void itemTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemTipoActionPerformed
+
+    private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
+        // Editar dados
+        int indice = jtable.getSelectedRow();
+
+        txtId.setText(jtable.getValueAt(indice, 0).toString());
+        txtNome.setText(jtable.getValueAt(indice, 1).toString());
+        txtCpf.setText(jtable.getValueAt(indice, 2).toString());
+        itemTipo.setSelectedIndex(Integer.parseInt(jtable.getValueAt(indice, 3).toString()));
+        txtSenha.setText("0000000000");
+
+        btnReseteSenha.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton1.setEnabled(false);
+    }//GEN-LAST:event_jtableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -452,6 +459,7 @@ public class TLUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -461,7 +469,7 @@ public class TLUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jtable;
     private javax.swing.JTextField txtCpf;
