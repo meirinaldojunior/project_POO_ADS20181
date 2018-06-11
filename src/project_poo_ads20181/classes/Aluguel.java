@@ -9,7 +9,7 @@ public class Aluguel {
 
 	private Integer idAluguel;
 	private Usuario idAtendente = new Usuario();
-	//private Exemplar idExemplar = new Exemplar();
+	private Exemplar idExemplar = new Exemplar();
 	private Usuario idUsuario = new Usuario();
 	private Integer valor;
 	
@@ -28,12 +28,12 @@ public class Aluguel {
         return this.idAtendente;
     }
 
-//    public void setIdExemplar(Exemplar idExemplar){
-//        this.idExemplar = idExemplar;
-//    }
-//    public Exemplar getIdExemplar(){
-//        return this.idExemplar;
-//    }
+    public void setIdExemplar(Exemplar idExemplar){
+        this.idExemplar = idExemplar;
+    }
+    public Exemplar getIdExemplar(){
+        return this.idExemplar;
+    }
     
     public void setIdUsuario (Usuario idUsuario){
         this.idUsuario = idUsuario;
