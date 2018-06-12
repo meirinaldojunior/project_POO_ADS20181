@@ -5,6 +5,8 @@
  */
 package project_poo_ads20181.tela;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import project_poo_ads20181.classes.Autor;
 import project_poo_ads20181.erro.ConexaoException;
@@ -41,6 +43,7 @@ public class TLAutor extends javax.swing.JFrame {
         TextId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         alterarAutor = new javax.swing.JButton();
+        buscarPorId = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +72,13 @@ public class TLAutor extends javax.swing.JFrame {
             }
         });
 
+        buscarPorId.setText("buscar");
+        buscarPorId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPorIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,6 +94,7 @@ public class TLAutor extends javax.swing.JFrame {
                     .addComponent(TextNome))
                 .addGap(115, 115, 115)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buscarPorId)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(salvarAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -109,7 +120,9 @@ public class TLAutor extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(alterarAutor)))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buscarPorId)
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,7 +154,7 @@ public class TLAutor extends javax.swing.JFrame {
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "erro de conexão,contate o ADM","Mensagem",JOptionPane.INFORMATION_MESSAGE);
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -157,9 +170,23 @@ public class TLAutor extends javax.swing.JFrame {
         }catch(GeralException e){
             JOptionPane.showMessageDialog(this, "Autor nao alterado","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(this, "Autor nao alterado","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "erro de conexão, contate o ADM","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         } 
     }//GEN-LAST:event_alterarAutorActionPerformed
+
+    private void buscarPorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPorIdActionPerformed
+      FachadaAutor fat = new FachadaAutor();
+      try{
+     Autor a =     fat.buscarPorId(Integer.parseInt(TextId.getText()));
+     JOptionPane.showMessageDialog(this, "Autor encontrado com sucesso:");
+      }catch(GeralException e){
+            JOptionPane.showMessageDialog(this, "Autor nao encontrado","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, "Autor nao encontrado","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } catch (ConexaoException ex) {
+         JOptionPane.showMessageDialog(this, "erro de conexão, contate o ADM","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        } 
+    }//GEN-LAST:event_buscarPorIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +227,7 @@ public class TLAutor extends javax.swing.JFrame {
     private javax.swing.JTextField TextId;
     private javax.swing.JTextField TextNome;
     private javax.swing.JButton alterarAutor;
+    private javax.swing.JButton buscarPorId;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
