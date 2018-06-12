@@ -7,7 +7,10 @@ package project_poo_ads20181.tela;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import project_poo_ads20181.erro.ConexaoException;
+import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
+import project_poo_ads20181.fachada.FachadaLivro;
 
 /**
  *
@@ -230,7 +233,19 @@ public class TLMenu extends javax.swing.JFrame {
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
        
         TLLivro tll = new TLLivro();
+        FachadaLivro fl = new FachadaLivro();
         tll.setVisible(true);
+        try {
+            fl.listarRegistro();
+        } catch (GeralException ex) {
+            Logger.getLogger(TLMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(TLMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(TLMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
