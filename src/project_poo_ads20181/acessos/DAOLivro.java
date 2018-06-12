@@ -24,5 +24,6 @@ public interface DAOLivro {
     
     public ArrayList<Livro> lista() throws ConexaoException, DAOException;
     
-    //falta o método de consulta por id
+    public ArrayList<Livro> lista(Integer param) throws ConexaoException, DAOException;
+//falta o método de consulta por id
 }

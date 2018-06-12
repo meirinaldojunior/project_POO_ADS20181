@@ -17,6 +17,12 @@ import project_poo_ads20181.erro.GeralException;
  */
 public class RNLivro {
     
+    DAOLivroImplementa l;
+    
+    public RNLivro() {
+        l = new DAOLivroImplementa();
+    }
+    
     public void validarID(Livro L) throws GeralException, DAOException, ConexaoException{
         DAOLivroImplementa dao = new DAOLivroImplementa();
         
@@ -142,5 +148,13 @@ public class RNLivro {
       }
       return true;
     }
-    
+    public ArrayList<Livro> listarLivros(Integer param) throws GeralException {
+        try {
+            return l.lista(param);
+        } catch (ConexaoException ex) {
+            throw new GeralException("Problema interno no sistema, tente novamente em uma hora.");
+        } catch (DAOException ex) {
+            throw new GeralException("Problema ao processar sua requisição, o suporte foi avisado do problema.");
+        }
+    }
 }

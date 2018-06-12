@@ -11,10 +11,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Aluguel;
+import project_poo_ads20181.classes.Livro;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaAluguel;
+import project_poo_ads20181.fachada.FachadaLivro;
 import project_poo_ads20181.fachada.FachadaUsuario;
 
 /**
@@ -24,7 +26,8 @@ import project_poo_ads20181.fachada.FachadaUsuario;
 public class TAluguel extends javax.swing.JFrame {
     FachadaAluguel falu;
     FachadaUsuario fusu;
-   // FachadaExemplar fexe;
+    FachadaLivro liv;
+    //FachadaExemplar fexe;
     DefaultTableModel tabelaModelo;
     /**
      * Creates new form TAluguel
@@ -33,9 +36,19 @@ public class TAluguel extends javax.swing.JFrame {
         initComponents();
         falu = new FachadaAluguel();
         fusu = new FachadaUsuario();
-        
+        liv = new FachadaLivro();
         try {
             ArrayList<Usuario> listaUsu = new ArrayList();
+            
+            listaUsu = fusu.listarUsuarios(0);
+        for (Usuario u: listaUsu){
+           jComboBox1.addItem(u.getNome());
+        }
+        } catch (GeralException ex) {
+            Logger.getLogger(TAluguel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ArrayList<Livro> listaUsu = new ArrayList();
             
             listaUsu = fusu.listarUsuarios(0);
         for (Usuario u: listaUsu){

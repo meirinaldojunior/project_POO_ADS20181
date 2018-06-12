@@ -16,11 +16,12 @@ import project_poo_ads20181.negocio.RNLivro;
  * @author Rafael Augusto
  */
 public class FachadaLivro {
-    RNLivro rn;
+    //RNLivro rn;
     DAOLivroImplementa dao;
     DAOAutorImplementa daoa;
     DAOCategoriaImplementa daoc;
     
+    RNLivro rn = new RNLivro();
     /**
      * CHAMA A VALIDAÇÃO DA REGRA DE NEGÓCIO LIVRO INSERIR.
      * @param L - OBJETO A SER VÁLIDADO
@@ -91,8 +92,10 @@ public class FachadaLivro {
         
         return rn.listarRegistro();
     }
-    
-    
+     
+    public ArrayList<Livro> listarRegistro(Integer param) throws GeralException, ConexaoException, DAOException {
+      return rn.listarLivros(param);
+    }
     
     
 }

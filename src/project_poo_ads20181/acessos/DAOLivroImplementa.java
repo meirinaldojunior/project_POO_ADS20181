@@ -219,5 +219,37 @@ public class DAOLivroImplementa implements DAOLivro{
     
     
     }
+     @Override
+    public ArrayList<Livro> lista(Integer param) throws ConexaoException, DAOException {
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        ArrayList<Livro> lista = new ArrayList();
+        String sql = "SELECT * FROM livro";
+        PreparedStatement pstm;
+        
+        try {
+            pstm = c.prepareStatement(sql);
+            pstm.setString(0, param.toString());
+            //pstm.executeUpdate(sql);
+            ResultSet rs = pstm.executeQuery(sql);
+
+            
+            while (rs.next()) {
+                Livro liv = new Livro();
+                liv.setNomeLivro(rs.getString("Nome_livro"));
+                liv.setIdLivro(rs.getInt("Id_Categoria"));
+                liv.setIdLivro(rs.getInt("Id_Autor"));
+                lista.add(liv);
+            }
+            
+            
+            
+            return lista;
+        } catch (SQLException e) {
+            System.out.println("ERRO " + e);
+            throw new DAOException();
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
     
 }
