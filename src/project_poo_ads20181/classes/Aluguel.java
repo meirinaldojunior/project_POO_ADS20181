@@ -8,7 +8,7 @@ package project_poo_ads20181.classes;
 public class Aluguel {
 
 	private Integer idAluguel;
-	private Atendente idAtendente = new Atendente();
+	private Usuario idAtendente = new Usuario();
 	private Exemplar idExemplar = new Exemplar();
 	private Usuario idUsuario = new Usuario();
 	private Integer valor;
@@ -21,10 +21,10 @@ public class Aluguel {
         return this.idAluguel;
     }
     
-    public void setIdAtendente (Atendente idAtendente){
+    public void setIdAtendente (Usuario idAtendente){
         this.idAtendente = idAtendente;
     }
-    public Atendente getIdAtendente(){
+    public Usuario getIdAtendente(){
         return this.idAtendente;
     }
 

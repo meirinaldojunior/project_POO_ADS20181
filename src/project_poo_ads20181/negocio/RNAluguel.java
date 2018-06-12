@@ -5,6 +5,10 @@
  */
 package project_poo_ads20181.negocio;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.acessos.DAOAluguel;
@@ -12,6 +16,7 @@ import project_poo_ads20181.acessos.DAOAluguelImplementa;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
+import project_poo_ads20181.util.GerenciadorConexaoMySql;
 
 
 /**
@@ -33,17 +38,8 @@ public class RNAluguel {
     // não valida o ID, apenas as chaves de outras classes
     public void validarAtributos(Aluguel alu)throws GeralException{
         if(alu==null){
-            throw new GeralException("Inválido!");
+            throw new GeralException("Informações inválidas!");
         }
-        /*if(alu.getIdAtendente()== null || alu.getIdAtendente() < 1){
-            throw new GeralException("Atendente não cadastrado!");
-        }
-        if(alu.getIdExemplar()==null || alu.getIdExemplar()< 1){
-            throw new GeralException("Número do exemplar não cadastrado!");
-        }
-        if(alu.getIdUsuario() == null || alu.getIdUsuario() < 0){
-            throw new GeralException("Usuário inválido!");
-        }*/
         if(alu.getValor() == null || alu.getValor() < 0) {
             throw new GeralException("Valor invalido!");
         }
@@ -53,7 +49,7 @@ public class RNAluguel {
         DAOAluguel dao = new DAOAluguelImplementa();
         try{
             if(dao.consultaAluguel( aluguel.getIdAluguel() )!=null){
-                throw new GeralException("Produto ja existe.");
+                throw new GeralException("Aluguel já existe.");
             }
         }
         catch(ConexaoException e){
@@ -69,9 +65,9 @@ public class RNAluguel {
         try{
             dao.inserir(aluguel);
         }catch(ConexaoException e){
-            throw new GeralException("Contacte o ADM.");
+            throw new GeralException("Contacte o Administrador do Sistema.");
         }catch(DAOException e){
-            throw new GeralException("BUG.");
+            throw new GeralException("Erro. Contacte o Administrador do Sistema");
         }
     }
     
@@ -94,5 +90,40 @@ public class RNAluguel {
     public Aluguel get(Integer idAluguel){
         return null;
     }
+    public Aluguel consultaAluguel (Integer idAluguel) throws ConexaoException, DAOException, GeralException{
+     DAOAluguelImplementa dao = new DAOAluguelImplementa();
+     try{
+         Aluguel consultaAluguel = dao.consultaAluguel(idAluguel);
+         return consultaAluguel;
+     }catch(ConexaoException e){
+            throw new GeralException("Contacte o Administrador do Sistema.");
+        }catch(DAOException e){
+            throw new GeralException("Erro, favor contate o Administrador do Sistema.");
+ }
     
-}
+    }
+  
+    public boolean checkID(Aluguel alu) throws DAOException, ConexaoException {
+        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+           String sql = "SELECT Id_Aluguel FROM aluguel WHERE Id_Aluguel=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1,alu.getIdAluguel());
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                return true;
+            }
+            
+            return false;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    }

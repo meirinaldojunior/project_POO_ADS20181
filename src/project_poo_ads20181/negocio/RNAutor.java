@@ -117,6 +117,7 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
         }catch(DAOException e){
             throw new GeralException("BUG.");
  }
+<<<<<<< HEAD
  }
  public boolean checkid(Autor a) throws DAOException, ConexaoException, GeralException{
      DAOAutorImplementa dai = new DAOAutorImplementa();
@@ -124,6 +125,16 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
          boolean checkID = dai.checkID(a);
          return checkID ;
     }catch(ConexaoException e){
+=======
+
+ }
+ public boolean checkid(Autor a) throws DAOException, ConexaoException, GeralException{
+     DAOAutorImplementa dai = new DAOAutorImplementa();
+     try{
+        boolean checkId = dai.checkID(a);
+     return checkId;}
+     catch(ConexaoException e){
+>>>>>>> 8f3769b59298d7f456a9fbaebf3402fdf5d0779c
             throw new GeralException("Contacte o ADM.");
         }catch(DAOException e){
             throw new GeralException("BUG.");
@@ -135,5 +146,11 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
  
 
 
+<<<<<<< HEAD
+=======
+    
+ }
+ }
+>>>>>>> 8f3769b59298d7f456a9fbaebf3402fdf5d0779c
 
 

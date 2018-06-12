@@ -24,4 +24,5 @@ public interface DAOAluguel {
         
         public Aluguel get(Integer idAluguel) throws ConexaoException, DAOException;
 	
+        public boolean checkID (Aluguel alu) throws DAOException,ConexaoException;
 }

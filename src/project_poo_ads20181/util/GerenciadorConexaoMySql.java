@@ -3,6 +3,7 @@ package project_poo_ads20181.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import project_poo_ads20181.erro.ConexaoException;
  
@@ -50,6 +51,11 @@ public class GerenciadorConexaoMySql implements GerenciadorConexao{
         } catch (SQLException ex) {
             throw new ConexaoException();
         }
+    }
+
+    @Override
+    public Statement createStatement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

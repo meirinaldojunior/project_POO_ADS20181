@@ -14,14 +14,12 @@ import project_poo_ads20181.acessos.DAOAluguelImplementa;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
-import project_poo_ads20181.acessos.DAOAtendenteImplementa;
 import project_poo_ads20181.acessos.DAOAutorImplementa;
 import project_poo_ads20181.acessos.DAOCategoriaImplementa;
 import project_poo_ads20181.acessos.DAOExemplarImplementa;
 import project_poo_ads20181.acessos.DAOLivroImplementa;
 import project_poo_ads20181.acessos.DAOUsuarioImplementa;
 import project_poo_ads20181.classes.Aluguel;
-import project_poo_ads20181.classes.Atendente;
 import project_poo_ads20181.classes.Autor;
 import project_poo_ads20181.classes.Categoria;
 import project_poo_ads20181.classes.Exemplar;
@@ -48,7 +46,7 @@ public class Project_POO_ADS20181 {
         //testaAlterarCategoria();  //ok
         //testaExcluirCategoria();  //ok
         //testaListarCategoria();   //ok
-        //testaCadastroAluguel(); //ok
+        testaCadastroAluguel(); //ok
         //testaAlterarAluguel();  //ok
         //testaExcluirAluguel();  //ok
         //testaListarAluguel();   //ok
@@ -56,10 +54,6 @@ public class Project_POO_ADS20181 {
         //testaAlterarExemplar();  //ok
         //testaExcluirExemplar();  //ok
         //testaListarExemplar();   //ok
-        //testaCadastroAtendente();
-        //testaExclusaoAtendente();
-        //testaEdicaoAtendente();
-        //testaListagemAtendente();
         //testaInserirAutor();
         //testaExcluirAutor();
         //testaAlterarAutor();
@@ -77,7 +71,6 @@ public class Project_POO_ADS20181 {
         Aluguel alu = new Aluguel();
 
         alu.getIdAluguel();
-        alu.getIdAtendente().setIdAtendente(12);
         alu.getIdExemplar().setIdExemplar(2);
         alu.getIdUsuario().setIdUsuario(2);
         alu.setValor(20);
@@ -95,17 +88,14 @@ public class Project_POO_ADS20181 {
     private static void testaAlterarAluguel() throws ConexaoException, DAOException {
 
         Aluguel alu = new Aluguel();
-        Atendente ate = new Atendente();
         Exemplar exe = new Exemplar();
         Usuario usu = new Usuario();
 
-        alu.setIdAtendente(ate);
         alu.setIdExemplar(exe);
         alu.setIdUsuario(usu);
         alu.setValor(100);
         alu.setIdAluguel(17);
 
-        ate.setIdAtendente(11);
         exe.setIdExemplar(2);
         usu.setIdUsuario(1);
 
@@ -237,55 +227,6 @@ public class Project_POO_ADS20181 {
      * MÃ‰TODOS DE TESTE PROVISÃ“RIOS, OS MÃ‰TODOS A SEGUIR SERÃƒO SUBSTITUÃ�DOS
      * QUANDO FOREM IMPLEMENTADOS OS MÃ‰TODOS DE FACHADA E TESTES UNITÃ�RIOS.
      */
-    private static void testaCadastroAtendente() {
-        Atendente atendente = new Atendente();
-        atendente.setCpf("12345678901");
-        atendente.setNome("Darth Vader");
-        DAOAtendenteImplementa DAOAddAten = new DAOAtendenteImplementa();
-        try {
-            DAOAddAten.inserir(atendente);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir: " + e.getMessage());
-        }
-    }
-
-    private static void testaExclusaoAtendente() {
-        Atendente atendente = new Atendente();
-        atendente.setIdAtendente(1);
-        DAOAtendenteImplementa DAOExcAten = new DAOAtendenteImplementa();
-        try {
-            DAOExcAten.excluir(atendente);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e);
-        }
-    }
-
-    private static void testaEdicaoAtendente() {
-        Atendente atUpt = new Atendente();
-        atUpt.setCpf("99999999");
-        atUpt.setNome("Novo nome");
-        atUpt.setIdAtendente(2);
-        DAOAtendenteImplementa DAOUpdtAten = new DAOAtendenteImplementa();
-        try {
-            DAOUpdtAten.alterar(atUpt);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
-        }
-    }
-
-    private static void testaListagemAtendente() {
-        DAOAtendenteImplementa DAOListAten = new DAOAtendenteImplementa();
-        try {
-            for (Atendente at : DAOListAten.listar()) {
-                System.out.println("ID: " + at.getIdAtendente()
-                        + " | Nome: " + at.getNome()
-                        + " | CPF: " + at.getCpf());
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar: " + e.getMessage());
-        }
-    }
-
     private static void testaConexao() {
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
@@ -442,5 +383,8 @@ public class Project_POO_ADS20181 {
             System.out.println("Erro ao listar categorias! " + e.getMessage());
         }
     }
+    
+    
+  
 
 }

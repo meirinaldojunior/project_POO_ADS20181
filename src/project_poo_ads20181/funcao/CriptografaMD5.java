@@ -6,6 +6,7 @@
 package project_poo_ads20181.funcao;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -15,11 +16,10 @@ import java.security.NoSuchAlgorithmException;
  */
 public class CriptografaMD5 {
     
-    public static String  criptografa(String text) throws NoSuchAlgorithmException{
-       String s = text;
-       MessageDigest m=MessageDigest.getInstance("MD5");
-       m.update(s.getBytes(),0,s.length());
-       return new BigInteger(1,m.digest()).toString(16);
+    public static String  criptografa(String text) throws NoSuchAlgorithmException{   
+       MessageDigest md5 = MessageDigest.getInstance("MD5");
+        md5.update(StandardCharsets.UTF_8.encode(text));
+        return String.format("%032x", new BigInteger(1, md5.digest()));
     }
     
     public static Boolean comparaCripografia(String senhaCriptograda, String senhaDescriptograda){
