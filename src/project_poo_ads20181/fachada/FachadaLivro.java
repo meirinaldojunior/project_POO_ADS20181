@@ -87,9 +87,6 @@ public class FachadaLivro {
      * @throws DAOException 
      */
     public ArrayList<Livro> listarRegistro() throws GeralException, ConexaoException, DAOException{
-        
-        rn = new RNLivro();
-        
         return rn.listarRegistro();
     }
      

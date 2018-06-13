@@ -6,6 +6,8 @@
 package project_poo_ads20181.negocio;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project_poo_ads20181.acessos.DAOExemplar;
 import project_poo_ads20181.acessos.DAOExemplarImplementa;
 import project_poo_ads20181.classes.Exemplar;
@@ -23,10 +25,13 @@ public class RNExemplar {
      * @param exe
      * @throws GeralException Se algum atributo obrigatório estiver em branco
      */
+    
+    DAOExemplar dao = new DAOExemplarImplementa();
+    
     public void validaExemplar(Exemplar exe)throws GeralException{
         validarAtributos(exe);
-        if (exe.getIdExemplar()== null || exe.getIdExemplar() < 1){
-        throw new GeralException("Número do aluguel inválido!");
+        if (exe.getIdExemplar() < 1){
+            throw new GeralException("Número do aluguel inválido!");
         }
     }
     // não valida o ID, apenas as chaves de outras classes
@@ -86,11 +91,30 @@ public class RNExemplar {
      * Retorna a lista de exemplares
      * @return 
      */
-    public ArrayList<Exemplar> listar(){
-        return null;
+    public ArrayList<Exemplar> listar() throws GeralException{
+        try {
+            return dao.lista();
+        } catch (ConexaoException ex) {
+            throw new GeralException("Erro na conexão: "+ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro na DAO: "+ex.getMessage());
+        }
     }
     
-    public Exemplar get(Integer idExemplar){
-        return null;
+    /**
+     * Listar exemplares por id do livro
+     * @param idLivro
+     * @return
+     * @throws GeralException 
+     */
+    public ArrayList<Exemplar> listar(int idLivro) throws GeralException{
+        try {
+            return dao.lista();
+        } catch (ConexaoException ex) {
+            throw new GeralException("Erro na conexão: "+ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro na DAO: "+ex.getMessage());
+        }
     }
+    
 }

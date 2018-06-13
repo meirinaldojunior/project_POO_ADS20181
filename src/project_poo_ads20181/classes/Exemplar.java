@@ -2,33 +2,33 @@ package project_poo_ads20181.classes;
 
 public class Exemplar {
 
-	private Integer idExemplar;
-	private Categoria idCategoria = new Categoria();
-        private Autor id = new Autor();
-        private Livro idLivro = new Livro();
+	private int idExemplar;
+	private int idCategoria;
+        private int idAutor;
+        private int idLivro;
         
-	public void setIdExemplar (Integer idExemplar){
+	public void setIdExemplar (int idExemplar){
         this.idExemplar = idExemplar;  
         }
-        public Integer getIdExemplar(){
+        public int getIdExemplar(){
         return this.idExemplar;
     }
-        public void setIdCategoria (Categoria idCategoria){
+        public void setIdCategoria (int idCategoria){
         this.idCategoria = idCategoria;  
         }
-        public Categoria getIdCategoria(){
+        public int getIdCategoria(){
         return this.idCategoria;
     }
-        public void setId (Autor id){
-        this.id = id;  
+        public void setIdAutor (int id){
+        this.idAutor = idAutor;  
         }
-        public Autor getId(){
-        return this.id;
+        public int getIdAutor(){
+        return this.idAutor;
     }
-        public void setIdLivro (Livro idLivro){
+        public void setIdLivro (int idLivro){
         this.idLivro = idLivro;  
         }
-        public Livro getIdLivro(){
+        public int getIdLivro(){
         return this.idLivro;
     }
 

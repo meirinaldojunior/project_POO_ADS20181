@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Livro;
 import project_poo_ads20181.classes.Usuario;
+import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.fachada.FachadaAluguel;
@@ -40,10 +41,11 @@ public class TAluguel extends javax.swing.JFrame {
         fusu = new FachadaUsuario();
         liv = new FachadaLivro();    
         
-        listaUsuarios();
+        listagemDeUsuarios();
+        listagemDeLivros();
     }
     
-    public void listaUsuarios(){
+    public void listagemDeUsuarios(){
         try {
             ArrayList<Usuario> listaUsu = new ArrayList();
 
@@ -57,6 +59,23 @@ public class TAluguel extends javax.swing.JFrame {
         }
     }
 
+    
+    public void listagemDeLivros() {
+        try {
+            ArrayList<Livro> listalivros = new ArrayList();
+
+            listalivros = liv.listarRegistro();
+            for (Livro l : listalivros) {
+                jComboBox2.addItem(l.getNomeLivro());
+            }
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -23,6 +23,8 @@ public interface DAOExemplar {
 	public void excluir (Exemplar exemplar) throws ConexaoException, DAOException;
 	    
 	public ArrayList<Exemplar> lista() throws ConexaoException, DAOException;
+        
+        public ArrayList<Exemplar> lista(int idLivro) throws ConexaoException, DAOException;
 	    
 	Exemplar consultaIdExemplar(Integer idExemplar) throws ConexaoException, DAOException;
     
