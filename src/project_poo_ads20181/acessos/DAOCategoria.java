@@ -34,4 +34,6 @@ public interface DAOCategoria {
     Categoria consultaIdCategoria(Integer idCategoria) throws ConexaoException, DAOException;
 
     public boolean checkID (Categoria ct) throws DAOException, ConexaoException;
+
+    public Categoria consultaNome(String nome) throws ConexaoException, DAOException;
 }
