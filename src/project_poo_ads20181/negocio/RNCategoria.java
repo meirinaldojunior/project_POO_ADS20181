@@ -38,7 +38,7 @@ public class RNCategoria {
           }
     }
 }
-    public void verificaDuplicidadeNome(Categoria ct)throws GeralException, DAOException, ConexaoException {
+    public void verificaDuplicidadeNome(Categoria ct)throws GeralException, DAOException {
     DAOCategoriaImplementa dai = new DAOCategoriaImplementa();
     try{
     if(dai.consultaNome(ct.getNomeCategoria())!= null){
@@ -108,4 +108,15 @@ DAOCategoriaImplementa dai = new DAOCategoriaImplementa();
             throw new GeralException("Erro. Favor contactar Administrador do Sistema.");
     }
           }
+  public boolean checkid(Categoria ct) throws DAOException, ConexaoException, GeralException{
+     DAOCategoriaImplementa dai = new DAOCategoriaImplementa();
+     try{
+        boolean checkId = dai.checkID(ct);
+     return checkId;}
+     catch(ConexaoException e){
+            throw new GeralException("Contacte o ADM.");
+        }catch(DAOException e){
+            throw new GeralException("BUG.");
+        }
+    }
 }

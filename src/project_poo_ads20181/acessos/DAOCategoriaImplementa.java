@@ -163,11 +163,11 @@ public class DAOCategoriaImplementa implements DAOCategoria {
    }
     @Override
     public Categoria consultaNome(String nome) throws ConexaoException, DAOException {
-        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         
         Categoria ct = null;
         
-        String sql = "SELECT Id_Categoria FROM Categoria WHERE Nome_Categoria=?";
+        String sql = "SELECT Id_Categoria, Nome_Categoria FROM Categoria WHERE Nome_Categoria=?";
         
         PreparedStatement pstm;
         try{
@@ -177,8 +177,8 @@ public class DAOCategoriaImplementa implements DAOCategoria {
             
             if(rs.next()){
                 ct = new Categoria();
-                ct.setIdCategoria(  rs.getInt("Id_Categoria") );
-                ct.setNomeCategoria( rs.getString("Nome_Categoria") );
+                ct.setIdCategoria(rs.getInt("Id_Categoria") );
+                ct.setNomeCategoria(rs.getString("Nome_Categoria") );
                 
             }
             
