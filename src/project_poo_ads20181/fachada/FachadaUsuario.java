@@ -29,7 +29,7 @@ public class FachadaUsuario {
         return rn.listarUsuarios();
     }
     
-    public ArrayList<Usuario> listarUsuarios(Integer param) throws GeralException {
+    public ArrayList<Usuario> listarUsuarios(int param) throws GeralException {
         return rn.listarUsuarios(param);
     }
 

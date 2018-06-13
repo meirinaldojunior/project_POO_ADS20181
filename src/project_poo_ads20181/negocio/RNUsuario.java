@@ -125,7 +125,7 @@ public class RNUsuario {
         }
     }
     
-     public ArrayList<Usuario> listarUsuarios(Integer param) throws GeralException {
+     public ArrayList<Usuario> listarUsuarios(int param) throws GeralException {
         try {
             return u.lista(param);
         } catch (ConexaoException ex) {

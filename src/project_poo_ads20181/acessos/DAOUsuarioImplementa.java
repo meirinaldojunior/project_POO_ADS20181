@@ -11,10 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
@@ -22,7 +18,6 @@ import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.funcao.CriptografaMD5;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
-import sun.security.provider.MD5;
 
 public class DAOUsuarioImplementa implements DAOUsuario {
 
@@ -152,20 +147,18 @@ public class DAOUsuarioImplementa implements DAOUsuario {
         }
     }
     
-     @Override
-    public ArrayList<Usuario> lista(Integer param) throws ConexaoException, DAOException {
+    @Override
+    public ArrayList<Usuario> lista(int param) throws ConexaoException, DAOException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Usuario> lista = new ArrayList();
-        String sql = "SELECT * FROM Usuario"; //WHERE Tipo = ?";
+        String sql = "SELECT * FROM Usuario WHERE Tipo=?";
         PreparedStatement pstm;
         
         try {
-            pstm = c.prepareStatement(sql);
-            pstm.setString(0, param.toString());
-            //pstm.executeUpdate(sql);
-            ResultSet rs = pstm.executeQuery(sql);
-
-            
+            pstm = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstm.setInt(1, param);
+            ResultSet rs = pstm.executeQuery();
+           
             while (rs.next()) {
                 Usuario usu = new Usuario();
                 usu.setIdUsuario(rs.getInt("Id_Usuario"));
@@ -174,9 +167,6 @@ public class DAOUsuarioImplementa implements DAOUsuario {
                 usu.setTipoUsuario(rs.getInt("Tipo"));
                 lista.add(usu);
             }
-            
-            
-            
             return lista;
         } catch (SQLException e) {
             System.out.println("ERRO " + e);

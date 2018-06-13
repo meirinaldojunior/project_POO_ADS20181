@@ -22,9 +22,10 @@ public interface DAOUsuario {
     public void excluir(Usuario usuario) throws ConexaoException, DAOException;
 
     public ArrayList<Usuario> lista() throws ConexaoException, DAOException;
+    
+    public ArrayList<Usuario> lista(int param) throws ConexaoException, DAOException;
 
     Usuario consultaCpf(String cpf) throws ConexaoException, DAOException;
-
-    public ArrayList<Usuario> lista(Integer param) throws ConexaoException, DAOException;
+    
 
 }
