@@ -5,19 +5,70 @@
  */
 package project_poo_ads20181.tela;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import project_poo_ads20181.classes.Categoria;
+import project_poo_ads20181.erro.ConexaoException;
+import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
+import project_poo_ads20181.fachada.FachadaCategoria;
+
 /**
  *
  * @author Hugo
  */
 public class TCategoria extends javax.swing.JFrame {
 
+    FachadaCategoria fc;
+    DefaultTableModel tabelaModelo;
     /**
      * Creates new form TCategoria
      */
     public TCategoria() {
         initComponents();
+        fc = new FachadaCategoria();
+    
+    //inicializa tabela
+        tabelaModelo = (DefaultTableModel) tabelacat.getModel();
+
+        //carrega tabela
+        carregaTabela();
+    }
+public void limpaTabela() {
+        for (int i = 0; i < tabelaModelo.getRowCount(); i++) {
+            tabelaModelo.removeRow(i);
+        }
     }
 
+    public void limpaCampos() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jButton4.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton1.setEnabled(true);
+    }
+
+    public void carregaTabela() {
+        limpaTabela();
+        try {
+            try {
+                for (Categoria ct : fc.listarCategoria()) {
+                    tabelaModelo.addRow(new Object[]{
+                        ct.getIdCategoria(),
+                        ct.getNomeCategoria(),
+                    });
+                }
+            } catch (ConexaoException ex) {
+                Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DAOException ex) {
+                Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar usuários, tente novamente em uma hora.", "Erro...", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +88,7 @@ public class TCategoria extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelacat = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,12 +107,27 @@ public class TCategoria extends javax.swing.JFrame {
         });
 
         jButton2.setText("Alterar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Pesquisar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelacat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -83,7 +149,7 @@ public class TCategoria extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelacat);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,8 +214,63 @@ public class TCategoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Cria categoria
+        Categoria ct = new Categoria();
+        ct.setNomeCategoria(jTextField2.getText());
+        
+        System.err.println(jTextField2.getText());
+        try {
+            fc.salvarCategoria(ct);
+            carregaTabela();
+            limpaCampos();
+            JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Erro!", JOptionPane.ERROR_MESSAGE);
+        } catch (DAOException ex) {
+            Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Edita Categoria
+        Categoria ct = new Categoria();
+        ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
+        try {
+            fc.alterarCategoria(ct);
+            carregaTabela();
+            JOptionPane.showMessageDialog(this, "Categoria alterada com sucesso!");
+            limpaCampos();
+        } catch (GeralException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (DAOException ex) {
+            Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Excluir usuário
+        if (JOptionPane.showConfirmDialog(this, "Deseja excluir a categoria selecionada?") == 0) {
+            Categoria ct = new Categoria();
+            ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
+            try {
+                fc.excluirCategoria(ct);
+                limpaCampos();
+                JOptionPane.showMessageDialog(this, "Categoria excluída com sucesso!");
+            } catch (GeralException | ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            } catch (DAOException ex) {
+                Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            carregaTabela();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,8 +316,8 @@ public class TCategoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tabelacat;
     // End of variables declaration//GEN-END:variables
 }
