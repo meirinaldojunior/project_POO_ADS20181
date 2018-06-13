@@ -37,7 +37,7 @@ public class FachadaCategoria {
     public void excluirCategoria(Categoria ct) throws GeralException, DAOException, ConexaoException{
         rnc.excluir(ct);
     }
-    public ArrayList<Categoria> listarAutor() throws ConexaoException, DAOException, GeralException{
+    public ArrayList<Categoria> listarCategoria() throws ConexaoException, DAOException, GeralException{
     return rnc.listar();
     }
     public Categoria buscarPorId(int id) throws ConexaoException, DAOException, GeralException{
