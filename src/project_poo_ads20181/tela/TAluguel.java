@@ -24,7 +24,7 @@ import project_poo_ads20181.fachada.FachadaUsuario;
 
 /**
  *
- * @author Hugo
+ * @author Meirinaldo
  */
 public class TAluguel extends javax.swing.JFrame {
 
@@ -46,16 +46,15 @@ public class TAluguel extends javax.swing.JFrame {
         
         listagemDeUsuarios();
         listagemDeLivros();
+        
+        //desabilita opção alugar
+        jButton4.setEnabled(false);
     }
     
     public void listagemDeUsuarios(){
         try {
-            ArrayList<Usuario> listaUsu = new ArrayList();
-
-            listaUsu = fusu.listarUsuarios(0);
-            for (Usuario u : listaUsu) {
-                System.err.println(u.getNome());
-                jComboBox1.addItem(u.getNome());
+            for (Usuario u : fusu.listarUsuarios(0)) {
+                jComboBox1.addItem(u.getIdUsuario()+"-"+u.getNome());
             }
         } catch (GeralException ex) {
             Logger.getLogger(TAluguel.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,11 +64,8 @@ public class TAluguel extends javax.swing.JFrame {
     
     public void listagemDeLivros() {
         try {
-            ArrayList<Livro> listaLivros = new ArrayList();
-
-            listaLivros = liv.listarRegistro();
-            for (Livro l : listaLivros) {
-                jComboBox2.addItem(l.getNomeLivro());
+            for (Livro l : liv.listarRegistro()) {
+                jComboBox2.addItem(l.getIdLivro()+"-"+l.getNomeLivro());
             }
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
@@ -80,12 +76,18 @@ public class TAluguel extends javax.swing.JFrame {
         }
     }
     
-    public void listagemDeExemplares() {
-        ArrayList<Exemplar> listaExemplares = new ArrayList();
-        //listaExemplares = fex.listar(jComboBox2.getSelectedItem());
-        for (Exemplar ex : listaExemplares) {
-            jComboBox2.addItem(Integer.toString(ex.getIdExemplar()));
+    public void listagemDeExemplares(int idLivro) {
+        try {
+            for (Exemplar ex : fex.listar(idLivro)) {
+                jComboBox3.addItem(Integer.toString(ex.getIdExemplar()));
+            }
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
+    }
+    
+    public int pegarId(String id){
+        return Integer.parseInt(id.substring(0, id.indexOf("-")));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,7 +140,7 @@ public class TAluguel extends javax.swing.JFrame {
 
         jLabel6.setText("Valor à pagar: R$");
 
-        jButton4.setText("Cadastrar");
+        jButton4.setText("Alugar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -160,6 +162,12 @@ public class TAluguel extends javax.swing.JFrame {
         });
 
         jLabel11.setText("Exemplar:");
+
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -404,8 +412,25 @@ public class TAluguel extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        listagemDeExemplares();
+        listagemDeExemplares(pegarId(jComboBox2.getSelectedItem().toString()));
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        //carrega informações do produto selecionado
+        try {
+            
+            liv.listarRegistro(pegarId(jComboBox2.getSelectedItem().toString()));
+            
+            //habilita opção alugar
+            jButton4.setEnabled(true);
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
      * @param args the command line arguments
