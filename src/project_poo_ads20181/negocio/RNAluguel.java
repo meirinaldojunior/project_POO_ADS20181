@@ -48,9 +48,6 @@ public class RNAluguel {
         if (alu == null) {
             throw new GeralException("Informações inválidas!");
         }
-        if (alu.getValor() == null || alu.getValor() < 0) {
-            throw new GeralException("Valor invalido!");
-        }
     }
 
     public void verificaDuplicidadeNome(Aluguel aluguel) throws GeralException {
@@ -77,17 +74,23 @@ public class RNAluguel {
         }
     }
 
-    public void alterar(Aluguel alu) {
-
+    public void alterar(Aluguel alu) throws GeralException {
+        try {
+            dao.alterar(alu);
+        } catch (ConexaoException ex) {
+            throw new GeralException("Erro na conexão, contacte o Administrador do Sistema... " + ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro na instrução do DAO. Contacte o Administrador do Sistema... " + ex.getMessage());
+        }
     }
 
     public void excluir(Aluguel alu) throws GeralException {
         try {
             dao.excluir(alu);
         } catch (ConexaoException ex) {
-            throw new GeralException("Erro na conexão, contacte o administrador: "+ex.getMessage());
+            throw new GeralException("Erro na conexão, contacte o administrador: " + ex.getMessage());
         } catch (DAOException ex) {
-            throw new GeralException("Erro na instrução SQL, contacte o administrador: "+ex.getMessage());
+            throw new GeralException("Erro na instrução SQL, contacte o administrador: " + ex.getMessage());
         }
     }
 
@@ -99,7 +102,7 @@ public class RNAluguel {
     public ArrayList<Aluguel> listar() {
         return null;
     }
-    
+
     public ArrayList<AluguelRelacionamento> listarForegein() throws GeralException, GeralException {
         try {
             return dao.listarForegein();

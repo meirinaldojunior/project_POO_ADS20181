@@ -61,16 +61,16 @@ public class DAOAluguelImplementa implements DAOAluguel {
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
 
-        String sql = "UPDATE aluguel SET Id_atendente=?, Id_exemplar=?, Id_Usuario=?, Valor=? WHERE Id_Aluguel =?";
+        String sql = "UPDATE aluguel SET Id_exemplar=? WHERE Id_Aluguel =?";
 
         PreparedStatement pstm;
         try {
             pstm = c.prepareStatement(sql);
             pstm.setInt(1, aluguel.getIdAtendente());
-            pstm.setInt(2, aluguel.getIdExemplar());
-            pstm.setInt(3, aluguel.getIdUsuario());
-            pstm.setDouble(4, aluguel.getValor());
-            pstm.setInt(5, aluguel.getIdAluguel());
+//            pstm.setInt(2, aluguel.getIdExemplar());
+//            pstm.setInt(3, aluguel.getIdUsuario());
+//            pstm.setDouble(4, aluguel.getValor());
+            pstm.setInt(2, aluguel.getIdAluguel());
             pstm.executeUpdate();
             System.out.println("Aluguel alterado com sucesso!");
         } catch (SQLException e) {
@@ -131,6 +131,7 @@ public class DAOAluguelImplementa implements DAOAluguel {
         ArrayList<AluguelRelacionamento> lista = new ArrayList<AluguelRelacionamento>();
         String sql = "SELECT atendente.Nome as nomeAtendente, "
                            + "aluno.nome as nomeAluno, "
+                           + "Livro.Id_livro as idLivro, "
                            + "Livro.Nome_livro as nomeLivro, "
                            + "Id_Aluguel, "
                            + "exemplar.Id_exemplar as id_exemplar, "
@@ -158,7 +159,7 @@ public class DAOAluguelImplementa implements DAOAluguel {
                 aluguel.setAluno(rs.getString("nomeAluno"));
                 aluguel.setAtendente(rs.getString("nomeAtendente"));
                 aluguel.setExemplar(rs.getInt("id_exemplar"));
-                aluguel.setLivro(rs.getString("nomeLivro"));
+                aluguel.setLivro(rs.getString("idLivro")+"-"+rs.getString("nomeLivro"));
                               
                 lista.add(aluguel);
             }

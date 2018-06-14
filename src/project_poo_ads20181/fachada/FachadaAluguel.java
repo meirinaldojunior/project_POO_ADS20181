@@ -50,12 +50,17 @@ public class FachadaAluguel {
 
     public void alterarAluguel(Aluguel alu) throws GeralException, DAOException {
         rnAlu.validarAtributos(alu);
-        rnAlu.verificaDuplicidadeNome(alu);
+        //rnAlu.verificaDuplicidadeNome(alu);
         rnAlu.alterar(alu);
     }
 
     public void excluirAluguel(Aluguel alu) throws GeralException, DAOException, ConexaoException {
         rnAlu.excluir(alu);
+        
+        Exemplar ex = new Exemplar();
+        ex.setIdExemplar(alu.getIdExemplar());
+        ex.setdisponibilidade(1);
+        rnExem.alterarDisponibilidade(ex);
     }
 
     public ArrayList<Aluguel> listarAluguel() throws ConexaoException, DAOException, GeralException {

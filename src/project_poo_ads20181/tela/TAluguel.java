@@ -29,7 +29,7 @@ import project_poo_ads20181.fachada.FachadaUsuario;
  * @author Meirinaldo
  */
 public class TAluguel extends javax.swing.JFrame {
-
+    
     FachadaAluguel falu;
     FachadaUsuario fusu;
     FachadaLivro liv;
@@ -45,15 +45,15 @@ public class TAluguel extends javax.swing.JFrame {
         fusu = new FachadaUsuario();
         liv = new FachadaLivro();
         fex = new FachadaExemplar();
-
+        
         listagemDeUsuarios();
         listagemDeLivros();
-
+        
         jTextFieldValor.setText("00.00");
 
         //desabilita opção alugar
         jButton4.setEnabled(false);
-        
+
         //inicializa tabelas
         tabelaListagemAlugueis = (DefaultTableModel) tabelaTodosAlugueis.getModel();
         carregaListagemAlugueis();
@@ -67,8 +67,7 @@ public class TAluguel extends javax.swing.JFrame {
     
     public void carregaListagemAlugueis() {
         limpaTabela();
-
-                
+        
         try {
             for (AluguelRelacionamento aluguel : falu.listarAluguelForegein()) {
                 System.err.println(aluguel.getAluno());
@@ -78,18 +77,17 @@ public class TAluguel extends javax.swing.JFrame {
                     aluguel.getAtendente(),
                     aluguel.getLivro(),
                     aluguel.getExemplar(),
-                    aluguel.getValor(),
-                    });
+                    aluguel.getValor(),});
             }
         } catch (GeralException ex) {
-            JOptionPane.showMessageDialog(this, "Erro na conexão."+ex, "Erro...", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro na conexão." + ex, "Erro...", JOptionPane.ERROR_MESSAGE);
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(this, "Erro na conexão - "+ex, "Erro...", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro na conexão - " + ex, "Erro...", JOptionPane.ERROR_MESSAGE);
         } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro no DAO - "+ex.getMessage(), "Erro...", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro no DAO - " + ex.getMessage(), "Erro...", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     public void listagemDeUsuarios() {
         try {
             for (Usuario u : fusu.listarUsuarios(0)) {
@@ -99,11 +97,12 @@ public class TAluguel extends javax.swing.JFrame {
             Logger.getLogger(TAluguel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void listagemDeLivros() {
         try {
             for (Livro l : liv.listarRegistro()) {
                 jComboBox2.addItem(l.getIdLivro() + "-" + l.getNomeLivro());
+                jComboBoxLivroEdit.addItem(l.getIdLivro() + "-" + l.getNomeLivro());
             }
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
@@ -113,18 +112,20 @@ public class TAluguel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex);
         }
     }
-
+    
     public void listagemDeExemplares(int idLivro) {
         jComboBox3.removeAllItems();
+        jComboBoxExempEdit.removeAllItems();
         try {
             for (Exemplar ex : fex.listar(idLivro, 1)) {
                 jComboBox3.addItem(Integer.toString(ex.getIdExemplar()));
+                jComboBoxExempEdit.addItem(Integer.toString(ex.getIdExemplar()));
             }
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
     }
-
+    
     public int pegarId(String id) {
         return Integer.parseInt(id.substring(0, id.indexOf("-")));
     }
@@ -152,8 +153,6 @@ public class TAluguel extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -167,11 +166,9 @@ public class TAluguel extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaTodosAlugueis = new javax.swing.JTable();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jTextFieldValor1 = new javax.swing.JTextField();
+        jComboBoxLivroEdit = new javax.swing.JComboBox<>();
+        jComboBoxExempEdit = new javax.swing.JComboBox<>();
+        txtValorPagar = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
@@ -190,7 +187,7 @@ public class TAluguel extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Aluguel");
@@ -232,27 +229,6 @@ public class TAluguel extends javax.swing.JFrame {
             }
         });
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Title 2", "Title 3", "Title 4"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTable4);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,12 +254,9 @@ public class TAluguel extends javax.swing.JFrame {
                         .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -306,9 +279,7 @@ public class TAluguel extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
@@ -343,15 +314,15 @@ public class TAluguel extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextField8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +333,7 @@ public class TAluguel extends javax.swing.JFrame {
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -388,10 +359,7 @@ public class TAluguel extends javax.swing.JFrame {
 
         tabelaTodosAlugueis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Aluno", "Atendente", "Livro", "Cod exemplar", "Valor"
@@ -405,31 +373,28 @@ public class TAluguel extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaTodosAlugueis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaTodosAlugueisMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelaTodosAlugueis);
 
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxLivroEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
+                jComboBoxLivroEditActionPerformed(evt);
             }
         });
 
-        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxExempEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox6ActionPerformed(evt);
+                jComboBoxExempEditActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Código do Aluno:");
-
-        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox7ActionPerformed(evt);
-            }
-        });
-
-        jTextFieldValor1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jTextFieldValor1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldValor1.setEnabled(false);
+        txtValorPagar.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        txtValorPagar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtValorPagar.setEnabled(false);
 
         jLabel12.setText("Valor à pagar: R$");
 
@@ -460,14 +425,14 @@ public class TAluguel extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jComboBoxExempEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(idListagemAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 127, Short.MAX_VALUE))
-                                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addGap(0, 153, Short.MAX_VALUE))
+                                    .addComponent(jComboBoxLivroEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -477,15 +442,13 @@ public class TAluguel extends javax.swing.JFrame {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel10))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldValor1)
-                            .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtValorPagar)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -497,20 +460,17 @@ public class TAluguel extends javax.swing.JFrame {
                     .addComponent(idListagemAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxLivroEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxExempEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldValor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -529,9 +489,12 @@ public class TAluguel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(343, 343, 343))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,7 +502,8 @@ public class TAluguel extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -553,11 +517,12 @@ public class TAluguel extends javax.swing.JFrame {
         alu.setIdExemplar(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
         alu.setIdUsuario(pegarId(jComboBox1.getSelectedItem().toString()));
         alu.setValor(Double.parseDouble(jTextFieldValor.getText()));
-
+        
         try {
             falu.salvarAluguel(alu);
             JOptionPane.showMessageDialog(this, "Aluguel realizado com sucesso...");
             listagemDeExemplares(pegarId(jComboBox2.getSelectedItem().toString()));
+            carregaListagemAlugueis();
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex, "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (DAOException ex) {
@@ -580,7 +545,7 @@ public class TAluguel extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         //carrega informações do produto selecionado
         try {
-
+            
             liv.listarRegistro(pegarId(jComboBox2.getSelectedItem().toString()));
 
             //habilita opção alugar
@@ -597,13 +562,14 @@ public class TAluguel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
-    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+    private void jComboBoxExempEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxExempEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox6ActionPerformed
+    }//GEN-LAST:event_jComboBoxExempEditActionPerformed
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+    private void jComboBoxLivroEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLivroEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox5ActionPerformed
+       listagemDeExemplares(pegarId(jComboBoxLivroEdit.getSelectedItem().toString()));
+    }//GEN-LAST:event_jComboBoxLivroEditActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //exluir aluguel
@@ -612,7 +578,9 @@ public class TAluguel extends javax.swing.JFrame {
         aluguel.setIdAluguel(Integer.parseInt(idListagemAluguel.getText()));        
         try {
             falu.excluirAluguel(aluguel);
+            
             JOptionPane.showMessageDialog(this, "Excluído com sucesso...");
+            carregaListagemAlugueis();
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
         } catch (DAOException ex) {
@@ -625,24 +593,38 @@ public class TAluguel extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox7ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+        Aluguel aluguel = new Aluguel();
+        aluguel.setIdAluguel(Integer.parseInt(idListagemAluguel.getText()));
+        aluguel.setIdExemplar(Integer.parseInt(jComboBoxExempEdit.getSelectedItem().toString()));
+        
         try {
-            //Atualiza tabela com todos alugueis
-            falu.listarAluguel();
-        } catch (ConexaoException ex) {
+            falu.alterarAluguel(aluguel);
+            JOptionPane.showMessageDialog(this, "Alterado com sucesso...");
+        } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(this, ex);
-        } catch (GeralException ex) {
-            JOptionPane.showMessageDialog(this, ex);
         }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        //Atualiza tabela com todos alugueis
+        carregaListagemAlugueis();
+        
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tabelaTodosAlugueisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaTodosAlugueisMouseClicked
+        //Preenche dados para edição e exclusão
+        
+        int index = tabelaTodosAlugueis.getSelectedRow();
+        
+        idListagemAluguel.setText(tabelaTodosAlugueis.getValueAt(index, 0).toString());
+        jComboBoxLivroEdit.setSelectedItem(tabelaTodosAlugueis.getValueAt(index, 3).toString());
+        jComboBoxExempEdit.setSelectedItem(tabelaTodosAlugueis.getValueAt(index, 4).toString());
+        txtValorPagar.setText(tabelaTodosAlugueis.getValueAt(index, 5).toString());
+    }//GEN-LAST:event_tabelaTodosAlugueisMouseClicked
 
     /**
      * @param args the command line arguments
@@ -689,11 +671,9 @@ public class TAluguel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBoxExempEdit;
+    private javax.swing.JComboBox<String> jComboBoxLivroEdit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -709,14 +689,12 @@ public class TAluguel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextFieldValor;
-    private javax.swing.JTextField jTextFieldValor1;
     private javax.swing.JTable tabelaTodosAlugueis;
+    private javax.swing.JTextField txtValorPagar;
     // End of variables declaration//GEN-END:variables
 }
