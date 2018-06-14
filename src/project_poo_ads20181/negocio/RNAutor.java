@@ -47,7 +47,7 @@ public class RNAutor {
     }
 }
      /**
-     * Verifica se o nome do Autor ja está cadastradi no banco
+     * Verifica se o nome do Autor ja está cadastrado no banco
      * @param a Objeto com TODOS os atributos preenchidos
      * @throws GeralException Se algum atributo obrigatório estiver em branco
      * @throws project_poo_ads20181.erro.DAOException
