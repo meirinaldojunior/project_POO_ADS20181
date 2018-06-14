@@ -148,6 +148,8 @@ public class TAluguel extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setEnabled(false);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +213,7 @@ public class TAluguel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -424,6 +426,9 @@ public class TAluguel extends javax.swing.JFrame {
             
             //habilita opção alugar
             jButton4.setEnabled(true);
+            
+            //carrega valor
+            jTextField3.setText("13.00");
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
         } catch (ConexaoException ex) {
