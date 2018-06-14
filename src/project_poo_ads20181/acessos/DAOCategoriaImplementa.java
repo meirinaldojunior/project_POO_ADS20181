@@ -75,6 +75,7 @@ public class DAOCategoriaImplementa implements DAOCategoria {
             while(rs.next()){
                 ct = new Categoria();
                 ct.setIdCategoria( rs.getInt("Id_Categoria") );
+                ct.setNomeCategoria(rs.getString("Nome_Categoria") );
                 lista.add(ct);
             }
             
