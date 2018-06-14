@@ -50,7 +50,6 @@ public class TLMenu extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -116,9 +115,6 @@ public class TLMenu extends javax.swing.JFrame {
         jMenu2.add(jMenuItem13);
 
         jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Relatórios");
-        jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Aluguel");
         jMenu4.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +271,6 @@ public class TLMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
