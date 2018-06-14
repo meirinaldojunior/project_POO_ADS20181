@@ -29,6 +29,7 @@ public interface DAOAutor {
     public void alterar(Autor a)throws ConexaoException,DAOException;
     /**
      * cria uma lista de autores cadastrados no BD
+     * @param a para criar a listar
      * @throws ConexaoException 
      * @throws DAOException 
      * @return lista
@@ -38,7 +39,7 @@ public interface DAOAutor {
     
     /**
      * exclui um cadastro de autor no BD
-     * @param a
+     * @param a objeto contendo o id de exclusao
      * @throws ConexaoException 
      * @throws DAOException 
      */
@@ -60,7 +61,13 @@ public interface DAOAutor {
      * @throws DAOException 
     */
     public Autor consultaNome(String nome)throws ConexaoException, DAOException;
-    
+    /**
+     * verifica se um numero de id é valido
+     * @param nome
+     * @return um boolean
+     * @throws ConexaoException
+     * @throws DAOException 
+    */
     public boolean checkID (Autor a) throws DAOException,ConexaoException;
         
 

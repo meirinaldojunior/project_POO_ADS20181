@@ -39,7 +39,6 @@ public class TLAutor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        salvarAutor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TextNome = new javax.swing.JTextField();
@@ -50,13 +49,6 @@ public class TLAutor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaAutor = new javax.swing.JTable();
         salvaAutor = new javax.swing.JButton();
-
-        salvarAutor.setText("Salvar");
-        salvarAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarAutorActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -167,20 +159,6 @@ public class TLAutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
   
     
-    private void salvarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarAutorActionPerformed
-        Autor a = new Autor();
-        a.setNome(TextNome.getText());
-        FachadaAutor fat = new FachadaAutor();
-        try{
-        fat.salvarAutor(a);
-        JOptionPane.showMessageDialog(this, "Autor salvo com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
-        }catch(GeralException e){
-            JOptionPane.showMessageDialog(this, e.getMessage(),"Mensagem",JOptionPane.ERROR_MESSAGE);
-        } catch (DAOException ex) {
-            
-        }
-    }//GEN-LAST:event_salvarAutorActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     Autor a = new Autor();
         a.setId(Integer.parseInt(TextId.getText()));
@@ -322,6 +300,5 @@ public class TLAutor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton listarAutor;
     private javax.swing.JButton salvaAutor;
-    private javax.swing.JButton salvarAutor;
     // End of variables declaration//GEN-END:variables
 }
