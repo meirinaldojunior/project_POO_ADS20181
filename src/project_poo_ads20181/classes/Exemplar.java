@@ -6,6 +6,7 @@ public class Exemplar {
 	private int idCategoria;
         private int idAutor;
         private int idLivro;
+        private int disponibilidade;
         
 	public void setIdExemplar (int idExemplar){
         this.idExemplar = idExemplar;  
@@ -31,5 +32,13 @@ public class Exemplar {
         public int getIdLivro(){
         return this.idLivro;
     }
+        
+        public void setdisponibilidade (int disponibilidade){
+        this.idLivro = disponibilidade;  
+        }
+        public int getdisponibilidade(){
+        return this.disponibilidade;
+    }
+       
 
     }

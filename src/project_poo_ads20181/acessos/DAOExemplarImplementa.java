@@ -80,10 +80,6 @@ public class DAOExemplarImplementa implements DAOExemplar {
         try {
             pstm = c.prepareStatement(sql);
             pstm.setInt(1,exemplar.getIdExemplar());
-            //pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
-            //pstm.setInt(3,alu.getExemplar().getIdExemplar());
-            //pstm.setString(4,alu.getCpf().getcpf());
-            //pstm.setDouble(5,alu.getValor());
             pstm.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException();
@@ -122,20 +118,21 @@ public class DAOExemplarImplementa implements DAOExemplar {
     }
     
     @Override
-    public ArrayList<Exemplar> lista(int idLivro) throws ConexaoException, DAOException {
+    public ArrayList<Exemplar> lista(int idLivro, int disponibilidade) throws ConexaoException, DAOException {
     Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Exemplar> lista = new ArrayList();
-        String sql = "SELECT * FROM exemplar WHERE Id_Livro = ?";
+        String sql = "SELECT * FROM exemplar WHERE Id_Livro = ? AND disponibilidade = ?";
         PreparedStatement pstm;
         
         try {
             pstm = c.prepareStatement(sql);
             pstm.setInt(1, idLivro);
+            pstm.setInt(2, disponibilidade);
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
                 Exemplar exe = new Exemplar();
-                exe.setIdLivro(rs.getInt("Id_livro"));
+                exe.setIdExemplar(rs.getInt("Id_exemplar"));
                 exe.setIdCategoria(rs.getInt("Id_Categoria"));
                 exe.setIdAutor(rs.getInt("Id_Autor"));
                 exe.setIdLivro(rs.getInt("Id_livro"));

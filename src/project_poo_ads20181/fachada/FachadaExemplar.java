@@ -35,8 +35,8 @@ public class FachadaExemplar {
      * @throws GeralException 
      */
     
-    public ArrayList<Exemplar> listar(int idLivro) throws GeralException{
-        return rn.listar(idLivro);
+    public ArrayList<Exemplar> listar(int idLivro, int disponibilidade) throws GeralException{
+        return rn.listar(idLivro, disponibilidade);
     }
     
 }

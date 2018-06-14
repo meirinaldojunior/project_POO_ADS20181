@@ -107,9 +107,9 @@ public class RNExemplar {
      * @return
      * @throws GeralException 
      */
-    public ArrayList<Exemplar> listar(int idLivro) throws GeralException{
+    public ArrayList<Exemplar> listar(int idLivro, int disponibilidade) throws GeralException{
         try {
-            return dao.lista(idLivro);
+            return dao.lista(idLivro, disponibilidade);
         } catch (ConexaoException ex) {
             throw new GeralException("Erro na conexão: "+ex.getMessage());
         } catch (DAOException ex) {

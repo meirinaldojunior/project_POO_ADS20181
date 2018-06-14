@@ -82,7 +82,7 @@ public class TAluguel extends javax.swing.JFrame {
     public void listagemDeExemplares(int idLivro) {
         jComboBox3.removeAllItems();
         try {
-            for (Exemplar ex : fex.listar(idLivro)) {
+            for (Exemplar ex : fex.listar(idLivro, 1)) {
                 jComboBox3.addItem(Integer.toString(ex.getIdExemplar()));
             }
         } catch (GeralException ex) {

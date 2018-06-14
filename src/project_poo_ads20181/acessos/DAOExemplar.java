@@ -25,7 +25,7 @@ public interface DAOExemplar {
 	    
 	public ArrayList<Exemplar> lista() throws ConexaoException, DAOException;
         
-        public ArrayList<Exemplar> lista(int idLivro) throws ConexaoException, DAOException;
+        public ArrayList<Exemplar> lista(int idLivro, int disponibilidade) throws ConexaoException, DAOException;
 	    
 	Exemplar consultaIdExemplar(Integer idExemplar) throws ConexaoException, DAOException;
     
