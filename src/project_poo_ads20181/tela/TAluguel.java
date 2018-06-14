@@ -394,14 +394,7 @@ public class TAluguel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        //realizar aluguel
-        
-        System.err.println("Começa o debug do cadastro do aluguel");
-        System.err.println(System.getProperty("id_usuario_atendente"));
-        System.err.println(jComboBox3.getSelectedItem().toString());
-        System.err.println(jComboBox1.getSelectedItem().toString());
-        System.err.println(jTextFieldValor.getText());
-        
+        //realizar aluguel       
         Aluguel alu = new Aluguel();
         alu.setIdAtendente(Integer.parseInt(System.getProperty("id_usuario_atendente")));
         alu.setIdExemplar(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
