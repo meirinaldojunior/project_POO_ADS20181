@@ -31,8 +31,7 @@ public class RNAluguel {
     DAOAluguel dao = new DAOAluguelImplementa();
 
     /**
-     * Verifica se um aluguel alu está com todos os campos preenchidos
-     * (inclusive o ID)
+     * Realiza as regras de negócios de Aluguel
      *
      * @param alu
      * @throws GeralException Se algum atributo obrigatório estiver em branco
@@ -97,16 +96,13 @@ public class RNAluguel {
             throw new GeralException("Erro na instrução SQL, contacte o administrador: " + ex.getMessage());
         }
     }
-
+    
+    
     /**
-     * Retorna a lista de produtos
+     * Retorna a lista de produtos com os devidos relacionamentos
      *
      * @return
      */
-    public ArrayList<Aluguel> listar() {
-        return null;
-    }
-
     public ArrayList<AluguelRelacionamento> listarForegein() throws GeralException, GeralException {
         try {
             return dao.listarForegein();

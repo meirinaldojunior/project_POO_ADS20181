@@ -31,7 +31,7 @@ public class FachadaAluguel {
     }
 
     /**
-     * Efetua todas as verificacoes e salva os dados no BD
+     * Efetua interface entre a regra de negócio e a DAO, no final retorna para a GUI o processamento;
      *
      * @param alu Objeto contendo todos os dados, exceto ID
      * @throws GeralException Caso ocorra algum erro na validacao
@@ -62,10 +62,6 @@ public class FachadaAluguel {
         ex.setIdExemplar(alu.getIdExemplar());
         ex.setdisponibilidade(1);
         rnExem.alterarDisponibilidade(ex);
-    }
-
-    public ArrayList<Aluguel> listarAluguel() throws ConexaoException, DAOException, GeralException {
-        return rnAlu.listar();
     }
     
     public ArrayList<AluguelRelacionamento> listarAluguelForegein() throws ConexaoException, DAOException, GeralException {
