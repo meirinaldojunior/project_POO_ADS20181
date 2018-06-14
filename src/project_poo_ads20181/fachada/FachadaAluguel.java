@@ -55,6 +55,7 @@ public class FachadaAluguel {
     }
 
     public void excluirAluguel(Aluguel alu) throws GeralException, DAOException, ConexaoException {
+        rnAlu.validarAtributos(alu);
         rnAlu.excluir(alu);
         
         Exemplar ex = new Exemplar();

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import project_poo_ads20181.classes.Aluguel;
@@ -47,6 +48,9 @@ public class RNAluguel {
     public void validarAtributos(Aluguel alu) throws GeralException {
         if (alu == null) {
             throw new GeralException("Informações inválidas!");
+        }
+        if (alu.getIdAluguel() == null || Objects.equals(alu.getIdAluguel(), "")) {
+            throw new GeralException("Escolhe um objeto válido para edição");
         }
     }
 

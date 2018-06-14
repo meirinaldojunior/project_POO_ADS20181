@@ -29,7 +29,7 @@ import project_poo_ads20181.fachada.FachadaUsuario;
  * @author Meirinaldo
  */
 public class TAluguel extends javax.swing.JFrame {
-    
+
     FachadaAluguel falu;
     FachadaUsuario fusu;
     FachadaLivro liv;
@@ -45,10 +45,10 @@ public class TAluguel extends javax.swing.JFrame {
         fusu = new FachadaUsuario();
         liv = new FachadaLivro();
         fex = new FachadaExemplar();
-        
+
         listagemDeUsuarios();
         listagemDeLivros();
-        
+
         jTextFieldValor.setText("00.00");
 
         //desabilita opção alugar
@@ -57,17 +57,21 @@ public class TAluguel extends javax.swing.JFrame {
         //inicializa tabelas
         tabelaListagemAlugueis = (DefaultTableModel) tabelaTodosAlugueis.getModel();
         carregaListagemAlugueis();
+        
+        //desativa botões de ação
+        idListagemAluguel.setEnabled(false);
+        jComboBoxExempEdit.setEnabled(false);
     }
-    
+
     public void limpaTabela() {
         for (int i = 0; i < tabelaListagemAlugueis.getRowCount(); i++) {
             tabelaListagemAlugueis.removeRow(i);
         }
     }
-    
+
     public void carregaListagemAlugueis() {
         limpaTabela();
-        
+
         try {
             for (AluguelRelacionamento aluguel : falu.listarAluguelForegein()) {
                 System.err.println(aluguel.getAluno());
@@ -87,7 +91,7 @@ public class TAluguel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro no DAO - " + ex.getMessage(), "Erro...", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void listagemDeUsuarios() {
         try {
             for (Usuario u : fusu.listarUsuarios(0)) {
@@ -97,7 +101,7 @@ public class TAluguel extends javax.swing.JFrame {
             Logger.getLogger(TAluguel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void listagemDeLivros() {
         try {
             for (Livro l : liv.listarRegistro()) {
@@ -112,7 +116,7 @@ public class TAluguel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex);
         }
     }
-    
+
     public void listagemDeExemplares(int idLivro) {
         jComboBox3.removeAllItems();
         jComboBoxExempEdit.removeAllItems();
@@ -125,7 +129,7 @@ public class TAluguel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex);
         }
     }
-    
+
     public int pegarId(String id) {
         return Integer.parseInt(id.substring(0, id.indexOf("-")));
     }
@@ -517,7 +521,7 @@ public class TAluguel extends javax.swing.JFrame {
         alu.setIdExemplar(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
         alu.setIdUsuario(pegarId(jComboBox1.getSelectedItem().toString()));
         alu.setValor(Double.parseDouble(jTextFieldValor.getText()));
-        
+
         try {
             falu.salvarAluguel(alu);
             JOptionPane.showMessageDialog(this, "Aluguel realizado com sucesso...");
@@ -545,7 +549,7 @@ public class TAluguel extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         //carrega informações do produto selecionado
         try {
-            
+
             liv.listarRegistro(pegarId(jComboBox2.getSelectedItem().toString()));
 
             //habilita opção alugar
@@ -568,17 +572,17 @@ public class TAluguel extends javax.swing.JFrame {
 
     private void jComboBoxLivroEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLivroEditActionPerformed
         // TODO add your handling code here:
-       listagemDeExemplares(pegarId(jComboBoxLivroEdit.getSelectedItem().toString()));
+        listagemDeExemplares(pegarId(jComboBoxLivroEdit.getSelectedItem().toString()));
     }//GEN-LAST:event_jComboBoxLivroEditActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //exluir aluguel
-        
+
         Aluguel aluguel = new Aluguel();
-        aluguel.setIdAluguel(Integer.parseInt(idListagemAluguel.getText()));        
+        aluguel.setIdAluguel(Integer.parseInt(idListagemAluguel.getText()));
         try {
             falu.excluirAluguel(aluguel);
-            
+
             JOptionPane.showMessageDialog(this, "Excluído com sucesso...");
             carregaListagemAlugueis();
         } catch (GeralException ex) {
@@ -588,16 +592,19 @@ public class TAluguel extends javax.swing.JFrame {
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
+        System.out.println(idListagemAluguel.getText());
+        System.out.println(jComboBoxExempEdit.getSelectedItem().toString());
+
         Aluguel aluguel = new Aluguel();
         aluguel.setIdAluguel(Integer.parseInt(idListagemAluguel.getText()));
         aluguel.setIdExemplar(Integer.parseInt(jComboBoxExempEdit.getSelectedItem().toString()));
-        
+
         try {
             falu.alterarAluguel(aluguel);
             JOptionPane.showMessageDialog(this, "Alterado com sucesso...");
@@ -612,18 +619,21 @@ public class TAluguel extends javax.swing.JFrame {
 
         //Atualiza tabela com todos alugueis
         carregaListagemAlugueis();
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tabelaTodosAlugueisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaTodosAlugueisMouseClicked
         //Preenche dados para edição e exclusão
-        
+
         int index = tabelaTodosAlugueis.getSelectedRow();
-        
+
         idListagemAluguel.setText(tabelaTodosAlugueis.getValueAt(index, 0).toString());
         jComboBoxLivroEdit.setSelectedItem(tabelaTodosAlugueis.getValueAt(index, 3).toString());
         jComboBoxExempEdit.setSelectedItem(tabelaTodosAlugueis.getValueAt(index, 4).toString());
         txtValorPagar.setText(tabelaTodosAlugueis.getValueAt(index, 5).toString());
+        
+        idListagemAluguel.setEnabled(true);
+        jComboBoxExempEdit.setEnabled(true);
     }//GEN-LAST:event_tabelaTodosAlugueisMouseClicked
 
     /**
