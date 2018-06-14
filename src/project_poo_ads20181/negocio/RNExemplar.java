@@ -109,7 +109,7 @@ public class RNExemplar {
      */
     public ArrayList<Exemplar> listar(int idLivro) throws GeralException{
         try {
-            return dao.lista();
+            return dao.lista(idLivro);
         } catch (ConexaoException ex) {
             throw new GeralException("Erro na conexão: "+ex.getMessage());
         } catch (DAOException ex) {

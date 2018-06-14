@@ -15,8 +15,9 @@ import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 
 public interface DAOExemplar {
-
-	public void inserir (Exemplar exemplar) throws ConexaoException, DAOException;
+        
+    
+        public void inserir (Exemplar exemplar) throws ConexaoException, DAOException;
 	    
 	public void alterar (Exemplar exemplar) throws ConexaoException, DAOException;
 	    
