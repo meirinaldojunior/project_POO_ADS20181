@@ -77,6 +77,7 @@ public class TAluguel extends javax.swing.JFrame {
     }
     
     public void listagemDeExemplares(int idLivro) {
+        jComboBox3.removeAllItems();
         try {
             for (Exemplar ex : fex.listar(idLivro)) {
                 jComboBox3.addItem(Integer.toString(ex.getIdExemplar()));
@@ -418,7 +419,7 @@ public class TAluguel extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         //carrega informações do produto selecionado
         try {
-            System.err.println(pegarId(jComboBox2.getSelectedItem().toString()));
+            
             liv.listarRegistro(pegarId(jComboBox2.getSelectedItem().toString()));
             
             //habilita opção alugar

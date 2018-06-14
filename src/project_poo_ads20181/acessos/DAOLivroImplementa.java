@@ -229,12 +229,12 @@ public class DAOLivroImplementa implements DAOLivro {
     public ArrayList<Livro> lista(int param) throws ConexaoException, DAOException {
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Livro> lista = new ArrayList();
-        String sql = "SELECT * FROM livro WHERE Id_livro = ?";
+        String sql = "SELECT * FROM Livro WHERE Id_livro = ?";
         PreparedStatement pstm;
 
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(0, param);
+            pstm.setInt(1, param);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Livro liv = new Livro();
