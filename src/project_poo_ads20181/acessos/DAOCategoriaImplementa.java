@@ -92,12 +92,12 @@ public class DAOCategoriaImplementa implements DAOCategoria {
     public void excluir(Categoria ct) throws ConexaoException, DAOException{
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         //
-        String sql = "DELETE FROM Categoria WHERE Id_Categoria=?";
+        String sql = "DELETE FROM Categoria WHERE Nome_Categoria=?";
         
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
-            //pstm.setString(1, ct.getNomeCategoria());
-            pstm.setInt(1, ct.getIdCategoria());
+            pstm.setString(1, ct.getNomeCategoria());
+            //pstm.setInt(1, ct.getIdCategoria());
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException();
