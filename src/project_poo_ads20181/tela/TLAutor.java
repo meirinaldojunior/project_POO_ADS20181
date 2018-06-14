@@ -39,9 +39,9 @@ public class TLAutor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        salvarAutor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        salvarAutor = new javax.swing.JButton();
         TextNome = new javax.swing.JTextField();
         TextId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -49,12 +49,7 @@ public class TLAutor extends javax.swing.JFrame {
         listarAutor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaAutor = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Nome");
-
-        jLabel2.setText("Id");
+        salvaAutor = new javax.swing.JButton();
 
         salvarAutor.setText("Salvar");
         salvarAutor.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +57,12 @@ public class TLAutor extends javax.swing.JFrame {
                 salvarAutorActionPerformed(evt);
             }
         });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Nome");
+
+        jLabel2.setText("Id");
 
         jButton1.setText("Excluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,30 +106,42 @@ public class TLAutor extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaAutor);
 
+        salvaAutor.setText("salvar");
+        salvaAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvaAutorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TextId, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(TextNome))
-                        .addGap(115, 115, 115)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listarAutor)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(salvarAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(alterarAutor)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(283, Short.MAX_VALUE))
+                            .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(120, 120, 120)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(alterarAutor)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(listarAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(salvaAutor))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,24 +149,18 @@ public class TLAutor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(salvarAutor)
-                    .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(TextId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(alterarAutor)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listarAutor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(alterarAutor))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(TextId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listarAutor)
+                    .addComponent(salvaAutor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -189,6 +196,15 @@ public class TLAutor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "erro de conexão,contate o ADM","Mensagem",JOptionPane.INFORMATION_MESSAGE);
             
         }
+        try {
+            lista();
+        } catch (ConexaoException ex) {
+            Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (GeralException ex) {
+            Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void alterarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAutorActionPerformed
@@ -204,6 +220,15 @@ public class TLAutor extends javax.swing.JFrame {
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(this, "erro de conexão, contate o ADM","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         } 
+        try {
+            lista();
+        } catch (ConexaoException ex) {
+            Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (GeralException ex) {
+            Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_alterarAutorActionPerformed
 
     private void listarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarAutorActionPerformed
@@ -217,6 +242,20 @@ public class TLAutor extends javax.swing.JFrame {
             Logger.getLogger(TLAutor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_listarAutorActionPerformed
+
+    private void salvaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvaAutorActionPerformed
+        Autor a = new Autor();
+        a.setNome(TextNome.getText());
+        FachadaAutor fat = new FachadaAutor();
+        try{
+        fat.salvarAutor(a);
+        JOptionPane.showMessageDialog(this, "Autor salvo com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        }catch(GeralException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Mensagem",JOptionPane.ERROR_MESSAGE);
+        } catch (DAOException ex) {
+            
+        }
+    }//GEN-LAST:event_salvaAutorActionPerformed
      private void lista() throws ConexaoException, DAOException, GeralException{
         FachadaAutor fat = new FachadaAutor(); //CRIAR A INSTANCIA DA FACHADA
         DefaultTableModel modelo = new DefaultTableModel(); // INSTANCIA O OBJETO PADRÃO DE TABELA - ADICIONE A IMPORTAÇÃO
@@ -282,6 +321,7 @@ public class TLAutor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton listarAutor;
+    private javax.swing.JButton salvaAutor;
     private javax.swing.JButton salvarAutor;
     // End of variables declaration//GEN-END:variables
 }
