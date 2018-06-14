@@ -50,7 +50,7 @@ public class TLAutor extends javax.swing.JFrame {
         TabelaAutor = new javax.swing.JTable();
         salvaAutor = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nome");
 
