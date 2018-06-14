@@ -42,7 +42,7 @@ public class Project_POO_ADS20181 {
 
         //testaConexao();  
         //inserirLivro();
-        //testaCadastroCategoria(); //ok
+        testaCadastroCategoria(); //ok
         //testaAlterarCategoria();  //ok
         //testaExcluirCategoria();  //ok
         //testaListarCategoria();   //ok
@@ -139,10 +139,10 @@ public class Project_POO_ADS20181 {
     public static void testaCadastroExemplar() throws ConexaoException, DAOException {
         Exemplar exe = new Exemplar();
 
-        exe.getIdExemplar();
-        exe.getIdLivro().setIdLivro(2);
-        exe.getIdCategoria().setIdCategoria(4);
-        exe.getId().setId(104);
+//        exe.getIdExemplar();
+//        exe.getIdLivro().setIdLivro(2);
+//        exe.getIdCategoria().setIdCategoria(4);
+//        exe.getId().setId(104);
 
         DAOExemplarImplementa DAOAddExe = new DAOExemplarImplementa();
         try {
@@ -161,10 +161,10 @@ public class Project_POO_ADS20181 {
         Categoria cat = new Categoria();
         Autor aut = new Autor();
 
-        exe.setIdExemplar(13);
-        exe.setIdLivro(liv);
-        exe.setIdCategoria(cat);
-        exe.setId(aut);
+//        exe.setIdExemplar(13);
+//        exe.setIdLivro(liv);
+//        exe.setIdCategoria(cat);
+//        exe.setId(aut);
 
         liv.setIdLivro(3);
         cat.setIdCategoria(5);

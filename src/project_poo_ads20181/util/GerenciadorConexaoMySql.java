@@ -38,6 +38,7 @@ public class GerenciadorConexaoMySql implements GerenciadorConexao{
         try{
             c = DriverManager.getConnection(URL, USU, SEN);
         }catch(SQLException e){
+            System.out.println(e);
             throw new ConexaoException();
         }
         
