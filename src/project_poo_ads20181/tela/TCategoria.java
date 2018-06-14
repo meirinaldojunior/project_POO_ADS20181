@@ -32,7 +32,7 @@ public class TCategoria extends javax.swing.JFrame {
     
     //inicializa tabela
         tabelaModelo = (DefaultTableModel) tabelacat.getModel();
-
+        jTextField1.setEnabled(false);
         //carrega tabela
         carregaTabela();
     }
@@ -138,11 +138,11 @@ public void limpaTabela() {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Código da Categoria", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -236,6 +236,7 @@ public void limpaTabela() {
         // Edita Categoria
         Categoria ct = new Categoria();
         ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
+        ct.setNomeCategoria(jTextField2.getText());
         try {
             fc.alterarCategoria(ct);
             carregaTabela();

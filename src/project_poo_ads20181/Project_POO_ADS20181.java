@@ -46,7 +46,7 @@ public class Project_POO_ADS20181 {
         //testaAlterarCategoria();  //ok
         //testaExcluirCategoria();  //ok
         //testaListarCategoria();   //ok
-        testaCadastroAluguel(); //ok
+        //testaCadastroAluguel(); //ok
         //testaAlterarAluguel();  //ok
         //testaExcluirAluguel();  //ok
         //testaListarAluguel();   //ok

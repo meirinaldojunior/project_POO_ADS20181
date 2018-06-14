@@ -30,11 +30,11 @@ public class RNCategoria {
             throw new GeralException("Categoria inválida!");
         }
         if(ct.getNomeCategoria()==null || ct.getNomeCategoria().trim().isEmpty()){
-            throw new GeralException("Nome da categoria inválido!");
+            throw new GeralException("Nome da categoria inválida!");
         }
         for (int i = 0; i < ct.getNomeCategoria().length(); i++) {
           if (!Character.isAlphabetic((ct.getNomeCategoria().charAt(i)))) {
-          throw new GeralException("Nome da categoria inválido!");
+          throw new GeralException("Nome da categoria inválida! Deve ser um nome genérico.");
           }
     }
 }
