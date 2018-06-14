@@ -90,7 +90,7 @@ public class FachadaLivro {
         return rn.listarRegistro();
     }
      
-    public ArrayList<Livro> listarRegistro(Integer param) throws GeralException, ConexaoException, DAOException {
+    public ArrayList<Livro> listarRegistro(int param) throws GeralException, ConexaoException, DAOException {
       return rn.listarLivros(param);
     }
     
