@@ -410,6 +410,7 @@ public class TAluguel extends javax.swing.JFrame {
         
         try {
             falu.salvarAluguel(alu);
+            JOptionPane.showMessageDialog(this, "Aluguel realizado com sucesso...");
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex, "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (DAOException ex) {
