@@ -1,6 +1,7 @@
 
 package project_poo_ads20181.acessos;
 
+import static java.lang.System.gc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -97,22 +98,49 @@ public class DAOAutorImplementa implements DAOAutor {
     }
 
     @Override
-    public Autor buscaPorId(int id) throws ConexaoException, DAOException {
+    public Autor buscaPorId(Integer id) throws ConexaoException, DAOException {
        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
         
         Autor a = null;
         
-        String sql = "SELECT id,nome,descricao,valor FROM produtos WHERE Id_Autor=?";
+        String sql = "SELECT Id_Autor,nome FROM Autor WHERE Id_Autor=?";
         
         PreparedStatement pstm;
         try{
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1, id);
+            pstm.setInt(1,id);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                a = new Autor();
+                a.setId(rs.getInt("id_Autor"));
+                a.setNome( rs.getString("nome") );
+            }
+               return a;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+           GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+
+    @Override
+    public Autor consultaNome(String nome) throws ConexaoException, DAOException {
+        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+        
+        Autor a = null;
+        
+        String sql = "SELECT nome,Id_Autor FROM Autor WHERE nome=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setString(1, nome);
             ResultSet rs = pstm.executeQuery();
             
             if(rs.next()){
                 a = new Autor();
-                a.setId(  rs.getInt("id") );
+                a.setId(  rs.getInt("Id_Autor") );
                 a.setNome( rs.getString("nome") );
                 
             }
@@ -125,5 +153,33 @@ public class DAOAutorImplementa implements DAOAutor {
            GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
     }
+
+    @Override
+    public boolean checkID(Autor a) throws DAOException, ConexaoException {
+        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
+           String sql = "SELECT Id_Autor FROM Autor WHERE Id_Autor=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1,a.getId());
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                return true;
+            }
+            
+            return false;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+        
+    
+
+        
         
     }

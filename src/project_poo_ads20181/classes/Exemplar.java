@@ -3,9 +3,10 @@ package project_poo_ads20181.classes;
 public class Exemplar {
 
 	private int idExemplar;
-	private Categoria idCategoria;
-        private Autor id;
-        private Livro idLivro;
+	private int idCategoria;
+        private int idAutor;
+        private int idLivro;
+        private int disponibilidade;
         
 	public void setIdExemplar (int idExemplar){
         this.idExemplar = idExemplar;  
@@ -13,23 +14,31 @@ public class Exemplar {
         public int getIdExemplar(){
         return this.idExemplar;
     }
-        public void setIdCategoria (Categoria idCategoria){
+        public void setIdCategoria (int idCategoria){
         this.idCategoria = idCategoria;  
         }
-        public Categoria getIdCategoria(){
+        public int getIdCategoria(){
         return this.idCategoria;
     }
-        public void setId (Autor id){
-        this.id = id;  
+        public void setIdAutor (int id){
+        this.idAutor = idAutor;  
         }
-        public Autor getId(){
-        return this.id;
+        public int getIdAutor(){
+        return this.idAutor;
     }
-        public void setIdLivro (Livro idLivro){
+        public void setIdLivro (int idLivro){
         this.idLivro = idLivro;  
         }
-        public Livro getIdLivro(){
+        public int getIdLivro(){
         return this.idLivro;
     }
+        
+        public void setdisponibilidade (int disponibilidade){
+        this.idLivro = disponibilidade;  
+        }
+        public int getdisponibilidade(){
+        return this.disponibilidade;
+    }
+       
 
     }

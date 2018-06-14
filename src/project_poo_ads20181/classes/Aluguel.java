@@ -1,51 +1,56 @@
 package project_poo_ads20181.classes;
 
 /**
-*
-* @author Hugo Felipe
-*/
-
+ *
+ * @author Meirinaldo
+ */
 public class Aluguel {
 
-	private int idAluguel;
-	private Atendente idAtendente = new Atendente();
-	private Exemplar idExemplar = new Exemplar();
-	private Usuario cpf = new Usuario();
-	private double valor;
-	
-	public void setIdAluguel (int idAluguel){
+    private int idAluguel;
+    private int idAtendente;
+    private int idExemplar;
+    private int idUsuario;
+    private Double valor;
+
+    public void setIdAluguel(Integer idAluguel) {
         this.idAluguel = idAluguel;
-        
-        }
-    public int getIdAluguel(){
+
+    }
+
+    public Integer getIdAluguel() {
         return this.idAluguel;
     }
-    
-    public void setIdAtendente (Atendente idAtendente){
+
+    public void setIdAtendente(int idAtendente) {
         this.idAtendente = idAtendente;
     }
-    public Atendente getIdAtendente(){
+
+    public int getIdAtendente() {
         return this.idAtendente;
     }
 
-    public void setIdExemplar(Exemplar idExemplar){
+    public void setIdExemplar(int idExemplar) {
         this.idExemplar = idExemplar;
     }
-    public Exemplar getIdExemplar(){
+
+    public int getIdExemplar() {
         return this.idExemplar;
     }
-    
-    public void setCpf (Usuario cpf){
-        this.cpf = cpf;
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
-    public Usuario getCpf(){
-        return this.cpf;
+
+    public int getIdUsuario() {
+        return this.idUsuario;
     }
-    
-    public void setValor(double valor){
+
+    public void setValor(Double valor) {
         this.valor = valor;
     }
-    public double getValor(){
+
+    public Double getValor() {
         return this.valor;
     }
+
 }

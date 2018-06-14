@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
 
@@ -28,17 +29,15 @@ public class DAOExemplarImplementa implements DAOExemplar {
         GerenciadorConexao gc;
         gc = GerenciadorConexaoMySql.getInstancia();
         Connection c = gc.conectar();
-        Exemplar exe = new Exemplar();
-               
-        String sql = "INSERT INTO Exemplar (Id_exemplar, Id_livro, Id_Categoria, Id_Autor)VALUES(?,?,?,?)";
+       
+        String sql = "INSERT INTO exemplar (Id_livro, Id_Categoria, Id_Autor) VALUES (?,?,?)";
         
         PreparedStatement pstm;
         try {
              pstm = c.prepareStatement(sql);
-             pstm.setInt(1,exe.getIdExemplar());
-             pstm.setInt(2,exe.getIdLivro().getIdLivro());
-             pstm.setInt(3,exe.getIdCategoria().getIdCategoria());
-             pstm.setInt(4,exe.getId().getId());
+             pstm.setInt(1,exemplar.getIdLivro());
+             pstm.setInt(2,exemplar.getIdCategoria());
+             pstm.setInt(3,exemplar.getIdAutor());
              pstm.executeUpdate();
              
         }catch(SQLException e){
@@ -50,22 +49,47 @@ public class DAOExemplarImplementa implements DAOExemplar {
 	}
 	
     @Override
-    public void alterar(Exemplar exemplar) throws ConexaoException, DAOException {
-            Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "UPDATE Exemplar SET Id_exemplar=?, Id_Categoria=?, Id_Autor=?, Id_livro=? WHERE Id_Exemplar=?";
+    public void alterar(Exemplar exemplar) throws ConexaoException, DAOException, GeralException {
+        
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        
+        String sql = "UPDATE exemplar SET Id_livro=? , Id_Categoria=?, Id_Autor=?, disponibilidade=? WHERE Id_exemplar=?";
+        
         PreparedStatement pstm;
-        Exemplar exe = new Exemplar();
+        
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1,exe.getIdExemplar());
-            pstm.setInt(2,exe.getIdCategoria().getIdCategoria());
-            pstm.setInt(3,exe.getId().getId());
-            pstm.setInt(4,exe.getIdLivro().getIdLivro());
-            pstm.setDouble(5,exe.getIdExemplar());
+            pstm.setInt(1,exemplar.getIdLivro());
+            pstm.setInt(2,exemplar.getIdCategoria());
+            pstm.setInt(3,exemplar.getIdAutor());
+            pstm.setInt(4,exemplar.getdisponibilidade());
+            pstm.setDouble(5,exemplar.getIdExemplar());
             pstm.executeUpdate();
             
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new GeralException(e.getMessage());
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    @Override
+    public void alterarDisponibilidade(Exemplar exemplar) throws ConexaoException, DAOException, GeralException {
+        
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        
+        String sql = "UPDATE exemplar SET disponibilidade=? WHERE Id_exemplar=?";
+        
+        PreparedStatement pstm;
+        
+        try {
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1,exemplar.getdisponibilidade());
+            pstm.setDouble(2,exemplar.getIdExemplar());
+            pstm.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new GeralException(e.getMessage());
         } finally {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
@@ -73,18 +97,13 @@ public class DAOExemplarImplementa implements DAOExemplar {
 
     @Override
     public void excluir(Exemplar exemplar) throws ConexaoException, DAOException {
-                Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
-        String sql = "DELETE FROM Exemplar WHERE Id_Exemplar =?";
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "DELETE FROM exemplar WHERE Id_exemplar =?";
         PreparedStatement pstm;
-        Exemplar exe = new Exemplar();
         
         try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1,exe.getIdExemplar());
-            //pstm.setInt(2,alu.getIdAtendente().getIdAtendente());
-            //pstm.setInt(3,alu.getExemplar().getIdExemplar());
-            //pstm.setString(4,alu.getCpf().getcpf());
-            //pstm.setDouble(5,alu.getValor());
+            pstm.setInt(1,exemplar.getIdExemplar());
             pstm.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException();
@@ -97,7 +116,7 @@ public class DAOExemplarImplementa implements DAOExemplar {
     public ArrayList<Exemplar> lista() throws ConexaoException, DAOException {
     Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         ArrayList<Exemplar> lista = new ArrayList();
-        String sql = "SELECT * FROM Exemplar";
+        String sql = "SELECT * FROM exemplar";
         Statement stm;
         
         try {
@@ -106,7 +125,7 @@ public class DAOExemplarImplementa implements DAOExemplar {
 
             while (rs.next()) {
                 Exemplar exe = new Exemplar();
-                exe.setIdExemplar(rs.getInt("Id_Exemplar"));
+                exe.setIdExemplar(rs.getInt("Id_exemplar"));
                 //exe.setIdCategoria(rs.getInt("Id_Categoria"));
                 //exe.setId(rs.getInt("Id_Autor"));
                 //exe.setIdLivro(rs.getInt("Id_livro"));
@@ -123,7 +142,38 @@ public class DAOExemplarImplementa implements DAOExemplar {
     }
     
     @Override
-    public Exemplar consultaIdExemplar (int idExemplar) throws ConexaoException, DAOException {
+    public ArrayList<Exemplar> lista(int idLivro, int disponibilidade) throws ConexaoException, DAOException {
+    Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        ArrayList<Exemplar> lista = new ArrayList();
+        String sql = "SELECT * FROM exemplar WHERE Id_Livro = ? AND disponibilidade = ?";
+        PreparedStatement pstm;
+        
+        try {
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, idLivro);
+            pstm.setInt(2, disponibilidade);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Exemplar exe = new Exemplar();
+                exe.setIdExemplar(rs.getInt("Id_exemplar"));
+                exe.setIdCategoria(rs.getInt("Id_Categoria"));
+                exe.setIdAutor(rs.getInt("Id_Autor"));
+                exe.setIdLivro(rs.getInt("Id_livro"));
+                lista.add(exe);
+            }
+            return lista;
+
+        } catch (SQLException e) {
+            System.out.println("ERRO "+e);
+            throw new DAOException();
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    @Override
+    public Exemplar consultaIdExemplar (Integer idExemplar) throws ConexaoException, DAOException {
         Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
         Exemplar exe = null;
         
@@ -138,9 +188,9 @@ public class DAOExemplarImplementa implements DAOExemplar {
             if(rs.next()){
                 exe = new Exemplar();
                 exe.setIdExemplar(rs.getInt("Id_Exemplar"));
-                exe.setIdExemplar(rs.getInt("Id_Livro"));
-                exe.setIdExemplar(rs.getInt("Id_Categoria"));
-                exe.setIdExemplar(rs.getInt("Id_Autor"));      
+                exe.setIdLivro(rs.getInt("Id_Livro"));
+                exe.setIdCategoria(rs.getInt("Id_Categoria"));
+                //exe.set(rs.getInt("Id_Autor"));      
                 }
             return exe;
         }catch(SQLException e){
@@ -149,7 +199,40 @@ public class DAOExemplarImplementa implements DAOExemplar {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);    
         }
     }
-
+    
+    @Override
+    public Exemplar get(Integer idExemplar) throws ConexaoException, DAOException{
+            
+        GerenciadorConexao gc;
+        gc = GerenciadorConexaoMySql.getInstancia();
+        Connection c = gc.conectar();
+        
+        Exemplar exe = null;
+        
+        String sql = "SELECT Id_exemplar, Id_livro, Id_Categoria, Id_Autor FROM exemplar WHERE Id_exemplar=?";
+        
+        PreparedStatement pstm;
+        try{
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1, idExemplar);
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()){
+                exe = new Exemplar();
+                exe.setIdExemplar(rs.getInt("Id_exemplar"));
+                exe.setIdExemplar(rs.getInt("Id_livro"));
+                exe.setIdExemplar(rs.getInt("Id_Categoria"));
+                exe.setIdExemplar(rs.getInt("Id_Autor"));
+            }
+            
+            return exe;
+            
+        }catch(SQLException e){
+            throw new DAOException();
+        }finally{
+            gc.desconectar(c);
+        }
+    }
     
     
 }
