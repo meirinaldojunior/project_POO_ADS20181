@@ -46,6 +46,12 @@ public class RNAutor {
           }
     }
 }
+     /**
+     * Verifica se o nome do Autor ja está cadastradi no banco
+     * @param a Objeto com TODOS os atributos preenchidos
+     * @throws GeralException Se algum atributo obrigatório estiver em branco
+     * @throws project_poo_ads20181.erro.DAOException
+     */
           
     public void verificaDuplicidadeNome(Autor a)throws GeralException, DAOException {
     DAOAutorImplementa dai = new DAOAutorImplementa();
@@ -116,25 +122,15 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
             throw new GeralException("Contacte o ADM.");
         }catch(DAOException e){
             throw new GeralException("BUG.");
+        }
  }
-<<<<<<< HEAD
- }
- public boolean checkid(Autor a) throws DAOException, ConexaoException, GeralException{
-     DAOAutorImplementa dai = new DAOAutorImplementa();
-    try{
-         boolean checkID = dai.checkID(a);
-         return checkID ;
-    }catch(ConexaoException e){
-=======
 
- }
  public boolean checkid(Autor a) throws DAOException, ConexaoException, GeralException{
      DAOAutorImplementa dai = new DAOAutorImplementa();
      try{
         boolean checkId = dai.checkID(a);
      return checkId;}
      catch(ConexaoException e){
->>>>>>> 8f3769b59298d7f456a9fbaebf3402fdf5d0779c
             throw new GeralException("Contacte o ADM.");
         }catch(DAOException e){
             throw new GeralException("BUG.");
@@ -146,11 +142,5 @@ public ArrayList<Autor>listar() throws ConexaoException, DAOException, GeralExce
  
 
 
-<<<<<<< HEAD
-=======
-    
- }
- }
->>>>>>> 8f3769b59298d7f456a9fbaebf3402fdf5d0779c
 
 
