@@ -75,10 +75,9 @@ public class RNCategoria {
  public void excluir(Categoria ct) throws GeralException, DAOException, ConexaoException{
      
      DAOCategoriaImplementa dai = new DAOCategoriaImplementa();
-      boolean checkID = dai.checkID(ct);
+     //boolean checkID = dai.checkID(ct);
      try{
-         if(checkID == true){
-         dai.excluir(ct);}
+         dai.excluir(ct);
      }catch(ConexaoException e){
             throw new GeralException("Contacte o Administrador do Sistema.");
         }catch(DAOException e){

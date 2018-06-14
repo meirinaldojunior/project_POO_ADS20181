@@ -45,7 +45,7 @@ public void limpaTabela() {
     public void limpaCampos() {
         jTextField1.setText("");
         jTextField2.setText("");
-        jButton3.setEnabled(false);
+        jButton3.setEnabled(true);
         jButton1.setEnabled(true);
     }
 
@@ -235,20 +235,21 @@ public void limpaTabela() {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //Excluir usuário
+        //Excluir categoria
         if (JOptionPane.showConfirmDialog(this, "Deseja excluir a categoria selecionada?") == 0) {
             Categoria ct = new Categoria();
-            ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
+            ct.setNomeCategoria(jTextField2.getText());
+           // ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
             try {
                 fc.excluirCategoria(ct);
-                limpaCampos();
+                carregaTabela();
                 JOptionPane.showMessageDialog(this, "Categoria excluída com sucesso!");
             } catch (GeralException | ConexaoException ex) {
                 JOptionPane.showMessageDialog(this, ex);
             } catch (DAOException ex) {
                 Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
             }
-            carregaTabela();
+            
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
