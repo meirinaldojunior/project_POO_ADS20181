@@ -44,7 +44,7 @@ public class FachadaAluguel {
         Exemplar exemp = new Exemplar();
         exemp.setIdExemplar(alu.getIdExemplar());
         exemp.setdisponibilidade(0);
-        rnExem.alterar(exemp);
+        rnExem.alterarDisponibilidade(exemp);
     }
 
     public void alterarAluguel(Aluguel alu) throws GeralException, DAOException {

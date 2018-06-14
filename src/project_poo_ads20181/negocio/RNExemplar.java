@@ -85,9 +85,21 @@ public class RNExemplar {
         try {
             dao.alterar(exe);
         } catch (ConexaoException ex) {
-            throw new GeralException("Erro de conexão, Contacte o ADM. | "+ ex);
+            throw new GeralException("Erro de conexão, Contacte o ADM. | "+ ex.getMessage());
         } catch (DAOException ex) {
-            throw new GeralException("Erro de instrução SQL, Contacte o ADM. | "+ ex);
+            throw new GeralException("Erro de instrução SQL, Contacte o ADM. | "+ ex.getMessage());
+        }
+    }
+    
+    public void alterarDisponibilidade(Exemplar exe) throws GeralException{
+        DAOExemplar dao = new DAOExemplarImplementa();
+        
+        try {
+            dao.alterarDisponibilidade(exe);
+        } catch (ConexaoException ex) {
+            throw new GeralException("Erro de conexão, Contacte o ADM. | "+ ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro de instrução SQL, Contacte o ADM. | "+ ex.getMessage());
         }
     }
     

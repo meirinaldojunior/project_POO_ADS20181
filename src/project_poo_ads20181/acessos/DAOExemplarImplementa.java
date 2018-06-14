@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
+import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.util.GerenciadorConexao;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
 
@@ -48,11 +49,11 @@ public class DAOExemplarImplementa implements DAOExemplar {
 	}
 	
     @Override
-    public void alterar(Exemplar exemplar) throws ConexaoException, DAOException {
+    public void alterar(Exemplar exemplar) throws ConexaoException, DAOException, GeralException {
         
         Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
         
-        String sql = "UPDATE exemplar SET Id_livro=? , Id_Categoria=?, Id_Autor=? WHERE Id_exemplar=?";
+        String sql = "UPDATE exemplar SET Id_livro=? , Id_Categoria=?, Id_Autor=?, disponibilidade=? WHERE Id_exemplar=?";
         
         PreparedStatement pstm;
         
@@ -61,11 +62,34 @@ public class DAOExemplarImplementa implements DAOExemplar {
             pstm.setInt(1,exemplar.getIdLivro());
             pstm.setInt(2,exemplar.getIdCategoria());
             pstm.setInt(3,exemplar.getIdAutor());
-            pstm.setDouble(4,exemplar.getIdExemplar());
+            pstm.setInt(4,exemplar.getdisponibilidade());
+            pstm.setDouble(5,exemplar.getIdExemplar());
             pstm.executeUpdate();
             
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new GeralException(e.getMessage());
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    @Override
+    public void alterarDisponibilidade(Exemplar exemplar) throws ConexaoException, DAOException, GeralException {
+        
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        
+        String sql = "UPDATE exemplar SET disponibilidade=? WHERE Id_exemplar=?";
+        
+        PreparedStatement pstm;
+        
+        try {
+            pstm = c.prepareStatement(sql);
+            pstm.setInt(1,exemplar.getdisponibilidade());
+            pstm.setDouble(2,exemplar.getIdExemplar());
+            pstm.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new GeralException(e.getMessage());
         } finally {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
