@@ -23,6 +23,9 @@ public class TLogin extends javax.swing.JFrame {
      */
     public TLogin() {
         initComponents();
+        
+        //limpa id do usuário passado
+        System.clearProperty("id_usuario_atendente");
     }
 
     /**

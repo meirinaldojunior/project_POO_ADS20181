@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.classes.Livro;
+import project_poo_ads20181.classes.Login;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
@@ -24,7 +25,7 @@ import project_poo_ads20181.fachada.FachadaUsuario;
 
 /**
  *
- * @author Hugo
+ * @author Meirinaldo
  */
 public class TAluguel extends javax.swing.JFrame {
 
@@ -46,16 +47,17 @@ public class TAluguel extends javax.swing.JFrame {
         
         listagemDeUsuarios();
         listagemDeLivros();
+        
+        jTextFieldValor.setText("00.00");
+        
+        //desabilita opção alugar
+        jButton4.setEnabled(false);
     }
     
     public void listagemDeUsuarios(){
         try {
-            ArrayList<Usuario> listaUsu = new ArrayList();
-
-            listaUsu = fusu.listarUsuarios(0);
-            for (Usuario u : listaUsu) {
-                System.err.println(u.getNome());
-                jComboBox1.addItem(u.getNome());
+            for (Usuario u : fusu.listarUsuarios(0)) {
+                jComboBox1.addItem(u.getIdUsuario()+"-"+u.getNome());
             }
         } catch (GeralException ex) {
             Logger.getLogger(TAluguel.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,11 +67,8 @@ public class TAluguel extends javax.swing.JFrame {
     
     public void listagemDeLivros() {
         try {
-            ArrayList<Livro> listaLivros = new ArrayList();
-
-            listaLivros = liv.listarRegistro();
-            for (Livro l : listaLivros) {
-                jComboBox2.addItem(l.getNomeLivro());
+            for (Livro l : liv.listarRegistro()) {
+                jComboBox2.addItem(l.getIdLivro()+"-"+l.getNomeLivro());
             }
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
@@ -80,12 +79,19 @@ public class TAluguel extends javax.swing.JFrame {
         }
     }
     
-    public void listagemDeExemplares() {
-        ArrayList<Exemplar> listaExemplares = new ArrayList();
-        //listaExemplares = fex.listar(jComboBox2.getSelectedItem());
-        for (Exemplar ex : listaExemplares) {
-            jComboBox2.addItem(Integer.toString(ex.getIdExemplar()));
+    public void listagemDeExemplares(int idLivro) {
+        jComboBox3.removeAllItems();
+        try {
+            for (Exemplar ex : fex.listar(idLivro)) {
+                jComboBox3.addItem(Integer.toString(ex.getIdExemplar()));
+            }
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex);
         }
+    }
+    
+    public int pegarId(String id){
+        return Integer.parseInt(id.substring(0, id.indexOf("-")));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,7 +109,7 @@ public class TAluguel extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldValor = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
@@ -138,14 +144,16 @@ public class TAluguel extends javax.swing.JFrame {
 
         jLabel6.setText("Valor à pagar: R$");
 
-        jButton4.setText("Cadastrar");
+        jButton4.setText("Alugar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jTextField3.setEnabled(false);
+        jTextFieldValor.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jTextFieldValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldValor.setEnabled(false);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +168,12 @@ public class TAluguel extends javax.swing.JFrame {
         });
 
         jLabel11.setText("Exemplar:");
+
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,7 +198,7 @@ public class TAluguel extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jLabel6)
                         .addGap(27, 27, 27)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
+                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,13 +216,13 @@ public class TAluguel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -380,7 +394,28 @@ public class TAluguel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        //realizar aluguel
+        
+        System.err.println("Começa o debug do cadastro do aluguel");
+        System.err.println(System.getProperty("id_usuario_atendente"));
+        System.err.println(jComboBox3.getSelectedItem().toString());
+        System.err.println(jComboBox1.getSelectedItem().toString());
+        System.err.println(jTextFieldValor.getText());
+        
+        Aluguel alu = new Aluguel();
+        alu.setIdAtendente(Integer.parseInt(System.getProperty("id_usuario_atendente")));
+        alu.setIdExemplar(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
+        alu.setIdUsuario(pegarId(jComboBox1.getSelectedItem().toString()));
+        alu.setValor(Double.parseDouble(jTextFieldValor.getText()));
+        
+        try {
+            falu.salvarAluguel(alu);
+            JOptionPane.showMessageDialog(this, "Aluguel realizado com sucesso...");
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -404,8 +439,28 @@ public class TAluguel extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        listagemDeExemplares();
+        listagemDeExemplares(pegarId(jComboBox2.getSelectedItem().toString()));
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        //carrega informações do produto selecionado
+        try {
+            
+            liv.listarRegistro(pegarId(jComboBox2.getSelectedItem().toString()));
+            
+            //habilita opção alugar
+            jButton4.setEnabled(true);
+            
+            //carrega valor
+            jTextFieldValor.setText("13.00");
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,11 +522,11 @@ public class TAluguel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldValor;
     // End of variables declaration//GEN-END:variables
 }

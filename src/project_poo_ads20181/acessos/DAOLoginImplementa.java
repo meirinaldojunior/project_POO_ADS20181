@@ -48,6 +48,8 @@ public class DAOLoginImplementa implements DAOLogin {
             ResultSet rs = pstm.executeQuery();
 
             if (rs.next()) {
+                // salva o ID do usuário atual em uma variável ambiente
+                System.setProperty("id_usuario_atendente", rs.getString("Id_Usuario"));
                 return true;
             }
         } catch (SQLException e) {

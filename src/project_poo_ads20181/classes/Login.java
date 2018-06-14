@@ -11,7 +11,7 @@ package project_poo_ads20181.classes;
  */
 public class Login {
     
-    private Usuario usuarioLogado;
+    public static Usuario usuarioLogado;
     
     public Usuario getUsuarioLogado() {
         return usuarioLogado;

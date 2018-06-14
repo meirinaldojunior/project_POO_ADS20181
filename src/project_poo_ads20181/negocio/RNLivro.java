@@ -148,7 +148,7 @@ public class RNLivro {
       }
       return true;
     }
-    public ArrayList<Livro> listarLivros(Integer param) throws GeralException {
+    public ArrayList<Livro> listarLivros(int param) throws GeralException {
         try {
             return l.lista(param);
         } catch (ConexaoException ex) {
