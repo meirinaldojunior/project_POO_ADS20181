@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.classes.Livro;
+import project_poo_ads20181.classes.Login;
 import project_poo_ads20181.classes.Usuario;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
@@ -46,6 +47,8 @@ public class TAluguel extends javax.swing.JFrame {
         
         listagemDeUsuarios();
         listagemDeLivros();
+        
+        jTextFieldValor.setText("00.00");
         
         //desabilita opção alugar
         jButton4.setEnabled(false);
@@ -106,7 +109,7 @@ public class TAluguel extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldValor = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
@@ -148,9 +151,9 @@ public class TAluguel extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setEnabled(false);
+        jTextFieldValor.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jTextFieldValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldValor.setEnabled(false);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +198,7 @@ public class TAluguel extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jLabel6)
                         .addGap(27, 27, 27)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
+                        .addComponent(jTextFieldValor, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
@@ -219,7 +222,7 @@ public class TAluguel extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -391,7 +394,27 @@ public class TAluguel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        //realizar aluguel
+        
+        System.err.println("Começa o debug do cadastro do aluguel");
+        System.err.println(System.getProperty("id_usuario_atendente"));
+        System.err.println(jComboBox3.getSelectedItem().toString());
+        System.err.println(jComboBox1.getSelectedItem().toString());
+        System.err.println(jTextFieldValor.getText());
+        
+        Aluguel alu = new Aluguel();
+        alu.setIdAtendente(Integer.parseInt(System.getProperty("id_usuario_atendente")));
+        alu.setIdExemplar(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
+        alu.setIdUsuario(pegarId(jComboBox1.getSelectedItem().toString()));
+        alu.setValor(Double.parseDouble(jTextFieldValor.getText()));
+        
+        try {
+            falu.salvarAluguel(alu);
+        } catch (GeralException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -428,7 +451,7 @@ public class TAluguel extends javax.swing.JFrame {
             jButton4.setEnabled(true);
             
             //carrega valor
-            jTextField3.setText("13.00");
+            jTextFieldValor.setText("13.00");
         } catch (GeralException ex) {
             JOptionPane.showMessageDialog(this, ex);
         } catch (ConexaoException ex) {
@@ -498,11 +521,11 @@ public class TAluguel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldValor;
     // End of variables declaration//GEN-END:variables
 }

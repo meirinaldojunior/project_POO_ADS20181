@@ -15,7 +15,7 @@ import project_poo_ads20181.negocio.RNAluguel;
 
 /**
  *
- * @author Hugo
+ * @author Meirinaldo
  */
 public class FachadaAluguel {
      private RNAluguel rnAlu;
@@ -31,7 +31,6 @@ public class FachadaAluguel {
      */
     public void salvarAluguel(Aluguel alu) throws GeralException, DAOException{
         rnAlu.validarAtributos(alu);
-        rnAlu.verificaDuplicidadeNome(alu);
         rnAlu.inserir(alu);
         
     }

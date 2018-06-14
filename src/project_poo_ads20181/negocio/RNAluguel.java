@@ -21,7 +21,7 @@ import project_poo_ads20181.util.GerenciadorConexaoMySql;
 
 /**
  *
- * @author Hugo
+ * @author Meirinaldo
  */
 public class RNAluguel {
   /**
@@ -53,10 +53,10 @@ public class RNAluguel {
             }
         }
         catch(ConexaoException e){
-            throw new GeralException("Contacte o Administrador do Sistema.");
+            throw new GeralException("Contacte o Administrador do Sistema. "+e);
         }
         catch(DAOException e){
-            throw new GeralException("Erro, contace o Administrador do Sistema.");
+            throw new GeralException("Erro, contacte o Administrador do Sistema. "+e);
         }
     }
     
@@ -65,9 +65,9 @@ public class RNAluguel {
         try{
             dao.inserir(aluguel);
         }catch(ConexaoException e){
-            throw new GeralException("Contacte o Administrador do Sistema.");
+            throw new GeralException("Erro na conexão, contacte o Administrador do Sistema... "+e.getMessage());
         }catch(DAOException e){
-            throw new GeralException("Erro. Contacte o Administrador do Sistema");
+            throw new GeralException("Erro na instrução do DAO. Contacte o Administrador do Sistema... "+e.getMessage());
         }
     }
     
