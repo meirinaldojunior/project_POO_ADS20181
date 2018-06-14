@@ -7,6 +7,7 @@ package project_poo_ads20181.fachada;
 
 import java.util.ArrayList;
 import project_poo_ads20181.classes.Aluguel;
+import project_poo_ads20181.classes.AluguelRelacionamento;
 import project_poo_ads20181.classes.Autor;
 import project_poo_ads20181.classes.Exemplar;
 import project_poo_ads20181.erro.ConexaoException;
@@ -59,6 +60,10 @@ public class FachadaAluguel {
 
     public ArrayList<Aluguel> listarAluguel() throws ConexaoException, DAOException, GeralException {
         return rnAlu.listar();
+    }
+    
+    public ArrayList<AluguelRelacionamento> listarAluguelForegein() throws ConexaoException, DAOException, GeralException {
+        return rnAlu.listarForegein();
     }
 
     public Aluguel consultaAluguel(Integer idAluguel) throws ConexaoException, DAOException, GeralException {

@@ -10,120 +10,143 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project_poo_ads20181.classes.Aluguel;
 import project_poo_ads20181.acessos.DAOAluguel;
 import project_poo_ads20181.acessos.DAOAluguelImplementa;
+import project_poo_ads20181.classes.AluguelRelacionamento;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
 import project_poo_ads20181.util.GerenciadorConexaoMySql;
-
 
 /**
  *
  * @author Meirinaldo
  */
 public class RNAluguel {
-  /**
-     * Verifica se um aluguel alu está com todos os campos preenchidos (inclusive o ID)
+
+    DAOAluguel dao = new DAOAluguelImplementa();
+
+    /**
+     * Verifica se um aluguel alu está com todos os campos preenchidos
+     * (inclusive o ID)
+     *
      * @param alu
      * @throws GeralException Se algum atributo obrigatório estiver em branco
      */
-    public void validaAluguel(Aluguel alu)throws GeralException{
+    public void validaAluguel(Aluguel alu) throws GeralException {
         validarAtributos(alu);
-        if (alu.getIdAluguel()== null || alu.getIdAluguel() < 1){
-        throw new GeralException("Número do aluguel inválido!");
+        if (alu.getIdAluguel() == null || alu.getIdAluguel() < 1) {
+            throw new GeralException("Número do aluguel inválido!");
         }
     }
+
     // não valida o ID, apenas as chaves de outras classes
-    public void validarAtributos(Aluguel alu)throws GeralException{
-        if(alu==null){
+    public void validarAtributos(Aluguel alu) throws GeralException {
+        if (alu == null) {
             throw new GeralException("Informações inválidas!");
         }
-        if(alu.getValor() == null || alu.getValor() < 0) {
+        if (alu.getValor() == null || alu.getValor() < 0) {
             throw new GeralException("Valor invalido!");
         }
     }
 
-    public void verificaDuplicidadeNome(Aluguel aluguel)throws GeralException{
-        DAOAluguel dao = new DAOAluguelImplementa();
-        try{
-            if(dao.consultaAluguel( aluguel.getIdAluguel() )!=null){
+    public void verificaDuplicidadeNome(Aluguel aluguel) throws GeralException {
+
+        try {
+            if (dao.consultaAluguel(aluguel.getIdAluguel()) != null) {
                 throw new GeralException("Aluguel já existe.");
             }
-        }
-        catch(ConexaoException e){
-            throw new GeralException("Contacte o Administrador do Sistema. "+e);
-        }
-        catch(DAOException e){
-            throw new GeralException("Erro, contacte o Administrador do Sistema. "+e);
+        } catch (ConexaoException e) {
+            throw new GeralException("Contacte o Administrador do Sistema. " + e);
+        } catch (DAOException e) {
+            throw new GeralException("Erro, contacte o Administrador do Sistema. " + e);
         }
     }
-    
-    public void inserir(Aluguel aluguel)throws GeralException{
-        DAOAluguel dao = new DAOAluguelImplementa();
-        try{
+
+    public void inserir(Aluguel aluguel) throws GeralException {
+
+        try {
             dao.inserir(aluguel);
-        }catch(ConexaoException e){
-            throw new GeralException("Erro na conexão, contacte o Administrador do Sistema... "+e.getMessage());
-        }catch(DAOException e){
-            throw new GeralException("Erro na instrução do DAO. Contacte o Administrador do Sistema... "+e.getMessage());
+        } catch (ConexaoException e) {
+            throw new GeralException("Erro na conexão, contacte o Administrador do Sistema... " + e.getMessage());
+        } catch (DAOException e) {
+            throw new GeralException("Erro na instrução do DAO. Contacte o Administrador do Sistema... " + e.getMessage());
         }
     }
-    
-    public void alterar(Aluguel alu){
-        
+
+    public void alterar(Aluguel alu) {
+
     }
-    
-    public void excluir(Aluguel alu){
-        
+
+    public void excluir(Aluguel alu) throws GeralException {
+        try {
+            dao.excluir(alu);
+        } catch (ConexaoException ex) {
+            throw new GeralException("Erro na conexão, contacte o administrador: "+ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro na instrução SQL, contacte o administrador: "+ex.getMessage());
+        }
     }
-    
+
     /**
      * Retorna a lista de produtos
-     * @return 
+     *
+     * @return
      */
-    public ArrayList<Aluguel> listar(){
+    public ArrayList<Aluguel> listar() {
         return null;
     }
     
-    public Aluguel get(Integer idAluguel){
+    public ArrayList<AluguelRelacionamento> listarForegein() throws GeralException, GeralException {
+        try {
+            return dao.listarForegein();
+        } catch (ConexaoException ex) {
+            throw new GeralException("Erro na conexão, contacte o Administrador do Sistema... " + ex.getMessage());
+        } catch (DAOException ex) {
+            throw new GeralException("Erro na instrução do DAO. Contacte o Administrador do Sistema... " + ex.getMessage());
+        }
+    }
+
+    public Aluguel get(Integer idAluguel) {
         return null;
     }
-    public Aluguel consultaAluguel (Integer idAluguel) throws ConexaoException, DAOException, GeralException{
-     DAOAluguelImplementa dao = new DAOAluguelImplementa();
-     try{
-         Aluguel consultaAluguel = dao.consultaAluguel(idAluguel);
-         return consultaAluguel;
-     }catch(ConexaoException e){
+
+    public Aluguel consultaAluguel(Integer idAluguel) throws ConexaoException, DAOException, GeralException {
+        try {
+            Aluguel consultaAluguel = dao.consultaAluguel(idAluguel);
+            return consultaAluguel;
+        } catch (ConexaoException e) {
             throw new GeralException("Contacte o Administrador do Sistema.");
-        }catch(DAOException e){
+        } catch (DAOException e) {
             throw new GeralException("Erro, favor contate o Administrador do Sistema.");
- }
-    
+        }
+
     }
-  
+
     public boolean checkID(Aluguel alu) throws DAOException, ConexaoException {
-        Connection c =GerenciadorConexaoMySql.getInstancia().conectar();
-           String sql = "SELECT Id_Aluguel FROM aluguel WHERE Id_Aluguel=?";
-        
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        String sql = "SELECT Id_Aluguel FROM aluguel WHERE Id_Aluguel=?";
+
         PreparedStatement pstm;
-        try{
+        try {
             pstm = c.prepareStatement(sql);
-            pstm.setInt(1,alu.getIdAluguel());
+            pstm.setInt(1, alu.getIdAluguel());
             ResultSet rs = pstm.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 return true;
             }
-            
+
             return false;
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             throw new DAOException();
-        }finally{
+        } finally {
             GerenciadorConexaoMySql.getInstancia().desconectar(c);
         }
     }
-    
-    }
+
+}

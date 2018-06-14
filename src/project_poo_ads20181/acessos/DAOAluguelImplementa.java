@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import project_poo_ads20181.classes.Aluguel;
+import project_poo_ads20181.classes.AluguelRelacionamento;
 import project_poo_ads20181.erro.ConexaoException;
 import project_poo_ads20181.erro.DAOException;
 import project_poo_ads20181.erro.GeralException;
@@ -87,9 +88,7 @@ public class DAOAluguelImplementa implements DAOAluguel {
 
         try {
             pstm = c.prepareStatement(sql);
-
             pstm.setInt(1, aluguel.getIdAluguel());
-
             pstm.executeUpdate();
             System.out.println("Aluguel excluído com sucesso!");
         } catch (SQLException e) {
@@ -118,6 +117,53 @@ public class DAOAluguelImplementa implements DAOAluguel {
             }
             return lista;
 
+        } catch (SQLException e) {
+            System.out.println("ERRO " + e);
+            throw new DAOException();
+        } finally {
+            GerenciadorConexaoMySql.getInstancia().desconectar(c);
+        }
+    }
+    
+    @Override
+    public ArrayList<AluguelRelacionamento> listarForegein() throws ConexaoException, DAOException {
+        Connection c = GerenciadorConexaoMySql.getInstancia().conectar();
+        ArrayList<AluguelRelacionamento> lista = new ArrayList<AluguelRelacionamento>();
+        String sql = "SELECT atendente.Nome as nomeAtendente, "
+                           + "aluno.nome as nomeAluno, "
+                           + "Livro.Nome_livro as nomeLivro, "
+                           + "Id_Aluguel, "
+                           + "exemplar.Id_exemplar as id_exemplar, "
+                           + "Valor "
+                    + "FROM aluguel "
+                    + "INNER JOIN Usuario atendente ON atendente.Id_Usuario = aluguel.Id_atendente "
+                    + "INNER JOIN Usuario aluno ON aluno.Id_Usuario = aluguel.Id_Usuario "
+                    + "INNER JOIN exemplar ON exemplar.Id_exemplar = aluguel.Id_exemplar "
+                    + "INNER JOIN Livro ON Livro.Id_livro = exemplar.Id_livro";
+        Statement stm;
+
+        try {
+            stm = c.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                AluguelRelacionamento aluguel = new AluguelRelacionamento();
+                
+                System.err.println(rs.getInt("Id_Aluguel"));
+                System.err.println(rs.getDouble("Valor"));
+                System.err.println(rs.getString("nomeAluno"));
+                
+                aluguel.setId(rs.getInt("Id_Aluguel"));
+                aluguel.setValor(rs.getDouble("Valor"));
+                aluguel.setAluno(rs.getString("nomeAluno"));
+                aluguel.setAtendente(rs.getString("nomeAtendente"));
+                aluguel.setExemplar(rs.getInt("id_exemplar"));
+                aluguel.setLivro(rs.getString("nomeLivro"));
+                              
+                lista.add(aluguel);
+            }
+
+            return lista;
         } catch (SQLException e) {
             System.out.println("ERRO " + e);
             throw new DAOException();
