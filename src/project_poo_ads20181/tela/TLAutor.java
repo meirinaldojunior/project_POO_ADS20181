@@ -161,14 +161,16 @@ public class TLAutor extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     Autor a = new Autor();
-        a.setId(Integer.parseInt(TextId.getText()));
-        FachadaAutor fat = new FachadaAutor();
-        try{
-            fat.excluirAutor(a);
+     FachadaAutor fat = new FachadaAutor();
+       try{
+    if( a.setId(Integer.parseInteger(TextId.getText()))){
+     fat.excluirAutor(a);
+     JOptionPane.showMessageDialog(this, "Autor excluido com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
+    }   
+    }catch(DAOException ev){
+    
             JOptionPane.showMessageDialog(this, "Autor excluido com sucesso","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         }catch(GeralException e){
-            JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
-        } catch (DAOException ex) {
             JOptionPane.showMessageDialog(this, "Autor nao excluido","Mensagem",JOptionPane.INFORMATION_MESSAGE);
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(this, "erro de conexão,contate o ADM","Mensagem",JOptionPane.INFORMATION_MESSAGE);
