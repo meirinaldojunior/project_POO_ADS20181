@@ -45,8 +45,7 @@ public void limpaTabela() {
     public void limpaCampos() {
         jTextField1.setText("");
         jTextField2.setText("");
-        jButton4.setEnabled(false);
-        jButton3.setEnabled(false);
+        jButton3.setEnabled(true);
         jButton1.setEnabled(true);
     }
 
@@ -86,11 +85,10 @@ public void limpaTabela() {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelacat = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Cadastro de Categorias");
@@ -117,13 +115,6 @@ public void limpaTabela() {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Pesquisar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -172,8 +163,7 @@ public void limpaTabela() {
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addGap(97, 97, 97)))
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -197,8 +187,7 @@ public void limpaTabela() {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -231,6 +220,7 @@ public void limpaTabela() {
         Categoria ct = new Categoria();
         ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
         ct.setNomeCategoria(jTextField2.getText());
+        FachadaCategoria fc = new FachadaCategoria();
         try {
             fc.alterarCategoria(ct);
             carregaTabela();
@@ -245,27 +235,23 @@ public void limpaTabela() {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //Excluir usuário
+        //Excluir categoria
         if (JOptionPane.showConfirmDialog(this, "Deseja excluir a categoria selecionada?") == 0) {
             Categoria ct = new Categoria();
-            ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
+            ct.setNomeCategoria(jTextField2.getText());
+           // ct.setIdCategoria(Integer.parseInt(jTextField1.getText()));
             try {
                 fc.excluirCategoria(ct);
-                limpaCampos();
+                carregaTabela();
                 JOptionPane.showMessageDialog(this, "Categoria excluída com sucesso!");
             } catch (GeralException | ConexaoException ex) {
                 JOptionPane.showMessageDialog(this, ex);
             } catch (DAOException ex) {
                 Logger.getLogger(TCategoria.class.getName()).log(Level.SEVERE, null, ex);
             }
-            carregaTabela();
+            
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,7 +292,6 @@ public void limpaTabela() {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
